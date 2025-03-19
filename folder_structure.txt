@@ -1,0 +1,31 @@
+/Balea-Brewery-Open-Business
+│── README.md  # Overview, philosophy, and contribution guide  
+│── LICENSE.md  # CC BY 4.0 License  
+│
+├── business  
+│   ├── financials/  # Revenue reports, break-even analysis, cost breakdown  
+│   ├── operations/  # Business model, legal documents, tax compliance  
+│   ├── supply-chain/  # Ingredient sourcing, logistics, distribution plans  
+│
+├── brewing  
+│   ├── recipes/  # Cider, mead, historical brews, open-source formulas  
+│   ├── production-logs/  # Batch tracking, yeast behavior, adjustments  
+│   ├── equipment/  # Brewery setup, scaling guides, process diagrams  
+│
+├── community  
+│   ├── feedback/  # Public discussions, feature requests  
+│   ├── voting/  # Community polls for new brews  
+│   ├── contributions/  # How to suggest ideas, share brews  
+│
+├── marketing  
+│   ├── branding/  # Logos, fonts, visual identity  
+│   ├── packaging/  # Label templates, bottle designs  
+│   ├── strategy/  # Social media, events, partnerships  
+│
+├── growth  
+│   ├── expansion-plans/  # Future product lines, scaling strategy  
+│   ├── experiments/  # Trial batches, R&D projects  
+│
+└── code (optional)  
+    ├── automation/  # Scripts for brewing tracking, inventory  
+    ├── website/  # Interactive site for open business tracking  

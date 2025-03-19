@@ -1,4 +1,5 @@
 # Balea Brewhouse
+Visit [our webpage](https://baleabrewhouse.netlify.app/).
 
 <image src="./marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="550"/>
 
@@ -24,24 +25,22 @@ Balea Brewery operates multiple revenue streams:
 - **Subscription Model**: Monthly "Balea Brew Box" featuring exclusive ciders, meads, and historical brews.
 
 ## 3. Product Lines & Names
+Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
-
-### Sagardo (Ciders)
-
+**Sagardo (Ciders)**
 <image src="./marketing/branding/sagardo_4.jpg" alt="sagardoa" width="350"/>
 
-- Sidra (“Cider”) – Traditional Basque hard cider.
+<!-- - Sidra (“Cider”) – Traditional Basque hard cider.
 - Itsaso (“Sea”) – Very light and crisp cider.
 - Haize (“Wind”) – Floral and refreshing.
 - Egur (“Wood”) – Extra-dry, oak-aged cider.
-- Zilar (“Silver”) – Champagne-style bubbly cider.
+- Zilar (“Silver”) – Champagne-style bubbly cider. -->
 
 
-### Ezti (Meads)
-
+**Ezti (Meads)**
 <image src="./marketing/branding/erle.jpg" alt="ezti" width="350"/>
 
-- Miel (“Honey”) – Classic smooth mead.
+<!-- - Miel (“Honey”) – Classic smooth mead.
 - Sagarra (“Apple”) - mead with apple juice.
 - Urdin (“Blue”) - Blueberry Melomel.
 - Gorri (“Red”) - Cherry Melomel.
@@ -49,14 +48,13 @@ Balea Brewery operates multiple revenue streams:
 - Haritz (“Oak”) – Barrel-aged mead.
 - Ilargi (“Moon”) – Elderflower-infused mead.
 - Sugaar – Fiery mead with chili heat.
-- Eguzki (“Sun”) – Citrus and saffron-infused mead.
+- Eguzki (“Sun”) – Citrus and saffron-infused mead. -->
 
 
-### Erdi Aroa (Medieval & Lost Historical Brews)
-
+**Erdi Aroa (Medieval & Lost Historical Brews)**
 <image src="./marketing/branding/erdi_aroa_4.png" alt="erdi_aroa" width="350"/>
 
-- Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.
+<!-- - Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.
 - Acinus (Latin, “Berry”) – A tart, medieval-style cherry wine.
 - Myrdöl (Old Norse, “Myrtle”) – A resinous bog myrtle ale, common in Viking and Germanic brewing.
 - Birken (Middle High German, “Birch”) – A lightly fermented beer made with birch sap.
@@ -71,7 +69,7 @@ Balea Brewery operates multiple revenue streams:
 - Honignuss (Middle High German, “Honey Nut”) – A hazelnut-infused bochet mead.
 - Mellagranum (Latin, “Honey Grain”) – A classic braggot with malted grains and honey.
 - Ölgyod (Old Norse, “Ale of the Gods”) – A smoky, oak-aged braggot brewed for Viking feasts.
-- Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels.
+- Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels. -->
 
 ## 4. Approximate Size & Business Growth
 **Phase 0**: Research & Testing (years 0-1)

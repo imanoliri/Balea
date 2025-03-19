@@ -161,29 +161,12 @@ table > tbody > tr > td {
 	font-size: 16px;
 	line-height: 25px;
 	word-wrap: break-word;
-	padding: 5px 10px
+	padding: 5px 10px;
+	min-width: 400px
 }
 
 table > tbody > tr + tr > td {
 	border-top: 1px solid;
-}
-
-/* Ensure tables don't force zoom-out */
-table {
-    width: 100%;
-    max-width: 100%;
-    border-collapse: collapse;
-}
-
-/* Wrap tables in a scrollable div on small screens */
-@media (max-width: 768px) {
-    .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    table {
-        min-width: auto; /* Override the problematic setting */
-    }
 }
 
 blockquote {
@@ -421,7 +404,6 @@ code {
 </ul>
 
 <h2 id="3-product-lines--names">3. Product Lines &amp; Names</h2>
-<div class="table-container">
 <table>
     <tr style="vertical-align:top">
         <td><h3 id="sagardo-ciders">Sagardo (Ciders)</h3><br>
@@ -472,7 +454,6 @@ code {
 			</ul></td>
     </tr>
 </table>
-</div>
 
 
 <h2 id="4-approximate-size--business-growth">4. Approximate Size &amp; Business Growth</h2>

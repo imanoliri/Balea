@@ -11,7 +11,7 @@ Balea Brewery is a Basque-inspired ciderhouse, meadery, and historical brewery f
 - **Authenticity**: Crafting Basque-style sagardoa (cider) and mead, along with forgotten medieval fruit wines and ales.
 - **Storytelling & Heritage**: Integrating Basque mythology, poetry, and history into branding, product names, and venue experience.
 - **Community & Experience**: Establishing a ciderhouse/Biergarten-style venue where customers can immerse themselves in Basque culture through food, events, and workshops.
-- **Open Business**: Customers and other breweries can track production, finances and decision-making, see the recipes, propose ideas, and vote on new flavors. This approach strengthens the community and fosters collaboration and innovation.
+- **Open Business**: Customers and other breweries can track production, finances and decision-making, learn the recipes, propose ideas, and vote on new flavors. This approach strengthens the community and fosters collaboration and innovation.
 - **Sustainability & Efficiency**: Using modern automation and only the best ingredients to maintain quality while reducing manual labor.
 
 ## 2. Business Lines
@@ -21,7 +21,7 @@ Balea Brewery operates multiple revenue streams:
 - **Custom Brewing for Events**: Large-batch custom brews for weddings, corporate events, and festivals.
 - **Workshops & Courses**: Teaching cider and mead brewing, historical brewing techniques, and fermentation.
 - **Digital Engagement**: A highly interactive website featuring an open-source business & brewing philosophy, allowing customers to access recipes, brewing logs, propose ideas and contribute to experimental batches.
-- **Homebrewing Kits & Equipment**: Selling DIY fermentation kits and curated brewing ingredients.
+- **Homebrewing Kits & Equipment**: Selling DIY brewing kits and curated ingredients.
 - **Subscription Model**: Monthly "Balea Brew Box" featuring exclusive ciders, meads, and historical brews.
 
 ## 3. Product Lines & Names

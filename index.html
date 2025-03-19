@@ -12,14 +12,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 body {
-	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
-	font-size: var(--vscode-markdown-font-size, 14px);
+	font-family: var(-apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: 14px;
+	line-height: 22px;
 	padding: 0 26px;
-	line-height: var(--vscode-markdown-line-height, 22px);
 	word-wrap: break-word;
 }
 
-th, td { font-size: 14px }
 
 #code-csp-warning {
 	position: fixed;
@@ -158,8 +157,12 @@ table > thead > tr > th,
 table > thead > tr > td,
 table > tbody > tr > th,
 table > tbody > tr > td {
+	font-family: var(-apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: 14px;
+	line-height: 22px;
+	word-wrap: break-word;
 	padding: 5px 10px;
-	min-width:400px
+	min-width: 400px
 }
 
 table > tbody > tr + tr > td {

@@ -74,6 +74,26 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 - Ölgyod (Old Norse, “Ale of the Gods”) – A smoky, oak-aged braggot brewed for Viking feasts.
 - Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels. -->
 
+
+**Goxo (Non-alcoholic beverages)**
+
+<image src="./marketing/branding/margarita_4_grey.png" alt="erdi_aroa" width="350"/>
+
+<!-- - Iturri (“Fountain”) – Unfermented apple with light spices.
+- Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.
+- Izpiliku (“Lavender”) – Light herbal soda with lavender and citrus.
+- Haritz Goxo (“Sweet Oak”) – Oak-infused botanical drink with honey.
+- Zuhaitza (“Tree”) – Spruce beer, rich in vitamin C, with citrus notes.
+- Zingira (“Swamp”) – Classic ginger beer with natural carbonation.
+- Erregina (“Queen”) – Spiced molasses & vanilla root beer.
+- Makil Goxo (“Sweet Stick”) – A cinnamon-honey herbal infusion.
+- Izurde (“Dolphin”) – Butter beer, creamy and lightly spiced with caramel notes.
+- Udaberri (“Spring”) – Classic homemade lemonade with honey and mint.
+- Mendiur (“Mountain Water”) – Mineral water infused with herbs and fruit.
+- Distira (“Spark”) – Citrus-ginger tonic with honey.
+- Txiki Ura (“Little Water”) – Elderflower & honey infusion for kids
+- Izotz (“Ice”) – Frozen fruit slush with fresh juice. -->
+
 ## 4. Approximate Size & Business Growth
 **Phase 0**: Research & Testing (years 0-1)
 - Production: 12x60 batches/year, 720L total.

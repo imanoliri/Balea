@@ -28,6 +28,7 @@ Balea Brewery operates multiple revenue streams:
 Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 **Sagardo (Ciders)**
+
 <image src="./marketing/branding/sagardo_4.jpg" alt="sagardoa" width="350"/>
 
 <!-- - Sidra (“Cider”) – Traditional Basque hard cider.
@@ -38,6 +39,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 
 **Ezti (Meads)**
+
 <image src="./marketing/branding/erle.jpg" alt="ezti" width="350"/>
 
 <!-- - Miel (“Honey”) – Classic smooth mead.
@@ -52,6 +54,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 
 **Erdi Aroa (Medieval & Lost Historical Brews)**
+
 <image src="./marketing/branding/erdi_aroa_4.png" alt="erdi_aroa" width="350"/>
 
 <!-- - Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.
@@ -87,5 +90,34 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 **Phase 3**: Full Market (years 4-6)
 - Production: 5x4x1000+5x2x10000 batches/year, 120,000L total.
 - Focus: Full market saturation.
+
+
+## 5. Next Steps
+
+2. Add Financial Data & Break-Even Analysis
+    - Add the first break-even analysis in .csv or .fods format.
+    - Document fixed vs. variable costs per production phase.
+
+
+3. Open Business Data
+    - Add recipes.
+    - Publish live brewing logs (batch performance, ingredient costs).
+    - Add revenue tracking templates.
+    - Website for automatic public financial reporting (quarterly and yearly).
+
+
+4. Branding & Marketing Strategy
+    - Upload Balea Brewery icons & logos.
+    - Include label and packaging design files.
+    - Add marketing strategy (social media plan, launch strategy).
+
+
+5. Digital Community & Contribution System
+    - Modify website to allow for usernames and passwords and send emails to the Balea team.
+    - Create a simple post and forum system.
+    - Define how people can propose new brews or suggest business improvements.
+    - Recipe review system.
+    - Voting system for the community to influence upcoming releases.
+    - Provide a contributor guide for submitting brewing data or financial insights.
 
 

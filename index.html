@@ -15,16 +15,21 @@ body {
     overflow-x: hidden;
 }
 
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 table {
     border-collapse: collapse;
-    min-width: 400px;
-    display: block;
-    overflow-x: auto;
-    max-width: 100%;
+    width: auto;
+    max-width: none;
 }
 
 td, th {
-    padding: 5px 10px;
+	min-width: 300px;
+    padding: 8px 12px;
     text-align: left;
     font-size: 16px;
 }
@@ -94,6 +99,7 @@ blockquote {
 </ul>
 
 <h2 id="3-product-lines--names">3. Product Lines &amp; Names</h2>
+<div class="table-container">
 <table>
     <tr style="vertical-align:top">
         <td><h3 id="sagardo-ciders">Sagardo (Ciders)</h3><br>
@@ -144,6 +150,7 @@ blockquote {
 			</ul></td>
     </tr>
 </table>
+</div>
 
 
 <h2 id="4-approximate-size--business-growth">4. Approximate Size &amp; Business Growth</h2>

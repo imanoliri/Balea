@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="balea-brewhouse">Balea Brewhouse</h1>
+<p>Visit <a href="https://baleabrewhouse.netlify.app/">our webpage</a>.</p>
+<image src="./marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="550"/>
+<p>Balea Brewery's open business repository – full transparency on brewing ideas, finances, and operations, fostering collaboration and community-driven innovation.</p>
+<h2 id="1-idea--philosophy">1. Idea &amp; Philosophy</h2>
+<p>Balea Brewery is a Basque-inspired ciderhouse, meadery, and historical brewery focused on reviving lost brewing traditions while maintaining strong cultural storytelling. The core philosophy revolves around:</p>
+<ul>
+<li><strong>Authenticity</strong>: Crafting Basque-style sagardoa (cider) and mead, along with forgotten medieval fruit wines and ales.</li>
+<li><strong>Storytelling &amp; Heritage</strong>: Integrating Basque mythology, poetry, and history into branding, product names, and venue experience.</li>
+<li><strong>Community &amp; Experience</strong>: Establishing a ciderhouse/Biergarten-style venue where customers can immerse themselves in Basque culture through food, events, and workshops.</li>
+<li><strong>Open Business</strong>: Customers and other breweries can track production, finances and decision-making, learn the recipes, propose ideas, and vote on new flavors. This approach strengthens the community and fosters collaboration and innovation.</li>
+<li><strong>Sustainability &amp; Efficiency</strong>: Using modern automation and only the best ingredients to maintain quality while reducing manual labor.</li>
+</ul>
+<h2 id="2-business-lines">2. Business Lines</h2>
+<p>Balea Brewery operates multiple revenue streams:</p>
+<ul>
+<li><strong>On-Site Consumption &amp; Txotx</strong>: A Biergarten/ciderhouse offering fresh cider, mead, and historic brews.</li>
+<li><strong>Retail Sales &amp; Farmer's Market</strong>: Bottled products with a Pfand system for take-home consumption.</li>
+<li><strong>Custom Brewing for Events</strong>: Large-batch custom brews for weddings, corporate events, and festivals.</li>
+<li><strong>Workshops &amp; Courses</strong>: Teaching cider and mead brewing, historical brewing techniques, and fermentation.</li>
+<li><strong>Digital Engagement</strong>: A highly interactive website featuring an open-source business &amp; brewing philosophy, allowing customers to access recipes, brewing logs, propose ideas and contribute to experimental batches.</li>
+<li><strong>Homebrewing Kits &amp; Equipment</strong>: Selling DIY brewing kits and curated ingredients.</li>
+<li><strong>Subscription Model</strong>: Monthly &quot;Balea Brew Box&quot; featuring exclusive ciders, meads, and historical brews.</li>
+</ul>
+<h2 id="3-product-lines--names">3. Product Lines &amp; Names</h2>
+<p>Visit <a href="https://baleabrewhouse.netlify.app/">the webpage</a> for all the recipes!</p>
+<p><strong>Sagardo (Ciders)</strong></p>
+<image src="./marketing/branding/sagardo_4.jpg" alt="sagardoa" width="350"/>
+<!-- - Sidra (“Cider”) – Traditional Basque hard cider.
+- Itsaso (“Sea”) – Very light and crisp cider.
+- Haize (“Wind”) – Floral and refreshing.
+- Egur (“Wood”) – Extra-dry, oak-aged cider.
+- Zilar (“Silver”) – Champagne-style bubbly cider. -->
+<p><strong>Ezti (Meads)</strong></p>
+<image src="./marketing/branding/erle.jpg" alt="ezti" width="350"/>
+<!-- - Miel (“Honey”) – Classic smooth mead.
+- Sagarra (“Apple”) - mead with apple juice.
+- Urdin (“Blue”) - Blueberry Melomel.
+- Gorri (“Red”) - Cherry Melomel.
+- Aranbeltz (“Black Plum”) - Blackberry & Plum Melomel.
+- Haritz (“Oak”) – Barrel-aged mead.
+- Ilargi (“Moon”) – Elderflower-infused mead.
+- Sugaar – Fiery mead with chili heat.
+- Eguzki (“Sun”) – Citrus and saffron-infused mead. -->
+<p><strong>Erdi Aroa (Medieval &amp; Lost Historical Brews)</strong></p>
+<image src="./marketing/branding/erdi_aroa_4.png" alt="erdi_aroa" width="350"/>
+<!-- - Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.
+- Acinus (Latin, “Berry”) – A tart, medieval-style cherry wine.
+- Myrdöl (Old Norse, “Myrtle”) – A resinous bog myrtle ale, common in Viking and Germanic brewing.
+- Birken (Middle High German, “Birch”) – A lightly fermented beer made with birch sap.
+- Halig (Old English, “Holy”) – A sacred, mildly bitter mugwort ale used in monasteries.
+- Parva (Latin, “Small”) – A mild, daily table beer (~2%) for hydration.
+- Spruce (Old English, “Spruce”) – A spruce beer brewed with pine and fir tips.
+- Trigo (Old Castilian, “Wheat”) – A rustic, lightly soured oat and barley ale.
+- Hippocras (Latin, “Physician”) – A spiced honey wine with cinnamon, ginger, and nutmeg.
+- Fuego (Old Castilian, “Fire”) – A saffron and chili-infused heated wine.
+- Callamellus (Latin, “Caramel”) – A bochet mead with deep caramelized flavors.
+- Feu (Old French, “Fire”) – A berry bochet blended with wild blackberries.
+- Honignuss (Middle High German, “Honey Nut”) – A hazelnut-infused bochet mead.
+- Mellagranum (Latin, “Honey Grain”) – A classic braggot with malted grains and honey.
+- Ölgyod (Old Norse, “Ale of the Gods”) – A smoky, oak-aged braggot brewed for Viking feasts.
+- Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels. -->
+<p><strong>Goxo (Non-alcoholic beverages)</strong></p>
+<image src="./marketing/branding/margarita_4_grey.png" alt="erdi_aroa" width="350"/>
+<!-- - Iturri (“Fountain”) – Unfermented apple with light spices.
+- Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.
+- Izpiliku (“Lavender”) – Light herbal soda with lavender and citrus.
+- Haritz Goxo (“Sweet Oak”) – Oak-infused botanical drink with honey.
+- Zuhaitza (“Tree”) – Spruce beer, rich in vitamin C, with citrus notes.
+- Zingira (“Swamp”) – Classic ginger beer with natural carbonation.
+- Erregina (“Queen”) – Spiced molasses & vanilla root beer.
+- Makil Goxo (“Sweet Stick”) – A cinnamon-honey herbal infusion.
+- Izurde (“Dolphin”) – Butter beer, creamy and lightly spiced with caramel notes.
+- Udaberri (“Spring”) – Classic homemade lemonade with honey and mint.
+- Mendiur (“Mountain Water”) – Mineral water infused with herbs and fruit.
+- Distira (“Spark”) – Citrus-ginger tonic with honey.
+- Txiki Ura (“Little Water”) – Elderflower & honey infusion for kids
+- Izotz (“Ice”) – Frozen fruit slush with fresh juice. -->
+<h2 id="4-approximate-size--business-growth">4. Approximate Size &amp; Business Growth</h2>
+<p><strong>Phase 0</strong>: Research &amp; Testing (years 0-1)</p>
+<ul>
+<li>Production: 12x60 batches/year, 720L total.</li>
+<li>Focus: Refining recipes, branding, and building early demand.</li>
+</ul>
+<p><strong>Phase 1</strong>: Pilot Launch (years 1-2)</p>
+<ul>
+<li>Production: 8x1000+1x10000 batches/year, 18,000L total.</li>
+<li>Focus: Biergarten opening, direct sales, local partnerships.</li>
+</ul>
+<p><strong>Phase 2</strong>: Expansion (years 3-4)</p>
+<ul>
+<li>Production: 5x10000 batches/year, 50,000L total.</li>
+<li>Focus: Full automation &amp; distribution, scaling up events and subscriptions.</li>
+</ul>
+<p><strong>Phase 3</strong>: Full Market (years 4-6)</p>
+<ul>
+<li>Production: 5x4x1000+5x2x10000 batches/year, 120,000L total.</li>
+<li>Focus: Full market saturation.</li>
+</ul>
+<h2 id="5-next-steps">5. Next Steps</h2>
+<ol>
+<li>
+<p>Add Financial Data &amp; Break-Even Analysis</p>
+<ul>
+<li>Add the first break-even analysis in .csv or .fods format.</li>
+<li>Document fixed vs. variable costs per production phase.</li>
+</ul>
+</li>
+<li>
+<p>Prototyping &amp; Testing</p>
+<ul>
+<li>Add recipes.</li>
+<li>Brew experimental batches of cider and mead.</li>
+<li>Experiment with tinctures for unique flavors.</li>
+</ul>
+</li>
+<li>
+<p>Venue Design &amp; Workflow</p>
+<ul>
+<li>Add physical layout of the brewery, storage, and customer areas.</li>
+<li>Add workflows &amp; equipment.</li>
+<li>Interactive map for the website, showing the venue layout and experience</li>
+</ul>
+</li>
+<li>
+<p>Operations</p>
+<ul>
+<li>Add live operational &amp; distribution workflows.</li>
+<li>Add live brewing logs (batch performance, ingredient costs).</li>
+<li>Add revenue &amp; costs tracking.</li>
+<li>Website for automatic public financial reporting (quarterly and yearly).</li>
+</ul>
+</li>
+<li>
+<p>Branding &amp; Marketing Strategy</p>
+<ul>
+<li>Finalize product names based on Basque myths and history.</li>
+<li>Develop marketing visuals, logos, and packaging.</li>
+<li>Add marketing strategy (social media plan, launch strategy).</li>
+</ul>
+</li>
+<li>
+<p>Baskpedia – Basque Cultural Wiki</p>
+<ul>
+<li>Create a small encyclopedia (Baskpedia) documenting Basque customs, myths, and history.</li>
+<li>Use it as a foundation for product lore, venue decoration, and branding.</li>
+<li>Feature sections on folklore, historical brewing techniques, and cultural elements.</li>
+</ul>
+</li>
+<li>
+<p>Digital Community &amp; Contributions</p>
+<ul>
+<li>Modify website to allow for usernames and passwords and send emails to the Balea team.</li>
+<li>Create a simple post and forum system.</li>
+<li>Define how people can propose new brews or suggest business improvements.</li>
+<li>Recipe review system.</li>
+<li>Voting system for the community to influence upcoming releases.</li>
+<li>Provide a contributor guide for submitting brewing data or financial insights.</li>
+</ul>
+</li>
+<li>
+<p>Expansion strategy:</p>
+<ul>
+<li>Events, new business lines, marketing, etc.?</li>
+<li>Contingency planning.</li>
+</ul>
+</li>
+</ol>
+
+</body>
+</html>

@@ -114,25 +114,39 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 ## 5. Next Steps
 
-2. Add Financial Data & Break-Even Analysis
+1. Add Financial Data & Break-Even Analysis
     - Add the first break-even analysis in .csv or .fods format.
     - Document fixed vs. variable costs per production phase.
 
-
-3. Open Business Data
+2. Prototyping & Testing
     - Add recipes.
-    - Publish live brewing logs (batch performance, ingredient costs).
-    - Add revenue tracking templates.
+    - Brew experimental batches of cider and mead.
+    - Experiment with tinctures for unique flavors.
+
+3. Venue Design & Workflow
+    - Add physical layout of the brewery, storage, and customer areas.
+    - Add workflows & equipment.
+    - Interactive map for the website, showing the venue layout and experience
+
+4. Operations
+    - Add live operational & distribution workflows.
+    - Add live brewing logs (batch performance, ingredient costs).
+    - Add revenue & costs tracking.
     - Website for automatic public financial reporting (quarterly and yearly).
 
 
-4. Branding & Marketing Strategy
-    - Upload Balea Brewery icons & logos.
-    - Include label and packaging design files.
+5. Branding & Marketing Strategy
+    - Finalize product names based on Basque myths and history.
+    - Develop marketing visuals, logos, and packaging.
     - Add marketing strategy (social media plan, launch strategy).
 
+6. Baskpedia – Basque Cultural Wiki
+    - Create a small encyclopedia (Baskpedia) documenting Basque customs, myths, and history.
+    - Use it as a foundation for product lore, venue decoration, and branding.
+    - Feature sections on folklore, historical brewing techniques, and cultural elements.
 
-5. Digital Community & Contribution System
+
+7. Digital Community & Contributions
     - Modify website to allow for usernames and passwords and send emails to the Balea team.
     - Create a simple post and forum system.
     - Define how people can propose new brews or suggest business improvements.
@@ -140,4 +154,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
     - Voting system for the community to influence upcoming releases.
     - Provide a contributor guide for submitting brewing data or financial insights.
 
-
+8. Expansion strategy:
+    - Events, new business lines, marketing, etc.?
+    - Contingency planning.
+    

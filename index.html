@@ -15,28 +15,51 @@ body {
     overflow-x: hidden;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-table {
+.tabs {
+	display: flex;
 	width: 100%;
-    border-collapse: collapse;
-    width: auto;
-    max-width: none;
-	background-color: #f8f8f8; /* Light grey background */
-    /*border: 1px solid #ccc; /* Light grey border */
-    padding: 10px;
-    border-radius: 5px;
+	justify-content: left;
+	margin-bottom: 10px;
 }
 
-td, th {
-	min-width: 550px;
-    padding: 8px 12px;
-    text-align: left;
-    font-size: 16px;
+.tab-button {
+	padding: 10px 15px;
+	border: none;
+	background-color: #102634;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	margin: 0 5px;
+}
+
+.tab-button:hover {
+	background-color: #005f99;
+}
+.tab-button.active {
+	background-color: #005f99;
+}
+
+.tab-content {
+	display: none;
+	max-width: 750px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+}
+
+.tab-content.active {
+	display: block;
+	max-width: 750px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+}
+.tab-img {
+	width: 550px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 img {
@@ -104,38 +127,45 @@ blockquote {
 </ul>
 
 <h2 id="3-product-lines--names">3. Product Lines &amp; Names</h2>
-<div class="table-container">
-<table>
-    <tr style="vertical-align:top">
-        <td><h3 id="sagardo-ciders">Sagardo (Ciders)</h3><br>
-			<image src="./marketing/branding/sagardo_4.png" alt="sagardo" width="350"/>
-			<ul>
-			<li>Sidra (“Cider”) – Traditional Basque hard cider.</li>
-			<li>Itsaso (“Sea”) – Very light and crisp cider.</li>
-			<li>Haize (“Wind”) – Floral and refreshing.</li>
-			<li>Egur (“Wood”) – Extra-dry, oak-aged cider.</li>
-			<li>Zilar (“Silver”) – Champagne-style bubbly cider.</li>
-			</ul></td>
+<div class="tabs">
+	<button id="tab-button-ciders" class="tab-button active" onclick="openTab('ciders')">Sagardo (Ciders)</button>
+	<button id="tab-button-meads" class="tab-button" onclick="openTab('meads')">Ezti (Meads)</button>
+	<button id="tab-button-historical" class="tab-button" onclick="openTab('historical')">Erdi Aroa (Historical Brews)</button>
+	<button id="tab-button-nonalcoholic" class="tab-button" onclick="openTab('nonalcoholic')">Goxo (Non-Alcoholic)</button>
+</div>
 
+    <div id="ciders" class="tab-content active">
+        <!-- <h3>Sagardo (Ciders)</h3> -->
+        <img class="tab-img" src="./marketing/branding/sagardo_4.png" alt="sagardo">
+        <ul>
+            <li>Sidra (“Cider”) – Traditional Basque hard cider.</li>
+            <li>Itsaso (“Sea”) – Very light and crisp cider.</li>
+            <li>Haize (“Wind”) – Floral and refreshing.</li>
+            <li>Egur (“Wood”) – Extra-dry, oak-aged cider.</li>
+            <li>Zilar (“Silver”) – Champagne-style bubbly cider.</li>
+        </ul>
+    </div>
 
-        <td><h3 id="ezti-meads">Ezti (Meads)</h3><br>
-			<image src="./marketing/branding/erle.png" alt="ezti" width="350"/>
-			<ul>
-			<li>Miel (“Honey”) – Classic mead.</li>
-			<li>Sagarra (“Apple”) - Mead with apple juice.</li>
-			<li>Urdin (“Blue”) - Blueberry Melomel.</li>
-			<li>Gorri (“Red”) - Cherry Melomel.</li>
-			<li>Aranbeltz (“Black Plum”) - Blackberry &amp; Plum Melomel.</li>
+    <div id="meads" class="tab-content">
+        <!-- <h3>Ezti (Meads)</h3> -->
+        <img class="tab-img" src="./marketing/branding/erle.png" alt="ezti">
+        <ul>
+            <li>Miel (“Honey”) – Classic mead.</li>
+            <li>Sagarra (“Apple”) - Mead with apple juice.</li>
+            <li>Urdin (“Blue”) - Blueberry Melomel.</li>
+            <li>Gorri (“Red”) - Cherry Melomel.</li>
+            <li>Aranbeltz (“Black Plum”) - Blackberry &&amp; Plum Melomel.</li>
 			<li>Haritz (“Oak”) – Barrel-aged mead.</li>
 			<li>Ilargi (“Moon”) – Elderflower-infused mead.</li>
 			<li>Sugaar (“Dragon God”) – Fiery mead with chili heat.</li>
 			<li>Eguzki (“Sun”) – Citrus and saffron-infused mead.</li>
-			</ul></td>
+        </ul>
+    </div>
 
-
-        <td><h3 id="erdi-aroa-medieval--lost-historical-brews">Erdi Aroa (Medieval &amp; Historical Brews)</h3>
-			<image src="./marketing/branding/erdi_aroa_4.png" alt="erdi_aroa" width="350"/>
-			<ul>
+    <div id="historical" class="tab-content">
+        <!-- <h3>Erdi Aroa (Medieval & Historical Brews)</h3> -->
+        <img class="tab-img" src="./marketing/branding/erdi_aroa_4.png" alt="erdi_aroa">
+        <ul>
 			<li>Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.</li>
 			<li>Acinus (Latin, “Berry”) – A tart, medieval-style cherry wine.</li>
 			<li>Myrdöl (Old Norse, “Myrtle”) – A resinous bog myrtle ale, common in Viking and Germanic brewing.</li>
@@ -152,28 +182,44 @@ blockquote {
 			<li>Mellagranum (Latin, “Honey Grain”) – A classic braggot with malted grains and honey.</li>
 			<li>Ölgyod (Old Norse, “Ale of the Gods”) – A smoky, oak-aged braggot brewed for Viking feasts.</li>
 			<li>Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels.</li>
-			</ul></td>
-		
-			<td><h3 id="goxo--non-alcoholic-beverages">Goxo (Non-alcoholic beverages)</h3>
-				<image src="./marketing/branding/margarita_4_white.png" alt="erdi_aroa" width="350"/>
-				<ul>
-				<li>Iturri (“Fountain”) – Unfermented apple with light spices.</li>
-				<li>Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.</li>
-				<li>Izpiliku (“Lavender”) – Light herbal soda with lavender and citrus.</li>
-				<li>Haritz Goxo (“Sweet Oak”) – Oak-infused botanical drink with honey.</li>
-				<li>Zuhaitza (“Tree”) – Spruce beer, rich in vitamin C, with citrus notes.</li>
-				<li>Zingira (“Swamp”) – Classic ginger beer with natural carbonation.</li>
-				<li>Erregina (“Queen”) – Spiced molasses &amp; vanilla root beer.</li>
-				<li>Makil Goxo (“Sweet Stick”) – A cinnamon-honey herbal infusion.</li>
-				<li>Izurde (“Dolphin”) – Butter beer, creamy and lightly spiced with caramel notes.</li>
-				<li>Udaberri (“Spring”) – Classic homemade lemonade with honey and mint.</li>
-				<li>Mendiur (“Mountain Water”) – Mineral water infused with herbs and fruit.</li>
-				<li>Distira (“Spark”) – Citrus-ginger tonic with honey.</li>
-				<li>Txiki Ura (“Little Water”) – Elderflower &amp; honey infusion for kids</li>
-				<li>Izotz (“Ice”) – Frozen fruit slush with fresh juice.</li></td>
-    </tr>
-</table>
-</div>
+		</ul>
+    </div>
+
+    <div id="nonalcoholic" class="tab-content">
+        <!-- <h3>Goxo (Non-alcoholic Beverages)</h3> -->
+        <img class="tab-img" src="./marketing/branding/margarita_4_white.png" alt="goxo">
+        <ul>
+            <li>Iturri (“Fountain”) – Unfermented apple with light spices.</li>
+			<li>Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.</li>
+			<li>Izpiliku (“Lavender”) – Light herbal soda with lavender and citrus.</li>
+			<li>Haritz Goxo (“Sweet Oak”) – Oak-infused botanical drink with honey.</li>
+			<li>Zuhaitza (“Tree”) – Spruce beer, rich in vitamin C, with citrus notes.</li>
+			<li>Zingira (“Swamp”) – Classic ginger beer with natural carbonation.</li>
+			<li>Erregina (“Queen”) – Spiced molasses &amp; vanilla root beer.</li>
+			<li>Makil Goxo (“Sweet Stick”) – A cinnamon-honey herbal infusion.</li>
+			<li>Izurde (“Dolphin”) – Butter beer, creamy and lightly spiced with caramel notes.</li>
+			<li>Udaberri (“Spring”) – Classic homemade lemonade with honey and mint.</li>
+			<li>Mendiur (“Mountain Water”) – Mineral water infused with herbs and fruit.</li>
+			<li>Distira (“Spark”) – Citrus-ginger tonic with honey.</li>
+			<li>Txiki Ura (“Little Water”) – Elderflower &amp; honey infusion for kids</li>
+			<li>Izotz (“Ice”) – Frozen fruit slush with fresh juice.</li></td>
+        </ul>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+			document.querySelectorAll('.tab-button').forEach(tab => {
+                tab.classList.remove('active');
+            });
+			console.log(`tab-button-ciders-${tabId}`)
+            document.getElementById(`tab-button-${tabId}`).classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 
 
 <h2 id="4-approximate-size--business-growth">4. Approximate Size &amp; Business Growth</h2>

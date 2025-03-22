@@ -94,22 +94,32 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 - Txiki Ura (“Little Water”) – Elderflower & honey infusion for kids
 - Izotz (“Ice”) – Frozen fruit slush with fresh juice. -->
 
-## 4. Approximate Size & Business Growth
+## 4. Business Projections
+[Business_Projections spreadsheet](https://docs.google.com/spreadsheets/d/1i1qvkoGsZDia1ozenOaS76aTAC3JZTy28vB54YDQDlE/edit?usp=sharing)
+
+In all phases, an "optimism -2" case is calculated, where the full production is realized but only 40%-50% are sold (Sales Ratio) and an "optimism -1" case, where only 40%-50% of target sales are achieved, but we reacted in time and didn't overproduce (nothing is left unsold).
+
+The pesimistic projections are considered. If in a specific phase demand is higher than projected and we sell everything, the jump to the next phase is accelerated. The very optimistic case that we sell more than 2 whole bars is not handled, because it's outside of the scope of the business idea and definitly enough work and more than enough profit.
+
 **Phase 0**: Research & Testing (years 0-1)
 - Production: 12x60 batches/year, 720L total.
-- Focus: Refining recipes, branding, and building early demand.
+- Focus: Refining recipes, brand, and building early demand.
 
 **Phase 1**: Pilot Launch (years 1-2)
 - Production: 8x1000+1x10000 batches/year, 18,000L total.
-- Focus: Biergarten opening, direct sales, local partnerships.
+- Focus: Biergarten opening, direct sales, and local partnerships.
 
 **Phase 2**: Expansion (years 3-4)
 - Production: 5x10000 batches/year, 50,000L total.
-- Focus: Full automation & distribution, scaling up events and subscriptions.
+- Focus: Full automation & distribution, events and subscriptions.
 
 **Phase 3**: Full Market (years 4-6)
 - Production: 5x4x1000+5x2x10000 batches/year, 120,000L total.
-- Focus: Full market saturation.
+- Focus: Full bar-level consumption. (200 seats * 3-10 barrels/seat/year*160L/barrel =100kL/year)
+
+**Phase 4**: Full Market (years 4-6)
+- Production: 12x10000+2x50000 batches/year, 220,000L total.
+- Focus: Full local market saturation. (2 whole bars)
 
 
 ## 5. Next Steps
@@ -134,7 +144,6 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
     - Add revenue & costs tracking.
     - Website for automatic public financial reporting (quarterly and yearly).
 
-
 5. Branding & Marketing Strategy
     - Finalize product names based on Basque myths and history.
     - Develop marketing visuals, logos, and packaging.
@@ -144,7 +153,6 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
     - Create a small encyclopedia (Baskpedia) documenting Basque customs, myths, and history.
     - Use it as a foundation for product lore, venue decoration, and branding.
     - Feature sections on folklore, historical brewing techniques, and cultural elements.
-
 
 7. Digital Community & Contributions
     - Modify website to allow for usernames and passwords and send emails to the Balea team.

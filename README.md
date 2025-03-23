@@ -29,7 +29,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 **Sagardo (Ciders)**
 
-<image src="./marketing/branding/sagardo_4.jpg" alt="sagardoa" width="350"/>
+<image src="./marketing/branding/sagardo_5.png" alt="sagardoa" width="350"/>
 
 <!-- - Sidra (“Cider”) – Traditional Basque hard cider.
 - Itsaso (“Sea”) – Very light and crisp cider.
@@ -40,7 +40,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 **Ezti (Meads)**
 
-<image src="./marketing/branding/erle.jpg" alt="ezti" width="350"/>
+<image src="./marketing/branding/erle.png" alt="ezti" width="350"/>
 
 <!-- - Miel (“Honey”) – Classic smooth mead.
 - Sagarra (“Apple”) - mead with apple juice.

@@ -77,7 +77,7 @@ Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 **Goxo (Non-alcoholic beverages)**
 
-<image src="./marketing/branding/margarita_4_grey.png" alt="erdi_aroa" width="350"/>
+<image src="./marketing/branding/margarita_5.png" alt="erdi_aroa" width="350"/>
 
 <!-- - Iturri (“Fountain”) – Unfermented apple with light spices.
 - Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.

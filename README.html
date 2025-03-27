@@ -447,100 +447,62 @@ code {
 <p><a href="https://docs.google.com/spreadsheets/d/1i1qvkoGsZDia1ozenOaS76aTAC3JZTy28vB54YDQDlE/edit?usp=sharing">Business_Projections spreadsheet</a></p>
 <p>In all phases, an &quot;optimism -2&quot; case is calculated, where the full production is realized but only 40%-50% are sold (Sales Ratio) and an &quot;optimism -1&quot; case, where only 40%-50% of target sales are achieved, but we reacted in time and didn't overproduce (nothing is left unsold).</p>
 <p>The pesimistic projections are considered. If in a specific phase demand is higher than projected and we sell everything, the jump to the next phase is accelerated. The very optimistic case that we sell more than 2 whole bars is not handled, because it's outside of the scope of the business idea and definitly enough work and more than enough profit.</p>
-<p><strong>Phase 0</strong>: Research &amp; Testing (years 0-1)</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Years</th>
+<th>Production Target</th>
+<th>Focus Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>0-1</td>
+<td>1,000L</td>
+<td>Refining recipes, brand, and building early demand</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>1-2</td>
+<td>18,000L</td>
+<td>Biergarten opening, direct sales, and local partnerships</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>3-4</td>
+<td>50,000L</td>
+<td>Full operation &amp; distribution, events and subscriptions</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>4-6</td>
+<td>120,000L</td>
+<td>Full bar-level consumption (200 seats * 3-10 barrels/seat/year*160L/barrel =100kL/year)</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>6+</td>
+<td>220,000L</td>
+<td>Full local market saturation (2x bars)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-recipes--development">5. Recipes &amp; Development</h2>
+<p><a href="https://docs.google.com/spreadsheets/d/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/edit?usp=sharing">Recipes</a></p>
+<p>To create recipes, a spreadsheet calculator is used to determine key parameters. The process is straightforward: a liquid containing a specific amount of sugar (measured as <strong>Original Gravity (OG)</strong>, which represents the liquid's density relative to water) undergoes fermentation when yeast is introduced. As the yeast consumes the sugars, the <strong>Final Gravity (FG)</strong> decreases. For example, if a liquid starts with an OG of 1.080 and ferments down to an FG of 1.020, the difference represents the amount of sugar consumed, which in turn determines the alcohol content.</p>
+<p>The <strong>Alcohol by Volume (ABV)</strong> can be calculated using the formula: <span style="background-color: #E8E8E8"><em>ABV(%) = (76.08 * (OG - FG) / (1.775 - OG)) * (FG / 79.4)</em></span>. The <strong>Original Gravity (OG)</strong> itself can be estimated based on the total sugar content of the ingredients in relation to the amount of water used: <span style="background-color: #E8E8E8"><em>OG = 1 + Total_sugar(kg) / (Total_water(kg)*2.5)</em></span>.</p>
+<p>During fermentation, yeast will continue consuming sugars until it reaches a <strong>Final Gravity (FG) of 1.000</strong> (indicating no residual sugars left), unless it hits its own <strong>alcohol tolerance limit</strong> or is <strong>artificially halted</strong> through methods such as cold crashing, pasteurization, or chemical stabilization.</p>
+<p>Beyond basic calculations, the spreadsheet also compiles essential information on yeast selection, ingredient choices and necessary equipment, which ensures a well-rounded approach to recipe formulation.</p>
+<h2 id="next-steps">Next Steps</h2>
 <ul>
-<li>Production: 12x60 batches/year, 720L total.</li>
-<li>Focus: Refining recipes, brand, and building early demand.</li>
+<li><strong>Brewhouse Design &amp; Layout</strong> – Brewing workflow, customer experience, interactive brewery map.</li>
+<li><strong>Operations Data</strong> – Live brewing data, costs, revenue tracking.</li>
+<li><strong>Baskpedia</strong> – Documenting Basque myths &amp; cultural influences.</li>
+<li><strong>Branding &amp; Marketing Strategy</strong> – Product names, visuals, and launch campaigns.</li>
+<li><strong>Community Forum &amp; Voting System</strong> – Let customers contribute posts, reviews, votes, contact the Balea team.</li>
 </ul>
-<p><strong>Phase 1</strong>: Pilot Launch (years 1-2)</p>
-<ul>
-<li>Production: 8x1000+1x10000 batches/year, 18,000L total.</li>
-<li>Focus: Biergarten opening, direct sales, and local partnerships.</li>
-</ul>
-<p><strong>Phase 2</strong>: Expansion (years 3-4)</p>
-<ul>
-<li>Production: 5x10000 batches/year, 50,000L total.</li>
-<li>Focus: Full automation &amp; distribution, events and subscriptions.</li>
-</ul>
-<p><strong>Phase 3</strong>: Full Market (years 4-6)</p>
-<ul>
-<li>Production: 5x4x1000+5x2x10000 batches/year, 120,000L total.</li>
-<li>Focus: Full bar-level consumption. (200 seats * 3-10 barrels/seat/year*160L/barrel =100kL/year)</li>
-</ul>
-<p><strong>Phase 4</strong>: Full Market (years 4-6)</p>
-<ul>
-<li>Production: 12x10000+2x50000 batches/year, 220,000L total.</li>
-<li>Focus: Full local market saturation. (2 whole bars)</li>
-</ul>
-<h2 id="5-next-steps">5. Next Steps</h2>
-<ol>
-<li>
-<p>Add Financial Data &amp; Break-Even Analysis</p>
-<ul>
-<li>Add the first break-even analysis in .csv or .fods format.</li>
-<li>Document fixed vs. variable costs per production phase.</li>
-</ul>
-</li>
-<li>
-<p>Prototyping &amp; Testing</p>
-<ul>
-<li>Add recipes.</li>
-<li>Brew experimental batches of cider and mead.</li>
-<li>Experiment with tinctures for unique flavors.</li>
-</ul>
-</li>
-<li>
-<p>Venue Design &amp; Workflow</p>
-<ul>
-<li>Add physical layout of the brewery, storage, and customer areas.</li>
-<li>Add workflows &amp; equipment.</li>
-<li>Interactive map for the website, showing the venue layout and experience</li>
-</ul>
-</li>
-<li>
-<p>Operations</p>
-<ul>
-<li>Add live operational &amp; distribution workflows.</li>
-<li>Add live brewing logs (batch performance, ingredient costs).</li>
-<li>Add revenue &amp; costs tracking.</li>
-<li>Website for automatic public financial reporting (quarterly and yearly).</li>
-</ul>
-</li>
-<li>
-<p>Branding &amp; Marketing Strategy</p>
-<ul>
-<li>Finalize product names based on Basque myths and history.</li>
-<li>Develop marketing visuals, logos, and packaging.</li>
-<li>Add marketing strategy (social media plan, launch strategy).</li>
-</ul>
-</li>
-<li>
-<p>Baskpedia – Basque Cultural Wiki</p>
-<ul>
-<li>Create a small encyclopedia (Baskpedia) documenting Basque customs, myths, and history.</li>
-<li>Use it as a foundation for product lore, venue decoration, and branding.</li>
-<li>Feature sections on folklore, historical brewing techniques, and cultural elements.</li>
-</ul>
-</li>
-<li>
-<p>Digital Community &amp; Contributions</p>
-<ul>
-<li>Modify website to allow for usernames and passwords and send emails to the Balea team.</li>
-<li>Create a simple post and forum system.</li>
-<li>Define how people can propose new brews or suggest business improvements.</li>
-<li>Recipe review system.</li>
-<li>Voting system for the community to influence upcoming releases.</li>
-<li>Provide a contributor guide for submitting brewing data or financial insights.</li>
-</ul>
-</li>
-<li>
-<p>Expansion strategy:</p>
-<ul>
-<li>Events, new business lines, marketing, etc.?</li>
-<li>Contingency planning.</li>
-</ul>
-</li>
-</ol>
 
 </body>
 </html>

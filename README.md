@@ -101,68 +101,33 @@ In all phases, an "optimism -2" case is calculated, where the full production is
 
 The pesimistic projections are considered. If in a specific phase demand is higher than projected and we sell everything, the jump to the next phase is accelerated. The very optimistic case that we sell more than 2 whole bars is not handled, because it's outside of the scope of the business idea and definitly enough work and more than enough profit.
 
-**Phase 0**: Research & Testing (years 0-1)
-- Production: 12x60 batches/year, 720L total.
-- Focus: Refining recipes, brand, and building early demand.
-
-**Phase 1**: Pilot Launch (years 1-2)
-- Production: 8x1000+1x10000 batches/year, 18,000L total.
-- Focus: Biergarten opening, direct sales, and local partnerships.
-
-**Phase 2**: Expansion (years 3-4)
-- Production: 5x10000 batches/year, 50,000L total.
-- Focus: Full automation & distribution, events and subscriptions.
-
-**Phase 3**: Full Market (years 4-6)
-- Production: 5x4x1000+5x2x10000 batches/year, 120,000L total.
-- Focus: Full bar-level consumption. (200 seats * 3-10 barrels/seat/year*160L/barrel =100kL/year)
-
-**Phase 4**: Full Market (years 4-6)
-- Production: 12x10000+2x50000 batches/year, 220,000L total.
-- Focus: Full local market saturation. (2 whole bars)
+| Phase  | Years  | Production Target | Focus Area |
+|--------|--------|-----------------|----------------|
+| **0**  | 0-1    | 1,000L | Refining recipes, brand, and building early demand |
+| **1**  | 1-2    | 18,000L | Biergarten opening, direct sales, and local partnerships |
+| **2**  | 3-4    | 50,000L | Full operation & distribution, events and subscriptions |
+| **3**  | 4-6    | 120,000L |  Full bar-level consumption (200 seats * 3-10 barrels/seat/year*160L/barrel =100kL/year) |
+| **4**  | 6+     | 220,000L | Full local market saturation (2x bars) |
 
 
-## 5. Next Steps
+## 5. Recipes & Development
+[Recipes](https://docs.google.com/spreadsheets/d/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/edit?usp=sharing)
 
-1. Add Financial Data & Break-Even Analysis
-    - Add the first break-even analysis in .csv or .fods format.
-    - Document fixed vs. variable costs per production phase.
+To create recipes, a spreadsheet calculator is used to determine key parameters. The process is straightforward: a liquid containing a specific amount of sugar (measured as **Original Gravity (OG)**, which represents the liquid's density relative to water) undergoes fermentation when yeast is introduced. As the yeast consumes the sugars, the **Final Gravity (FG)** decreases. For example, if a liquid starts with an OG of 1.080 and ferments down to an FG of 1.020, the difference represents the amount of sugar consumed, which in turn determines the alcohol content.
 
-2. Prototyping & Testing
-    - Add recipes.
-    - Brew experimental batches of cider and mead.
-    - Experiment with tinctures for unique flavors.
 
-3. Venue Design & Workflow
-    - Add physical layout of the brewery, storage, and customer areas.
-    - Add workflows & equipment.
-    - Interactive map for the website, showing the venue layout and experience
+The **Alcohol by Volume (ABV)** can be calculated using the formula: <span style="background-color: #E8E8E8">_ABV(%) = (76.08 * (OG - FG) / (1.775 - OG)) * (FG / 79.4)_</span>. The **Original Gravity (OG)** itself can be estimated based on the total sugar content of the ingredients in relation to the amount of water used: <span style="background-color: #E8E8E8">_OG = 1 + Total_sugar(kg) / (Total_water(kg)*2.5)_</span>.
 
-4. Operations
-    - Add live operational & distribution workflows.
-    - Add live brewing logs (batch performance, ingredient costs).
-    - Add revenue & costs tracking.
-    - Website for automatic public financial reporting (quarterly and yearly).
+During fermentation, yeast will continue consuming sugars until it reaches a **Final Gravity (FG) of 1.000** (indicating no residual sugars left), unless it hits its own **alcohol tolerance limit** or is **artificially halted** through methods such as cold crashing, pasteurization, or chemical stabilization.
 
-5. Branding & Marketing Strategy
-    - Finalize product names based on Basque myths and history.
-    - Develop marketing visuals, logos, and packaging.
-    - Add marketing strategy (social media plan, launch strategy).
+Beyond basic calculations, the spreadsheet also compiles essential information on yeast selection, ingredient choices and necessary equipment, which ensures a well-rounded approach to recipe formulation.
 
-6. Baskpedia – Basque Cultural Wiki
-    - Create a small encyclopedia (Baskpedia) documenting Basque customs, myths, and history.
-    - Use it as a foundation for product lore, venue decoration, and branding.
-    - Feature sections on folklore, historical brewing techniques, and cultural elements.
 
-7. Digital Community & Contributions
-    - Modify website to allow for usernames and passwords and send emails to the Balea team.
-    - Create a simple post and forum system.
-    - Define how people can propose new brews or suggest business improvements.
-    - Recipe review system.
-    - Voting system for the community to influence upcoming releases.
-    - Provide a contributor guide for submitting brewing data or financial insights.
 
-8. Expansion strategy:
-    - Events, new business lines, marketing, etc.?
-    - Contingency planning.
-    
+## Next Steps
+
+- **Brewhouse Design & Layout** – Brewing workflow, customer experience, interactive brewery map.  
+- **Operations Data** – Live brewing data, costs, revenue tracking.  
+- **Baskpedia** – Documenting Basque myths & cultural influences. 
+- **Branding & Marketing Strategy** – Product names, visuals, and launch campaigns.  
+- **Community Forum & Voting System** – Let customers contribute posts, reviews, votes, contact the Balea team.  

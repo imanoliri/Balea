@@ -61,6 +61,11 @@ img {
     height: auto;
 }
 
+div img{ 
+display: inline-block;
+vertical-align: top;
+}
+
 a {
     text-decoration: none;
 }

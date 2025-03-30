@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>product_lines_and_names</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <h2 id="product-lines-and-names">3. Product Lines &amp; Names</h2>
+    <div class="tabs">
+        <button id="tab-button-ciders" class="tab-button active" onclick="openTab('ciders')">Sagardo (Ciders)</button>
+        <button id="tab-button-meads" class="tab-button" onclick="openTab('meads')">Ezti (Meads)</button>
+        <button id="tab-button-historical" class="tab-button" onclick="openTab('historical')">Erdi Aroa (Historical Brews)</button>
+        <button id="tab-button-nonalcoholic" class="tab-button" onclick="openTab('nonalcoholic')">Goxo (Non-Alcoholic)</button>
+    </div>
+    
+        <div id="ciders" class="tab-content active">
+            <!-- <h3>Sagardo (Ciders)</h3> -->
+            <img class="tab-img" src="../marketing/branding/sagardo_5.png" alt="sagardo">
+            <ul>
+                <li>Sidra (“Cider”) – Traditional Basque hard cider.</li>
+                <li>Itsaso (“Sea”) – Very light and crisp cider.</li>
+                <li>Haize (“Wind”) – Floral and refreshing.</li>
+                <li>Egur (“Wood”) – Extra-dry, oak-aged cider.</li>
+                <li>Zilar (“Silver”) – Champagne-style bubbly cider.</li>
+            </ul>
+        </div>
+    
+        <div id="meads" class="tab-content">
+            <!-- <h3>Ezti (Meads)</h3> -->
+            <img class="tab-img" src="../marketing/branding/erle.png" alt="ezti">
+            <ul>
+                <li>Miel (“Honey”) – Classic mead.</li>
+                <li>Sagarra (“Apple”) - Mead with apple juice.</li>
+                <li>Urdin (“Blue”) - Blueberry Melomel.</li>
+                <li>Gorri (“Red”) - Cherry Melomel.</li>
+                <li>Aranbeltz (“Black Plum”) - Blackberry &&amp; Plum Melomel.</li>
+                <li>Haritz (“Oak”) – Barrel-aged mead.</li>
+                <li>Ilargi (“Moon”) – Elderflower-infused mead.</li>
+                <li>Sugaar (“Dragon God”) – Fiery mead with chili heat.</li>
+                <li>Eguzki (“Sun”) – Citrus and saffron-infused mead.</li>
+            </ul>
+        </div>
+    
+        <div id="historical" class="tab-content">
+            <!-- <h3>Erdi Aroa (Medieval & Historical Brews)</h3> -->
+            <img class="tab-img" src="../marketing/branding/erdi_aroa_4.png" alt="erdi_aroa">
+            <ul>
+                <li>Nero (Latin, “Black”) – Blackberry wine, rich and deep in flavor.</li>
+                <li>Acinus (Latin, “Berry”) – A tart, medieval-style cherry wine.</li>
+                <li>Myrdöl (Old Norse, “Myrtle”) – A resinous bog myrtle ale, common in Viking and Germanic brewing.</li>
+                <li>Birken (Middle High German, “Birch”) – A lightly fermented beer made with birch sap.</li>
+                <li>Halig (Old English, “Holy”) – A sacred, mildly bitter mugwort ale used in monasteries.</li>
+                <li>Parva (Latin, “Small”) – A mild, daily table beer (~2%) for hydration.</li>
+                <li>Spruce (Old English, “Spruce”) – A spruce beer brewed with pine and fir tips.</li>
+                <li>Trigo (Old Castilian, “Wheat”) – A rustic, lightly soured oat and barley ale.</li>
+                <li>Hippocras (Latin, “Physician”) – A spiced honey wine with cinnamon, ginger, and nutmeg.</li>
+                <li>Fuego (Old Castilian, “Fire”) – A saffron and chili-infused heated wine.</li>
+                <li>Callamellus (Latin, “Caramel”) – A bochet mead with deep caramelized flavors.</li>
+                <li>Feu (Old French, “Fire”) – A berry bochet blended with wild blackberries.</li>
+                <li>Honignuss (Middle High German, “Honey Nut”) – A hazelnut-infused bochet mead.</li>
+                <li>Mellagranum (Latin, “Honey Grain”) – A classic braggot with malted grains and honey.</li>
+                <li>Ölgyod (Old Norse, “Ale of the Gods”) – A smoky, oak-aged braggot brewed for Viking feasts.</li>
+                <li>Stark (Middle High German, “Strong”) – A strong, dark braggot aged in oak barrels.</li>
+            </ul>
+        </div>
+    
+        <div id="nonalcoholic" class="tab-content">
+            <!-- <h3>Goxo (Non-alcoholic Beverages)</h3> -->
+            <img class="tab-img" src="../marketing/branding/margarita_5.png" alt="goxo">
+            <ul>
+                <li>Iturri (“Fountain”) – Unfermented apple with light spices.</li>
+                <li>Urki (“Birch”) – Birch beer, made with birch sap and wintergreen.</li>
+                <li>Izpiliku (“Lavender”) – Light herbal soda with lavender and citrus.</li>
+                <li>Haritz Goxo (“Sweet Oak”) – Oak-infused botanical drink with honey.</li>
+                <li>Zuhaitza (“Tree”) – Spruce beer, rich in vitamin C, with citrus notes.</li>
+                <li>Zingira (“Swamp”) – Classic ginger beer with natural carbonation.</li>
+                <li>Erregina (“Queen”) – Spiced molasses &amp; vanilla root beer.</li>
+                <li>Makil Goxo (“Sweet Stick”) – A cinnamon-honey herbal infusion.</li>
+                <li>Izurde (“Dolphin”) – Butter beer, creamy and lightly spiced with caramel notes.</li>
+                <li>Udaberri (“Spring”) – Classic homemade lemonade with honey and mint.</li>
+                <li>Mendiur (“Mountain Water”) – Mineral water infused with herbs and fruit.</li>
+                <li>Distira (“Spark”) – Citrus-ginger tonic with honey.</li>
+                <li>Txiki Ura (“Little Water”) – Elderflower &amp; honey infusion for kids</li>
+                <li>Izotz (“Ice”) – Frozen fruit slush with fresh juice.</li></td>
+            </ul>
+        </div>
+    
+        <script>
+            function openTab(tabId) {
+                document.querySelectorAll('.tab-button').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                console.log(`tab-button-ciders-${tabId}`)
+                document.getElementById(`tab-button-${tabId}`).classList.add('active');
+    
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+            }
+        </script>
+    
+
+</body>
+</html>

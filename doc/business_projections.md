@@ -19,4 +19,4 @@ For each phase, two pessimistic scenarios are considered:
 
 - In the **"optimism -1"** case, only 40–50% of the target sales are achieved, but we anticipated the drop in demand and adjusted production accordingly—so we only produced what we sold.
 
-If actual demand exceeds expectations and we sell out, the transition to the next phase is triggered. However, extremely optimistic scenarios—such as selling more than two full bars’ worth of product—are not planned for, as they exceed the scope of the business idea and would already represent more than sufficient success and workload.
+If **demand exceeds expectations** and we sell out, the transition to the next phase is triggered. However, extremely optimistic scenarios—such as selling more than two full bars’ worth of product—are not planned for, as they exceed the scope of the business idea and would already represent more than sufficient success and workload.

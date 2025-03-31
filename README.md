@@ -12,13 +12,16 @@ Balea Brewery's open business repository – full transparency on brewing ideas,
 ## 2. [Business Lines](./doc/business_lines.md)
 
 
-## 3. [Product Lines & Names](./doc/product_lines_and_names.md)
+## 3. [Brewhouse Layout](.doc/brewhouse_layout.md)
 
 
-## 4. [Business Projections](./doc/business_projections.md)
+## 4. [Product Lines & Names](./doc/product_lines_and_names.md)
 
 
-## 5. [Recipes & Development](./doc/recipes_and_development.md)
+## 5. [Business Projections](./doc/business_projections.md)
+
+
+## 6. [Recipes & Development](./doc/recipes_and_development.md)
 
 
 ## [Next Steps](./doc/next_steps.md)

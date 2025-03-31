@@ -1,5 +1,5 @@
 ## Recipes & Development
-[Recipes](https://docs.google.com/spreadsheets/d/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/edit?usp=sharing)
+[Recipes spreadsheet](https://docs.google.com/spreadsheets/d/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/edit?usp=sharing)
 
 To create recipes, a spreadsheet calculator is used to determine key parameters. The process is straightforward: a liquid containing a specific amount of sugar (measured as **Original Gravity (OG)**, which represents the liquid's density relative to water) undergoes fermentation when yeast is introduced. As the yeast consumes the sugars, the **Final Gravity (FG)** decreases. For example, if a liquid starts with an OG of 1.080 and ferments down to an FG of 1.020, the difference represents the amount of sugar consumed, which in turn determines the alcohol content.
 

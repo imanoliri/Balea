@@ -1,0 +1,117 @@
+/* Minimal CSS for PC and mobile */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0 20px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+}
+
+.tabs {
+	display: flex;
+	width: 100%;
+	justify-content: left;
+	margin-bottom: 10px;
+}
+
+.tab-button {
+	padding: 10px 15px;
+	border: none;
+	background-color: #102634;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	margin: 0 5px;
+}
+
+.tab-button:hover {
+	background-color: #005f99;
+}
+.tab-button.active {
+	background-color: #005f99;
+}
+
+.tab-content {
+	display: none;
+	max-width: 750px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+}
+
+.tab-content.active {
+	display: block;
+	max-width: 750px;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: #f8f8f8;
+}
+.tab-img {
+	width: 600px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+div img{ 
+display: inline-block;
+vertical-align: top;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+h2 {
+    margin-top: 40px;
+}
+h3 {
+    margin-top: 30px;
+}
+
+blockquote {
+    padding-left: 10px;
+    border-left: 3px solid #ccc;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}

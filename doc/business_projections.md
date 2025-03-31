@@ -1,7 +1,7 @@
 ## Business Projections
 [Business_Projections spreadsheet](https://docs.google.com/spreadsheets/d/1i1qvkoGsZDia1ozenOaS76aTAC3JZTy28vB54YDQDlE/edit?usp=sharing)
 
-Here is a table that summarizes the projections for the different phases of the business.
+Here is a table summarizing the projections for the different phases of the business.
 
 
 | Phase  | Years  | Production Target | Focus Area |

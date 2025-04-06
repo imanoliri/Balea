@@ -1,0 +1,65 @@
+{
+    "title": "Open taproom",
+    "procedure_id": "OPS-TAP-001",
+    "version": "v1",
+    "created_by": "Imanol",
+    "created_on": "2025-04-03",
+    "filled_by": "",
+    "filled_on": "",
+    "last_reviewed": "",
+    "last_reviewed_by": "",
+    "approved_by": "",
+    "business_area": "Operations",
+    "subcategory": "Taproom",
+    "purpose": "Explain the waiter or opening staff the exact steps to open the taproom for the guests later in the day.",
+    "scope": "All employees assigned to open the taproom during operating days.",
+    "responsible_people": [
+        "Waiter",
+        "Taproom Manager"
+    ],
+    "prerequisites": [
+        "Access to building keys",
+        "Completed safety & hygiene training",
+        "Knowledge of current tap list"
+    ],
+    "tools": [
+        "Taproom keys",
+        "Cleaning supplies",
+        "POS tablet",
+        "Fridge access",
+        "Lights and power switches"
+    ],
+    "frequency": "Daily (on opening days)",
+    "duration_estimate": "15–20 minutes",
+    "priority": "Critical",
+    "steps": [
+        "1. Enter building and disable security system if active.",
+        "2. Turn on lights in all guest-accessible areas.",
+        "3. Check for cleanliness; do a quick walkthrough.",
+        "4. Wipe tables and surfaces if needed.",
+        "5. Unlock bathrooms and check soap, paper, and cleanliness.",
+        "6. Turn on POS tablet and test connection.",
+        "7. Check taproom fridge and cider/mead taps for readiness.",
+        "8. Open outside doors/windows if weather allows (Biergarten).",
+        "9. Play opening playlist or light ambient music.",
+        "10. Place chalkboard/menu with today’s offerings outside.",
+        "11. Log completion in the taproom opening checklist."
+    ],
+    "required_quality_check": "Supervisor verifies cleanliness and fridge/tap readiness before service begins.",
+    "required_records": "Opening checklist signed by staff member and counter-signed by supervisor weekly.",
+    "safety": "Ensure electrical and fridge equipment are operating correctly. Bathrooms must meet hygiene standards before customer arrival.",
+    "common_issues_and_fixes": [
+        "If POS fails, switch to manual order-taking and notify supervisor.",
+        "If taps aren't working, check CO2 or notify brewing team."
+    ],
+    "improvement": "Staff can leave notes at the bottom of the checklist or suggest improvements during weekly team meetings.",
+    "history": [
+        {
+            "date": "2025-04-03",
+            "author": "Imanol Irizar Da Silva",
+            "change": "Initial version created"
+        }
+    ],
+    "status": "Draft",
+    "attachments": []
+}

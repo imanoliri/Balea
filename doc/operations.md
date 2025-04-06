@@ -19,7 +19,7 @@ This includes planning, producing, selling, and improving — everything from in
     - Demand estimates → production → storage capacity → bottling/sales timing.
     - See [Brewing_Calendar spreadsheet](https://docs.google.com/spreadsheets/d/1WSErOmV3NpGC9YrrKwWCPy5YrhLJK3uXXh4-aLBEntg/edit?usp=sharing)
 
-3. Workflow Definition (procedures)
+3. Workflow Definition ([fill in procedure](../business/operations/fill_in_procedure.html))
     - Buying online
     - Buying manually
     - Arrival of goods

@@ -1,4 +1,4 @@
-## Product Lines & Names
+## Products
 Visit [the webpage](https://baleabrewhouse.netlify.app/) for all the recipes!
 
 **Sagardo (Ciders)**

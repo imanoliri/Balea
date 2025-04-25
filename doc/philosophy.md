@@ -1,4 +1,4 @@
-## Idea & Philosophy
+## Philosophy
 
 Balea Brewery is a Basque-inspired ciderhouse, meadery, and historical brewery focused on reviving lost brewing traditions while maintaining strong cultural storytelling. The core philosophy revolves around:
 - **Authenticity**: Crafting Basque-style sagardoa (cider) and mead, along with forgotten medieval fruit wines and ales.

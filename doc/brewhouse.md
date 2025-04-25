@@ -1,4 +1,4 @@
-## Brewhouse Layout
+## Brewhouse
 [Brewhouse_Layout spreadsheet](https://docs.google.com/spreadsheets/d/1i1qvkoGsZDia1ozenOaS76aTAC3JZTy28vB54YDQDlE/edit?usp=sharing)
 
 The spreadsheet is a simplified plan for the distribution of the whole brewhouse. It is only a virtual example used to experiment with the layout and the operations.

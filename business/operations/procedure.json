@@ -1,0 +1,37 @@
+{
+    "title": "",
+    "procedure_id": "",
+    "version": "",
+    "created_by": "",
+    "created_on": "",
+    "filled_by": "",
+    "filled_on": "",
+    "last_reviewed": "",
+    "last_reviewed_by": "",
+    "approved_by": "",
+    "business_area": "",
+    "subcategory": "",
+    "purpose": "",
+    "scope": "",
+    "responsible_people": [],
+    "prerequisites": [],
+    "tools": [],
+    "frequency": "",
+    "duration_estimate": "",
+    "priority": "",
+    "steps": [],
+    "notes": "",
+    "required_quality_check": "",
+    "required_records": "",
+    "safety": "",
+    "common_issues_and_fixes": [],
+    "history": [
+        {
+            "date": "2025-04-03",
+            "author": "Imanol Irizar Da Silva",
+            "change": "Initial version created"
+        }
+    ],
+    "status": "Draft",
+    "attachments": []
+}

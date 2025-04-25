@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedure Fill-Out Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #f8f8f8;
+      border-radius: 8px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f99;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Procedure Fill-Out Tool</h1>
+
+  <label for="procedureId">Enter Procedure ID or Name:</label>
+  <input type="text" id="procedureId">
+  <button onclick="loadProcedure()">Load Procedure</button>
+
+  <div id="procedureForm" style="display:none;">
+    <h2 id="procedureTitle"></h2>
+    <p><strong>ID:</strong> <span id="procedureID"></span></p>
+    <p><strong>Purpose:</strong> <span id="procedurePurpose"></span></p>
+
+    <h3>Steps</h3>
+    <ul id="stepsList"></ul>
+
+    <div id="dynamicFields"></div>
+
+    <button onclick="saveProcedureResult()">Save Procedure Record</button>
+  </div>
+
+  <script>
+    let currentProcedure = null;
+    let stepChecks = [];
+    let dynamicFieldInputs = {};
+
+    function loadProcedure() {
+      const id = document.getElementById('procedureId').value;
+      const procedureFile = `${id}.json` //`./business/operations/${id}.json`
+      console.log(procedureFile)
+      fetch(procedureFile)
+        .then(response => response.json())
+        .then(data => {
+          currentProcedure = data;
+          stepChecks = new Array(data.steps?.length || 0).fill(false);
+          document.getElementById('procedureForm').style.display = 'block';
+          document.getElementById('procedureTitle').textContent = data.title;
+          document.getElementById('procedureID').textContent = data.procedure_id;
+          document.getElementById('procedurePurpose').textContent = data.purpose;
+
+          const stepsList = document.getElementById('stepsList');
+          stepsList.innerHTML = '';
+          (data.steps || []).forEach((step, index) => {
+            const li = document.createElement('li');
+            li.className = 'step-item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.onchange = () => stepChecks[index] = checkbox.checked;
+
+            const label = document.createElement('label');
+            label.textContent = step;
+
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            stepsList.appendChild(li);
+          });
+
+          // Populate dynamic fields
+          const dynamicFieldsDiv = document.getElementById('dynamicFields');
+          dynamicFieldsDiv.innerHTML = '';
+          dynamicFieldInputs = {};
+          for (const key in data) {
+            if (data[key] === '' || (Array.isArray(data[key]) && data[key].length === 0)) {
+              const label = document.createElement('label');
+              label.textContent = key.replaceAll('_', ' ');
+              const input = document.createElement('input');
+              input.type = key.includes('date') ? 'date' : 'text';
+              input.oninput = (e) => dynamicFieldInputs[key] = e.target.value;
+              dynamicFieldsDiv.appendChild(label);
+              dynamicFieldsDiv.appendChild(document.createElement('br'));
+              dynamicFieldsDiv.appendChild(input);
+              dynamicFieldsDiv.appendChild(document.createElement('br'));
+              dynamicFieldsDiv.appendChild(document.createElement('br'));
+            }
+          }
+        })
+        .catch(() => alert(`Procedure not found:\n${procedureFile}`));
+    }
+
+    function saveProcedureResult() {
+      if (!currentProcedure) return;
+
+      const result = {
+        ...dynamicFieldInputs,
+        procedure_id: currentProcedure.procedure_id,
+        step_checklist: stepChecks,
+        status: "Completed"
+      };
+
+      const blob = new Blob([JSON.stringify(result, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const timestamp = Date.now();
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${currentProcedure.procedure_id}_${timestamp}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

@@ -54,7 +54,7 @@
   <h1>Procedure Fill-Out Tool</h1>
 
   <label for="procedureId">Enter Procedure ID or Name:</label>
-  <input type="text" id="procedureId">
+  <select id="procedureId"></select>
   <button onclick="loadProcedure()">Load Procedure</button>
 
   <div id="procedureForm" style="display:none;">
@@ -78,9 +78,36 @@
     let stepChecks = [];
     let dynamicFieldInputs = {};
 
+  
+    async function listJSONFiles() {
+      try {
+        const response = await fetch(".");
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+
+        const links = Array.from(doc.querySelectorAll("a"));
+        const jsonFiles = links
+          .map(link => link.getAttribute("href"))
+          .filter(href => href && href.endsWith(".json"));
+
+        const dropdown = document.getElementById("procedureId");
+        jsonFiles.forEach(file => {
+          const option = document.createElement("option");
+          option.value = file;
+          option.textContent = file;
+          dropdown.appendChild(option);
+        });
+      } catch (err) {
+        console.error("Could not load file list:", err);
+      }
+    }
+
+    listJSONFiles();
+
     function loadProcedure() {
       id = document.getElementById('procedureId').value;
-      procedureFile = `${id}.json` //`./business/operations/${id}.json`
+      procedureFile = id //`${id}.json` //`./business/operations/${id}.json`
 
       fetch(procedureFile)
         .then(response => response.json())

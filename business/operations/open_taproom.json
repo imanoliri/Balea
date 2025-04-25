@@ -45,6 +45,7 @@
         "10. Place chalkboard/menu with today’s offerings outside.",
         "11. Log completion in the taproom opening checklist."
     ],
+    "notes": "",
     "required_quality_check": "Supervisor verifies cleanliness and fridge/tap readiness before service begins.",
     "required_records": "Opening checklist signed by staff member and counter-signed by supervisor weekly.",
     "safety": "Ensure electrical and fridge equipment are operating correctly. Bathrooms must meet hygiene standards before customer arrival.",

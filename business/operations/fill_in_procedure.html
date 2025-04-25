@@ -67,18 +67,21 @@
 
     <div id="dynamicFields"></div>
 
+    <button onclick="submitFile()">Send to Balea Drive</button>
     <button onclick="saveProcedureResult()">Save Procedure Record</button>
   </div>
 
   <script>
+    let id = null;
+    let procedureFile = null;
     let currentProcedure = null;
     let stepChecks = [];
     let dynamicFieldInputs = {};
 
     function loadProcedure() {
-      const id = document.getElementById('procedureId').value;
-      const procedureFile = `${id}.json` //`./business/operations/${id}.json`
-      console.log(procedureFile)
+      id = document.getElementById('procedureId').value;
+      procedureFile = `${id}.json` //`./business/operations/${id}.json`
+
       fetch(procedureFile)
         .then(response => response.json())
         .then(data => {
@@ -148,6 +151,34 @@
       a.click();
       URL.revokeObjectURL(url);
     }
+
+    const APPS_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby0zeXyi9-sdk_ZOnaoZRmFueYsdD5Nb2imqLHYKHZBV6ktKY1sHAiTqvqkCRCjU-Ytcw/exec";
+
+    async function submitFile() {
+        if (!currentProcedure) return;
+
+        const result = {
+          filename: `${currentProcedure.procedure_id}_${Date.now()}.json`,
+          content: JSON.stringify({
+            ...dynamicFieldInputs,
+            procedure_id: currentProcedure.procedure_id,
+            step_checklist: stepChecks,
+            status: "Completed"
+          })
+        };
+
+        const response = await fetch(APPS_SCRIPT_WEB_APP_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `data=${encodeURIComponent(JSON.stringify(result))}`
+        });
+
+        const resText = await response.text();
+        alert(resText);
+      }
+
   </script>
 </body>
 </html>

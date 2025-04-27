@@ -1,14 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Balea Brews – Batch Lookup</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #search {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    #results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    .card div {
+      margin-bottom: 8px;
+    }
+
+    .field-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .no-results {
+      width: 100%;
+      font-size: 18px;
+      color: #777;
+    }
+  </style>
 </head>
+
 <body>
 
   <h1>Balea Brews – Batch Lookup</h1>
 
   <input type="text" id="search" placeholder="Search any field..." />
+
   <div id="results"></div>
 
   <script>
@@ -29,7 +87,7 @@
         batchData = json;
       } catch (err) {
         console.error('Error loading batch data:', err);
-        document.getElementById('results').innerText = '⚠️ Failed to load batch data.';
+        document.getElementById('results').innerHTML = '<div class="no-results">⚠️ Failed to load batch data.</div>';
       }
     }
 
@@ -44,14 +102,12 @@
 
       const html = filtered.map(row => {
         const fieldsHtml = FIELDS_TO_SEARCH.map(f =>
-          `<div><strong>${f}</strong>: ${row[f] || ''}</div>`
+          row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
-        return `<div style="margin-bottom: 1em; padding: 0.5em; border: 1px solid #ccc;">
-                  ${fieldsHtml}
-                </div>`;
+        return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 
-      document.getElementById('results').innerHTML = html || '<p>No matching batches found.</p>';
+      document.getElementById('results').innerHTML = html || '<div class="no-results">No matching batches found.</div>';
     }
 
     window.onload = async () => {

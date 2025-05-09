@@ -1,7 +1,7 @@
 /* Minimal CSS for PC and mobile */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
     padding: 0 20px;
     word-wrap: break-word;
@@ -21,7 +21,7 @@ body {
 	background-color: #102634;
 	color: white;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 20px;
 	border-radius: 5px;
 	margin: 0 5px;
 }

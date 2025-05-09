@@ -1,27 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Balea Brewhouse</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<link rel="stylesheet" href="website/style.css">
+  <meta charset="UTF-8">
+  <title>Balea Brews</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+      font-size: 24px;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+      margin-top: 2em;
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-size: 24px;
+      padding: 0.75em 1.5em;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      color: #333;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .nav a:hover {
+      background-color: #d0d0d0;
+    }
+
+    image {
+      margin: 1em 0;
+    }
+  </style>
 </head>
 
-<h1 id="balea-brewhouse">Balea Brewhouse</h1>
-<image src="./marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="550"/>
-<p>Visit Balea Brewery's <a href="https://github.com/imanoliri/Balea">open business repository</a> – full transparency on brewing ideas, finances, and operations, fostering collaboration and community-driven innovation.</p>
+<body>
 
+  <h1>Balea Brews</h1>
 
-<h2 id="1-philosophy">1. <a href="./website/philosophy.html">Philosophy</a></h2>
-<h2 id="2-business-lines">2. <a href="./website/business_lines.html">Business Lines</a></h2>
-<h2 id="3-products">3. <a href="./website/products.html">Products</a></h2>
-<h2 id="4-recipes">4. <a href="./website/recipes.html">Recipes</a></h2>
-<h2 id="5-batches">5. <a href="./website/batches.html">Batches</a></h2>
-<h2 id="6-business-projections">6. <a href="./website/business_projections.html">Business Projections</a></h2>
-<h2 id="7-brewhouse">7. <a href="./doc/brewhouse.html">Brewhouse</a></h2>
-<h2 id="8-operations">8. <a href="./website/operations.html">Operations</a></h2>
-<h2 id="next-steps"><a href="./website/next_steps.html">Next Steps</a></h2>
+  <image src="./marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="350"/>
 
-
+  <div class="nav">
+    <a href="https://github.com/imanoliri/Balea" target="_blank">💻 GitHub Repo</a>
+    <a href="website/batches.html" target="_blank">🔍 Learn More About Your Bottle</a>
+    <a href="baleabrewhouse.html" target="_blank">🏡 Balea Website</a>
+  </div>
 
 </body>
 </html>

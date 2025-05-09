@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
-      font-size: 20px;
+      font-size: 24px;
       background: #f2f2f2;
       margin: 0;
       padding: 20px;
@@ -17,10 +17,26 @@
       margin-bottom: 20px;
     }
 
+    .donation-button {
+      text-decoration: none;
+      font-size: 24px;
+      padding: 0.75em 1.5em;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      color: #333;
+      width: 80%;
+      max-width: 400px;
+      display: inline-block;
+    }
+
+    .donation-button:hover {
+      background-color: #d0d0d0;
+    }
+
     #search {
-      width: 400px;
+      width: 700px;
       padding: 12px;
-      font-size: 20px;
+      font-size: 22px;
       border: 1px solid #ccc;
       border-radius: 8px;
       margin-bottom: 30px;
@@ -38,6 +54,7 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 18px;
       text-align: left;
       width: 100%;
       max-width: 400px;
@@ -65,7 +82,17 @@
 
   <h1>Balea Brews – Batch Lookup</h1>
 
-  <input type="text" id="search" placeholder="Search any field..." />
+  <div><image src="../marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="350"/></div>
+
+  <a href="https://www.paypal.com/paypalme/ImanolIrizar/3" target="_blank" class="donation-button">💙 Adopt This Brew – Help Cover Its Cost</a>
+
+  <p style="font-size: 12px; max-width: 700px; margin: 1.5em auto; text-align: center;">
+    Each bottle of Balea costs about <strong>€3 to make</strong> — and our bottles hold a full liter, not 0.75 like most wines.  
+    If you believe in fairness and open brewing, consider donating €3 to cover the cost of this one.
+  </p>  
+
+  <input type="text" id="search" placeholder="Search batches..." />
+
   <div id="results"></div>
 
   <script>

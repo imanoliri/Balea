@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Balea Brews – Batch Lookup</title>
+  <title>Balea Brews</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
@@ -15,6 +15,27 @@
 
     h1 {
       margin-bottom: 20px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 2em;
+    }
+    .nav a {
+      text-decoration: none;
+      font-size: 1.2em;
+      padding: 0.5em 1em;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      color: #333;
+    }
+    .nav a:hover {
+      background-color: #d0d0d0;
+    }
+    #lookup {
+      margin: 1em auto;
+      max-width: 400px;
     }
 
     #search {
@@ -63,7 +84,14 @@
 
 <body>
 
-  <h1>Balea Brews – Batch Lookup</h1>
+  <h1>Balea Brews</h1>
+
+  <image src="./marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="350"/>
+
+  <div class="nav">
+    <a href="https://github.com/imanoliri/Balea" target="_blank">GitHub Repo</a>
+    <a href="index.html" target="_blank">Balea Website</a>
+  </div>
 
   <input type="text" id="search" placeholder="Search batches..." />
 
@@ -120,3 +148,4 @@
 
 </body>
 </html>
+  

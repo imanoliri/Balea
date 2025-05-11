@@ -2,59 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Balea Brews – Batch Lookup</title>
+  <title>Explore Our Brews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
-      font-size: 24px;
+      font-size: 1.2rem;
       background: #f2f2f2;
       margin: 0;
-      padding: 20px;
+      padding: 1.25rem;
       text-align: center;
     }
 
     h1 {
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
     }
 
     .donation-button {
       text-decoration: none;
-      font-size: 24px;
-      padding: 0.75em 1.5em;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
       background-color: #e0e0e0;
-      border-radius: 5px;
+      border-radius: 0.5rem;
       color: #333;
-      width: 80%;
+      width: 100%;
       max-width: 400px;
-      display: inline-block;
+      display: block;
+      margin: 1rem auto;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
     }
 
     .donation-button:hover {
       background-color: #d0d0d0;
     }
 
+    img.logo {
+      display: block;
+      margin: 1rem auto;
+      width: auto;
+      max-width: 90vw;
+      max-height: 40vh;
+      height: auto;
+    }
+
+    p.description {
+      font-size: 0.8rem;
+      max-width: 90%;
+      margin: 1.5em auto;
+      text-align: center;
+    }
+
+
     #search {
-      width: 700px;
-      padding: 12px;
-      font-size: 22px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 30px;
+      width: 100%;
+      max-width: 600px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #999;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+
+    #search:focus {
+      border-color: #333;
+      outline: none;
     }
 
     #results {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 1.25rem;
     }
 
     .card {
+      color: black;
       background: white;
-      padding: 20px;
-      border-radius: 12px;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      font-size: 18px;
+      font-size: 0.95rem;
       text-align: left;
       width: 100%;
       max-width: 400px;
@@ -62,7 +93,7 @@
     }
 
     .card div {
-      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
     }
 
     .field-name {
@@ -72,7 +103,7 @@
 
     .no-results {
       width: 100%;
-      font-size: 18px;
+      font-size: 1rem;
       color: #777;
     }
   </style>
@@ -80,20 +111,26 @@
 
 <body>
 
-  <h1>Balea Brews – Batch Lookup</h1>
+  <h1>Explore Our Brews</h1>
 
-  <div><image src="../marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" width="350"/></div>
+  <div>
+    <img src="../marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" class="logo" />
+  </div>
 
-  <a href="https://www.paypal.com/paypalme/ImanolIrizar/3" target="_blank" class="donation-button">💙 Adopt This Brew – Help Cover Its Cost</a>
+  <div>
+    <a href="https://www.paypal.com/paypalme/ImanolIrizar/3" target="_blank" class="donation-button">
+      💙 Adopt This Brew – Help Cover Its Cost
+    </a>
+  </div>
 
-  <p style="font-size: 12px; max-width: 700px; margin: 1.5em auto; text-align: center;">
-    Each bottle of Balea costs about <strong>€3 to make</strong> — and our bottles hold a full liter, not 0.75 like most wines.  
+  <p class="description">
+    Each bottle of Balea costs about <strong>€3 to make</strong> — and our bottles hold a full liter, not 0.75 like most wines.<br>
     If you believe in fairness and open brewing, consider donating €3 to cover the cost of this one.
   </p>  
 
-  <input type="text" id="search" placeholder="Search batches..." />
+  <input type="text" id="search" placeholder="🔎 Search by batch ID, name, type, characteristics..." autofocus />
 
-  <div id="results"></div>
+  <div id="results" class="no-results">Any matching batch will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>
 
   <script>
     const SHEET_URL = 'https://opensheet.vercel.app/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/batches';
@@ -105,6 +142,10 @@
 
     let batchData = [];
 
+    const htmlDefaultResult = '<div class="no-results">Any matching batch will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load batch data.</div>';
+    const htmlNoResult = '<div class="no-results">No matching batches found.</div>';
+
     async function loadBatchData() {
       try {
         const res = await fetch(SHEET_URL);
@@ -113,16 +154,21 @@
         batchData = json;
       } catch (err) {
         console.error('Error loading batch data:', err);
-        document.getElementById('results').innerHTML = '<div class="no-results">⚠️ Failed to load batch data.</div>';
+        document.getElementById('results').innerHTML = htmlErrorResult;
       }
     }
 
     function displayResults(query) {
-      const q = query.trim().toLowerCase();
+      const searchText = query.trim().toLowerCase();
+
+      if (!searchText) {
+        document.getElementById('results').innerHTML = htmlDefaultResult;
+        return;
+      }
 
       const filtered = batchData.filter(row =>
         FIELDS_TO_SEARCH.some(field => 
-          row[field] && String(row[field]).toLowerCase().includes(q)
+          row[field] && String(row[field]).toLowerCase().includes(searchText)
         )
       );
 
@@ -133,11 +179,12 @@
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 
-      document.getElementById('results').innerHTML = html || '<div class="no-results">No matching batches found.</div>';
+      document.getElementById('results').innerHTML = html || htmlNoResult;
     }
 
     window.onload = async () => {
       await loadBatchData();
+      document.getElementById('results').innerHTML = htmlDefaultResult
       document.getElementById('search').addEventListener('input', e => {
         displayResults(e.target.value);
       });

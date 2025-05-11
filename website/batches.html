@@ -28,7 +28,8 @@
       color: #333;
       width: 100%;
       max-width: 400px;
-      display: inline-block;
+      display: block;
+      margin: 1rem auto;
       box-sizing: border-box;
       transition: background-color 0.2s ease;
     }
@@ -53,15 +54,28 @@
       text-align: center;
     }
 
+    p.search-instruction {
+      font-size: 0.95rem;
+      color: #444;
+      margin: 1.5rem auto 0.5rem;
+      max-width: 90%;
+    }
+
     #search {
       width: 100%;
       max-width: 600px;
       padding: 0.75rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
+      border: 2px solid #999;
       border-radius: 0.5rem;
       margin-bottom: 2rem;
       box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+
+    #search:focus {
+      border-color: #333;
+      outline: none;
     }
 
     #results {
@@ -119,7 +133,11 @@
     If you believe in fairness and open brewing, consider donating €3 to cover the cost of this one.
   </p>  
 
-  <input type="text" id="search" placeholder="Search batches..." />
+  <p class="search-instruction">
+    🔎 Type anything to explore your bottle's details — try "<strong>sidra</strong>", "<strong>sagar</strong>", "<strong>blue</strong>", "<strong>b21</strong>", "<strong>carbonated</strong>", or "<strong>/2024</strong>"
+  </p>
+
+  <input type="text" id="search" placeholder="Search by ID, name, type, ingredient..." autofocus />
 
   <div id="results"></div>
 

@@ -54,12 +54,6 @@
       text-align: center;
     }
 
-    p.search-instruction {
-      font-size: 0.95rem;
-      color: #444;
-      margin: 1.5rem auto 0.5rem;
-      max-width: 90%;
-    }
 
     #search {
       width: 100%;
@@ -133,13 +127,9 @@
     If you believe in fairness and open brewing, consider donating €3 to cover the cost of this one.
   </p>  
 
-  <p class="search-instruction">
-    🔎 Browse Balea’s brews or your specific bottle — try "<strong>b21</strong>", "<strong>sidra</strong>", "<strong>sagar</strong>", "<strong>blue</strong>", "<strong>carbonated</strong>", or "<strong>/2024</strong>"
-  </p>
+  <input type="text" id="search" placeholder="🔎 Search by batch ID, name, type, characteristics..." autofocus />
 
-  <input type="text" id="search" placeholder="Search by batch ID, name, type, characteristics..." autofocus />
-
-  <div id="results" class="no-results">Any matching batches will be displayed here.</div>
+  <div id="results" class="no-results">Any matching batch will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>
 
   <script>
     const SHEET_URL = 'https://opensheet.vercel.app/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/batches';

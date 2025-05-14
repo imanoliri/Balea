@@ -18,7 +18,7 @@ Balea Brewery's open business repository – full transparency on brewing ideas,
 ## 4. [Recipes](./doc/recipes.md)
 
 
-## 5. [Batches](./website/batches.html)
+## 5. [Batches](.https://docs.google.com/spreadsheets/d/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/edit?usp=sharing)
 
 
 ## 6. [Business Projections](./doc/business_projections.md)

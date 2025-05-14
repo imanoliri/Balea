@@ -32,3 +32,6 @@ Balea Brewery's open business repository – full transparency on brewing ideas,
 
 ## [Next Steps](./doc/next_steps.md)
 
+
+## [Contact Balea](./doc/contact.md)
+

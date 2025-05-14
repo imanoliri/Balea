@@ -16,7 +16,7 @@ We’re always listening — whether you want to:
 
     🎉 Propose an event or custom brewing order
 
-    📦 Reach out as a business to collaborate, sell, distribute, or market Balea products
+    📦 Propose a business partnership with Balea
 
     💬 Or just share your thoughts
 

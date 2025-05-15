@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../marketing/branding/balea_aquamarine.svg" type="image/svg+xml">
+  <title>Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+      font-size: 1.2rem;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+     .review-button {
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #e0e0e0;
+      border-radius: 0.5rem;
+      color: #333;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 1rem auto;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+
+    .review-button:hover {
+      background-color: #d0d0d0;
+    }
+
+    #search {
+      width: 100%;
+      max-width: 600px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #999;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+
+    #search:focus {
+      border-color: #333;
+      outline: none;
+    }
+
+    #results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .card {
+      color: black;
+      background: white;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 0.95rem;
+      text-align: left;
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    .card div {
+      margin-bottom: 0.5rem;
+    }
+
+    .field-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .no-results {
+      width: 100%;
+      font-size: 1rem;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Reviews</h1>
+
+  <div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB_jtYsDyITDzdyFjeig10Y9tfb1tcmvTonEDsjx9K-jdQ_Q/viewform?usp=header" target="_blank" class="review-button">
+      ✍️ Write a Review
+    </a>
+  </div>
+
+
+  <input type="text" id="search" placeholder="🔎 Search by batch ID, name, type, characteristics..." autofocus />
+
+  <div id="results" class="no-results">Any matching review will be shown here — try "b21", "sour", "sweet", "fruity", "carbonated", or "/2024"</div>
+
+  <script>
+    const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
+
+    const FIELDS_TO_SEARCH = [
+      "Batch Number"
+    ];
+
+    let batchData = [];
+
+    const htmlDefaultResult = '<div class="no-results">Any matching batch review will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load batch data.</div>';
+    const htmlNoResult = '<div class="no-results">No matching batches found.</div>';
+
+    async function loadBatchData() {
+      try {
+        const res = await fetch(SHEET_URL);
+        const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("Data is not an array");
+        batchData = json;
+      } catch (err) {
+        console.error('Error loading batch data:', err);
+        document.getElementById('results').innerHTML = htmlErrorResult;
+      }
+    }
+
+    function displayResults(query) {
+      const searchText = query.trim().toLowerCase();
+
+      if (!searchText) {
+        document.getElementById('results').innerHTML = htmlDefaultResult;
+        return;
+      }
+
+      // const filtered = batchData.filter(row =>
+      //   FIELDS_TO_SEARCH.some(field => 
+      //     row[field] && String(row[field]).toLowerCase().includes(searchText)
+      //   )
+      // );
+      const filtered = batchData
+
+      const html = filtered.map(row => {
+        const fieldsHtml = FIELDS_TO_SEARCH.map(f =>
+          row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
+        ).join('');
+        return `<div class="card">${fieldsHtml}</div>`;
+      }).join('');
+
+      document.getElementById('results').innerHTML = html || htmlNoResult;
+    }
+
+    window.onload = async () => {
+      await loadBatchData();
+      document.getElementById('results').innerHTML = htmlDefaultResult
+      document.getElementById('search').addEventListener('input', e => {
+        displayResults(e.target.value);
+      });
+    };
+  </script>
+
+</body>
+</html>

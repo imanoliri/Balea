@@ -118,20 +118,20 @@
       "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
     ];
 
-    let batchData = [];
+    let reviewData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Any matching batch review will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
-    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load batch data.</div>';
-    const htmlNoResult = '<div class="no-results">No matching batches found.</div>';
+    const htmlDefaultResult = '<div class="no-results">Any matching review will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load review data.</div>';
+    const htmlNoResult = '<div class="no-results">No matching reviews found.</div>';
 
-    async function loadBatchData() {
+    async function loadReviewData() {
       try {
         const res = await fetch(SHEET_URL);
         const json = await res.json();
         if (!Array.isArray(json)) throw new Error("Data is not an array");
-        batchData = json;
+        reviewData = json;
       } catch (err) {
-        console.error('Error loading batch data:', err);
+        console.error('Error loading review data:', err);
         document.getElementById('results').innerHTML = htmlErrorResult;
       }
     }
@@ -144,7 +144,7 @@
         return;
       }
 
-      const filtered = batchData.filter(row =>
+      const filtered = reviewData.filter(row =>
         FIELDS_TO_SEARCH.some(field => 
           row[field] && String(row[field]).toLowerCase().includes(searchText)
         )
@@ -161,7 +161,7 @@
     }
 
     window.onload = async () => {
-      await loadBatchData();
+      await loadreviewData();
       document.getElementById('results').innerHTML = htmlDefaultResult
       document.getElementById('search').addEventListener('input', e => {
         displayResults(e.target.value);

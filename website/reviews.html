@@ -112,7 +112,10 @@
     const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
 
     const FIELDS_TO_SEARCH = [
-      "Batch Number"
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
+    ];
+    const FIELDS_TO_SHOW = [
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
     ];
 
     let batchData = [];
@@ -141,15 +144,14 @@
         return;
       }
 
-      // const filtered = batchData.filter(row =>
-      //   FIELDS_TO_SEARCH.some(field => 
-      //     row[field] && String(row[field]).toLowerCase().includes(searchText)
-      //   )
-      // );
-      const filtered = batchData
+      const filtered = batchData.filter(row =>
+        FIELDS_TO_SEARCH.some(field => 
+          row[field] && String(row[field]).toLowerCase().includes(searchText)
+        )
+      );
 
       const html = filtered.map(row => {
-        const fieldsHtml = FIELDS_TO_SEARCH.map(f =>
+        const fieldsHtml = FIELDS_TO_SHOW.map(f =>
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
         return `<div class="card">${fieldsHtml}</div>`;

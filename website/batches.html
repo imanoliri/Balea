@@ -89,6 +89,10 @@
       "id", "name", "type", "details", "abv", "recipe", "review", "rating",
       "size", "metric", "status", "OG", "FG", "start Date"
     ];
+    const FIELDS_TO_SHOW = [
+      "id", "name", "type", "details", "abv", "recipe", "review", "rating",
+      "size", "metric", "status", "OG", "FG", "start Date"
+    ];
 
     let batchData = [];
 
@@ -123,7 +127,7 @@
       );
 
       const html = filtered.map(row => {
-        const fieldsHtml = FIELDS_TO_SEARCH.map(f =>
+        const fieldsHtml = FIELDS_TO_SHOW.map(f =>
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
         return `<div class="card">${fieldsHtml}</div>`;

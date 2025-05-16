@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="../marketing/branding/balea_aquamarine.svg" type="image/svg+xml">
-  <title>Explore Our Brews</title>
+  <title>Reviews</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -18,6 +18,25 @@
     h1 {
       margin-bottom: 1.5rem;
       font-size: 2rem;
+    }
+
+     .review-button {
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #e0e0e0;
+      border-radius: 0.5rem;
+      color: #333;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 1rem auto;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+
+    .review-button:hover {
+      background-color: #d0d0d0;
     }
 
     #search {
@@ -76,38 +95,43 @@
 
 <body>
 
-  <h1>Explore Our Brews</h1>
+  <h1>Reviews</h1>
 
-  <input type="text" id="search" placeholder="🔎 Search by batch ID, name, type, characteristics..." autofocus />
+  <div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB_jtYsDyITDzdyFjeig10Y9tfb1tcmvTonEDsjx9K-jdQ_Q/viewform?usp=header" target="_blank" class="review-button">
+      ✍️ Write a Review
+    </a>
+  </div>
 
-  <div id="results" class="no-results">Any matching batch will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>
+
+  <input type="text" id="search" placeholder="🔎 Search by batch ID, email, characteristics..." autofocus />
+
+  <div id="results" class="no-results">Any matching review will be shown here — try "b21", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>
 
   <script>
-    const SHEET_URL = 'https://opensheet.vercel.app/1g0QLpLwEBhVCjyEvlgSv63yysXk9_XxcegWlaK4cg6A/batches';
+    const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
 
     const FIELDS_TO_SEARCH = [
-      "id", "name", "type", "details", "abv", "recipe", "review", "rating",
-      "size", "metric", "status", "OG", "FG", "start Date"
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
     ];
     const FIELDS_TO_SHOW = [
-      "id", "name", "type", "details", "abv", "recipe", "review", "rating",
-      "size", "metric", "status", "OG", "FG", "start Date"
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
     ];
 
-    let batchData = [];
+    let reviewData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Any matching batch will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
-    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load batch data.</div>';
-    const htmlNoResult = '<div class="no-results">No matching batches found.</div>';
+    const htmlDefaultResult = '<div class="no-results">Any matching review will be shown here — try "b21", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load review data.</div>';
+    const htmlNoResult = '<div class="no-results">No matching reviews found.</div>';
 
-    async function loadBatchData() {
+    async function loadReviewData() {
       try {
         const res = await fetch(SHEET_URL);
         const json = await res.json();
         if (!Array.isArray(json)) throw new Error("Data is not an array");
-        batchData = json;
+        reviewData = json;
       } catch (err) {
-        console.error('Error loading batch data:', err);
+        console.error('Error loading review data:', err);
         document.getElementById('results').innerHTML = htmlErrorResult;
       }
     }
@@ -120,7 +144,7 @@
         return;
       }
 
-      const filtered = batchData.filter(row =>
+      const filtered = reviewData.filter(row =>
         FIELDS_TO_SEARCH.some(field => 
           row[field] && String(row[field]).toLowerCase().includes(searchText)
         )
@@ -137,7 +161,7 @@
     }
 
     window.onload = async () => {
-      await loadBatchData();
+      await loadReviewData();
       document.getElementById('results').innerHTML = htmlDefaultResult
       document.getElementById('search').addEventListener('input', e => {
         displayResults(e.target.value);

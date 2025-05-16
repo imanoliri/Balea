@@ -104,9 +104,9 @@
   </div>
 
 
-  <input type="text" id="search" placeholder="🔎 Search by batch ID, name, type, characteristics..." autofocus />
+  <input type="text" id="search" placeholder="🔎 Search by batch ID, email, characteristics..." autofocus />
 
-  <div id="results" class="no-results">Any matching review will be shown here — try "b21", "sour", "sweet", "fruity", "carbonated", or "/2024"</div>
+  <div id="results" class="no-results">Any matching review will be shown here — try "b21", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>
 
   <script>
     const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
@@ -120,7 +120,7 @@
 
     let reviewData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Any matching review will be shown here — try "b21", "sidra", "sagar", "blue", "carbonated", or "/2024"</div>';
+    const htmlDefaultResult = '<div class="no-results">Any matching review will be shown here — try "b21", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>';
     const htmlErrorResult = '<div class="no-results">⚠️ Failed to load review data.</div>';
     const htmlNoResult = '<div class="no-results">No matching reviews found.</div>';
 
@@ -161,7 +161,7 @@
     }
 
     window.onload = async () => {
-      await loadreviewData();
+      await loadReviewData();
       document.getElementById('results').innerHTML = htmlDefaultResult
       document.getElementById('search').addEventListener('input', e => {
         displayResults(e.target.value);

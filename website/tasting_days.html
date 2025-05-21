@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Balea Tasting Day Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+      font-size: 1.2rem;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 2px solid #999;
+      margin-bottom: 2rem;
+    }
+
+    .no-results {
+      width: 100%;
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .results {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .results div {
+      margin-bottom: 1rem;
+    }
+
+    .field-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .bar-container {
+      background-color: #ddd;
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 24px;
+      margin-top: 1rem;
+    }
+
+    .bar {
+      height: 100%;
+      background-color: #007B7F;
+      text-align: center;
+      color: white;
+      line-height: 24px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Balea Tasting Days</h1>
+
+  <select id="tastingDaySelector" onchange="displayResults(this.value)">
+    <option value="" selected>Select a Tasting Day</option>
+  </select>
+
+  <div id="results" class="results"></div>
+
+
+
+  <script>
+    const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
+
+    const FIELDS_TO_SEARCH = [
+        "Timestamp", "Email address", "Your Alias", "Tasting ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+    ];
+    const FIELDS_TO_SHOW = [
+        "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+    ];
+
+    const FIELDS_TO_SHOW_WITHOUT_TITLES = [
+      "General Comments", "Specific Bottle Comments"
+    ]
+
+    let tastingData = [];
+
+    const htmlDefaultResult = '<div class="no-results">Select a tasting day to show its data.</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load tasting day data.</div>';
+    const htmlNoResult = '<div class="no-results">Error loading tasting day data.</div>';
+
+    async function loadTastingData() {
+      try {
+        const res = await fetch(SHEET_URL);
+        const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("Data is not an array");
+        tastingData = json;
+        populateDropdown()
+      } catch (err) {
+        console.error('Error loading batch data:', err);
+        document.getElementById('results').innerHTML = htmlErrorResult;
+      }
+    }
+
+    function populateDropdown() {
+      const selector = document.getElementById('tastingDaySelector');
+      tastingData.forEach((row, i) => {
+        const option = document.createElement('option');
+        const id = row["Tasting ID"] || `T${i+1}`;
+        option.value = i;
+        option.textContent = `${id} – ${row["Date"]}`;
+        selector.appendChild(option);
+      });
+    }
+
+    function displayResults(tastingDaySelectorValue) {
+
+      if (!tastingDaySelectorValue) {
+        document.getElementById('results').innerHTML = htmlDefaultResult;
+        return;
+      }
+
+      const row = tastingData[tastingDaySelectorValue]
+
+      if (!tastingData[tastingDaySelectorValue]) {
+        document.getElementById('results').innerHTML = htmlNoResult;
+        return;
+      }
+
+      // Create html with general text
+      let html = FIELDS_TO_SHOW.map(f =>
+          row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
+        ).join('');
+
+
+      // Add goal bar
+      const tastedCosts = sumCSV(row["Tasted Costs"]);
+      const soldCosts = sumCSV(row["Sold Costs"]);
+      const soldRevenue = sumCSV(row["Sold Sale Prices"]);
+      const totalCost = tastedCosts + soldCosts;
+      const progress = totalCost > 0 ? Math.min(100, Math.round((soldRevenue / totalCost) * 100)) : 0;
+      
+
+      html += `
+        <div><span class="label">Costs vs Donations:</span>
+          <div class="bar-container">
+            <div class="bar" style="width: ${progress}%;">€${soldRevenue.toFixed(2)} / €${totalCost.toFixed(2)}</div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('results').innerHTML = html || htmlNoResult;
+    }
+
+    function sumCSV(str) {
+      if (!str) return 0;
+      return str
+        .split(/[,;]/)
+        .map(s => parseFloat(s.trim().replace('€','') || '0'))
+        .reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
+    }
+
+    window.onload = async () => {
+      await loadTastingData();
+      document.getElementById('results').innerHTML = htmlDefaultResult
+      displayResults(document.getElementById('tastingDaySelector').value)
+    };
+  </script>
+
+</body>
+</html>

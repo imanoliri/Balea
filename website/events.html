@@ -160,10 +160,10 @@
     const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
 
     const FIELDS_TO_SEARCH = [
-        "Timestamp", "Email address", "Your Alias", "Event ID", "Event Name", "Date", "Time", "Location", "Participants", "Bottles Batch IDs", "Bottle Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
+        "Timestamp", "Email address", "Your Alias", "Event ID", "Event Name", "Date", "Time", "Location", "Participants", "Bottles Batch IDs", "Bottle Ingredients Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
     ];
     const FIELDS_TO_SHOW = [
-        "Event Name", "Participants", "Bottles Batch IDs", "Bottle Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
+        "Event Name", "Participants", "Bottles Batch IDs", "Bottle Ingredients Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
     ];
 
     let eventData = [];
@@ -218,7 +218,7 @@
 
       // Add goal bar
       // Calculate base values
-      const eventCosts = sumCSV(row["Bottle Costs"]);
+      const ingredientCost = sumCSV(row["Bottle Ingredients Costs"]);
       const donations = sumCSV(row["Donations"]);
 
       // Count bottles from CSV string
@@ -227,10 +227,10 @@
       // Add €2 per bottle for bottles and €2 for labor
       const bottleCost = bottleCount * 2;
       const laborCost = bottleCount * 2;
-      const totalGoal = eventCosts + bottleCost + laborCost;
+      const totalGoal = ingredientCost + bottleCost + laborCost;
 
       // Compute proportional widths
-      const ingPercent = (eventCosts / totalGoal) * 100;
+      const ingPercent = (ingredientCost / totalGoal) * 100;
       const botPercent = (bottleCost / totalGoal) * 100;
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
@@ -249,7 +249,7 @@
         </div>
         <div style="margin-top: 0.5rem; font-size: 0.9rem;">
           €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
-          covering ingredients (€${eventCosts}), bottles (€${bottleCost}), and labor (€${laborCost}).
+          covering ingredients (€${ingredientCost}), bottles (€${bottleCost}), and labor (€${laborCost}).
         </div>
       `;
 
@@ -258,9 +258,9 @@
       const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
 
       const rounded = val => Math.round(val * 100) / 100;
-      const base = rounded(eventCosts / participants);
-      const mid = rounded((eventCosts + bottleCost)/ participants);
-      const high = rounded((eventCosts + bottleCost + laborCost)/ participants);
+      const base = rounded(ingredientCost / participants);
+      const mid = rounded((ingredientCost + bottleCost)/ participants);
+      const high = rounded((ingredientCost + bottleCost + laborCost)/ participants);
 
       html += `
         <div id="donation-buttons"">

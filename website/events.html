@@ -235,17 +235,21 @@
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
 
+      const ingText = (donationPercent > 0)? "Ingredients" : ""
+      const botText = (donationPercent > ingPercent)? "Bottles" : ""
+      const labText = (donationPercent > botPercent)? "Labor" : ""
+
       // Build progress bar
       html += `
         <div class="label">💸 Support This Event</div>
         <div class="bar-container" style="display: flex;">
-          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">Ingredients</div>
-          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">Bottles</div>
-          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">Labor</div>
+          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">${ingText}</div>
+          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">${botText}</div>
+          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">${labText}</div>
         </div>
         <div style="margin-top: 0.5rem; font-size: 0.9rem;">
           €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
-          covering ingredients, bottles, and labor.
+          covering ingredients (€${eventCosts}), bottles (€${bottleCost}), and labor (€${laborCost}).
         </div>
       `;
 

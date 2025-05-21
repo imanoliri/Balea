@@ -198,31 +198,52 @@
 
 
       // Add goal bar
+      // Calculate base values
       const eventCosts = sumCSV(row["Bottle Costs"]);
       const donations = sumCSV(row["Donations"]);
-      const progress = eventCosts > 0 ? Math.min(100, Math.round((donations / eventCosts) * 100)) : 0;
-      
+
+      // Count bottles from CSV string
+      const bottleCount = (row["Bottles Batch IDs"] || '').split(',').filter(x => x.trim()).length;
+
+      // Add €2 per bottle for bottles and €2 for labor
+      const bottleCost = bottleCount * 2;
+      const laborCost = bottleCount * 2;
+      const totalGoal = eventCosts + bottleCost + laborCost;
+
+      // Compute proportional widths
+      const ingPercent = (eventCosts / totalGoal) * 100;
+      const botPercent = (bottleCost / totalGoal) * 100;
+      const labPercent = (laborCost / totalGoal) * 100;
+      const donationPercent = Math.min(100, (donations / totalGoal) * 100);
+
+      // Build progress bar
       html += `
-        <div class="label">💸 Want to support this event?</div>
-        <div class="bar-container">
-          <div class="bar" style="width: ${progress}%;">€${donations.toFixed(2)} / €${eventCosts.toFixed(2)}</div>
+        <div class="label">💸 Support This Event</div>
+        <div class="bar-container" style="display: flex;">
+          <div class="bar" style="width: ${Math.min(donationPercent, ingPercent)}%; background-color: #007B7F;" title="Ingredients"></div>
+          <div class="bar" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%; background-color: #00A3AD;" title="Bottles"></div>
+          <div class="bar" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%; background-color: #40C1C8;" title="Labor"></div>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+          €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
+          covering ingredients, bottles, and labor.
         </div>
       `;
 
+
       // Add donations buttons
       const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
-      const perPerson = eventCosts / participants;
 
       const rounded = val => Math.round(val * 100) / 100;
-      const base = rounded(perPerson);
-      const mid = rounded(perPerson * 1.35);
-      const high = rounded(perPerson * 1.75);
+      const base = rounded(eventCosts / participants);
+      const mid = rounded((eventCosts + bottleCost)/ participants);
+      const high = rounded((eventCosts + bottleCost + laborCost)/ participants);
 
       html += `
         <div id="donation-buttons"">
           <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Help a Bit More – €${mid}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Open Brewing – €${high}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Labor – €${mid}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Labor and Bottles – €${high}</a>
         </div>
       `;
       

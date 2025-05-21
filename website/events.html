@@ -75,6 +75,25 @@
       white-space: nowrap;
     }
 
+    .bar-ingredients {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #007B7F
+    }
+    .bar-bottles {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #00A3AD
+    }
+    .bar-labor {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #40C1C8
+    }
+
     #donation-buttons{
       margin-top: 2rem;
       text-align: center;
@@ -220,9 +239,9 @@
       html += `
         <div class="label">💸 Support This Event</div>
         <div class="bar-container" style="display: flex;">
-          <div class="bar" style="width: ${Math.min(donationPercent, ingPercent)}%; background-color: #007B7F;" title="Ingredients"></div>
-          <div class="bar" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%; background-color: #00A3AD;" title="Bottles"></div>
-          <div class="bar" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%; background-color: #40C1C8;" title="Labor"></div>
+          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">Ingredients</div>
+          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">Bottles</div>
+          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">Labor</div>
         </div>
         <div style="margin-top: 0.5rem; font-size: 0.9rem;">
           €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
@@ -242,8 +261,8 @@
       html += `
         <div id="donation-buttons"">
           <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Labor – €${mid}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Labor and Bottles – €${high}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Bottles – €${mid}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Bottles and Labor – €${high}</a>
         </div>
       `;
       

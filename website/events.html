@@ -73,6 +73,43 @@
       line-height: 24px;
       white-space: nowrap;
     }
+
+    #donation-buttons{
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .donation-button {
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #e0e0e0;
+      border-radius: 0.5rem;
+      color: #333;
+      width: 90%;
+      max-width: 400px;
+      display: block;
+      margin: 1rem auto;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+
+    .donation-button:hover {
+      background-color: #d0d0d0;
+    }
+
+    #action-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #action-buttons .donation-button {
+      width: auto;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -85,16 +122,21 @@
 
   <div id="results" class="results"></div>
 
+  <div id="action-buttons">
+    <a href="batches.html" target="_blank" class="donation-button">🔍 Learn More About Your Bottle</a>
+    <a href="reviews.html" target="_blank" class="donation-button">✍️ Write or Read Reviews</a>
+  </div>
+  
 
 
   <script>
     const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
 
     const FIELDS_TO_SEARCH = [
-        "Timestamp", "Email address", "Your Alias", "Event ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+        "Timestamp", "Email address", "Your Alias", "Event ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Tasted Donations", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
     ];
     const FIELDS_TO_SHOW = [
-        "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+        "Participants", "Tasted Batch IDs", "Tasted Costs", "Tasted Donations", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
     ];
 
     let eventData = [];
@@ -150,16 +192,31 @@
       // Add goal bar
       const tastedCosts = sumCSV(row["Tasted Costs"]);
       const soldCosts = sumCSV(row["Sold Costs"]);
-      const soldRevenue = sumCSV(row["Sold Sale Prices"]);
+      const soldRevenue = sumCSV(row["Tasted Donations"]);
       const totalCost = tastedCosts + soldCosts;
-      const progress = totalCost > 0 ? Math.min(100, Math.round((soldRevenue / totalCost) * 100)) : 0;
+      const progress = tastedCosts > 0 ? Math.min(100, Math.round((soldRevenue / tastedCosts) * 100)) : 0;
       
+      html += `
+        <div class="label">💸 Want to support this event?</div>
+        <div class="bar-container">
+          <div class="bar" style="width: ${progress}%;">€${soldRevenue.toFixed(2)} / €${tastedCosts.toFixed(2)}</div>
+        </div>
+      `;
+
+      // Add donations buttons
+      const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
+      const perPerson = tastedCosts / participants;
+
+      const rounded = val => Math.round(val * 100) / 100;
+      const base = rounded(perPerson);
+      const mid = rounded(perPerson * 1.35);
+      const high = rounded(perPerson * 1.75);
 
       html += `
-        <div><span class="label">Costs vs Donations:</span>
-          <div class="bar-container">
-            <div class="bar" style="width: ${progress}%;">€${soldRevenue.toFixed(2)} / €${totalCost.toFixed(2)}</div>
-          </div>
+        <div id="donation-buttons"">
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Help a Bit More – €${mid}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Open Brewing – €${high}</a>
         </div>
       `;
       

@@ -133,10 +133,10 @@
     const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
 
     const FIELDS_TO_SEARCH = [
-        "Timestamp", "Email address", "Your Alias", "Event ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Tasted Donations", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+        "Timestamp", "Email address", "Your Alias", "Event ID", "Date", "Time", "Location", "Participants", "Bottles Batch IDs", "Bottle Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
     ];
     const FIELDS_TO_SHOW = [
-        "Participants", "Tasted Batch IDs", "Tasted Costs", "Tasted Donations", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+        "Participants", "Bottles Batch IDs", "Bottle Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
     ];
 
     let eventData = [];
@@ -190,22 +190,20 @@
 
 
       // Add goal bar
-      const tastedCosts = sumCSV(row["Tasted Costs"]);
-      const soldCosts = sumCSV(row["Sold Costs"]);
-      const soldRevenue = sumCSV(row["Tasted Donations"]);
-      const totalCost = tastedCosts + soldCosts;
-      const progress = tastedCosts > 0 ? Math.min(100, Math.round((soldRevenue / tastedCosts) * 100)) : 0;
+      const eventCosts = sumCSV(row["Bottle Costs"]);
+      const donations = sumCSV(row["Donations"]);
+      const progress = eventCosts > 0 ? Math.min(100, Math.round((donations / eventCosts) * 100)) : 0;
       
       html += `
         <div class="label">💸 Want to support this event?</div>
         <div class="bar-container">
-          <div class="bar" style="width: ${progress}%;">€${soldRevenue.toFixed(2)} / €${tastedCosts.toFixed(2)}</div>
+          <div class="bar" style="width: ${progress}%;">€${donations.toFixed(2)} / €${eventCosts.toFixed(2)}</div>
         </div>
       `;
 
       // Add donations buttons
       const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
-      const perPerson = tastedCosts / participants;
+      const perPerson = eventCosts / participants;
 
       const rounded = val => Math.round(val * 100) / 100;
       const base = rounded(perPerson);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Balea Tasting Day Viewer</title>
+  <title>Balea Events</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -77,10 +77,10 @@
 </head>
 <body>
 
-  <h1>Balea Tasting Days</h1>
+  <h1>Balea Events</h1>
 
-  <select id="tastingDaySelector" onchange="displayResults(this.value)">
-    <option value="" selected>Select a Tasting Day</option>
+  <select id="eventSelector" onchange="displayResults(this.value)">
+    <option value="" selected>Select an Event</option>
   </select>
 
   <div id="results" class="results"></div>
@@ -91,7 +91,7 @@
     const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
 
     const FIELDS_TO_SEARCH = [
-        "Timestamp", "Email address", "Your Alias", "Tasting ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
+        "Timestamp", "Email address", "Your Alias", "Event ID", "Date", "Time", "Location", "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
     ];
     const FIELDS_TO_SHOW = [
         "Participants", "Tasted Batch IDs", "Tasted Costs", "Extracts Tasted", "Sold Batch IDs", "Sold Costs", "Sold Sale Prices", "General Comments", "Specific Bottle Comments"
@@ -101,18 +101,18 @@
       "General Comments", "Specific Bottle Comments"
     ]
 
-    let tastingData = [];
+    let eventData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Select a tasting day to show its data.</div>';
-    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load tasting day data.</div>';
-    const htmlNoResult = '<div class="no-results">Error loading tasting day data.</div>';
+    const htmlDefaultResult = '<div class="no-results">Select a event to show its data.</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load event data.</div>';
+    const htmlNoResult = '<div class="no-results">Error loading event data.</div>';
 
-    async function loadTastingData() {
+    async function loadeventData() {
       try {
         const res = await fetch(SHEET_URL);
         const json = await res.json();
         if (!Array.isArray(json)) throw new Error("Data is not an array");
-        tastingData = json;
+        eventData = json;
         populateDropdown()
       } catch (err) {
         console.error('Error loading batch data:', err);
@@ -121,26 +121,26 @@
     }
 
     function populateDropdown() {
-      const selector = document.getElementById('tastingDaySelector');
-      tastingData.forEach((row, i) => {
+      const selector = document.getElementById('eventSelector');
+      eventData.forEach((row, i) => {
         const option = document.createElement('option');
-        const id = row["Tasting ID"] || `T${i+1}`;
+        const id = row["Event ID"];
         option.value = i;
         option.textContent = `${id} – ${row["Date"]}`;
         selector.appendChild(option);
       });
     }
 
-    function displayResults(tastingDaySelectorValue) {
+    function displayResults(eventSelectorValue) {
 
-      if (!tastingDaySelectorValue) {
+      if (!eventSelectorValue) {
         document.getElementById('results').innerHTML = htmlDefaultResult;
         return;
       }
 
-      const row = tastingData[tastingDaySelectorValue]
+      const row = eventData[eventSelectorValue]
 
-      if (!tastingData[tastingDaySelectorValue]) {
+      if (!eventData[eventSelectorValue]) {
         document.getElementById('results').innerHTML = htmlNoResult;
         return;
       }
@@ -179,9 +179,9 @@
     }
 
     window.onload = async () => {
-      await loadTastingData();
+      await loadeventData();
       document.getElementById('results').innerHTML = htmlDefaultResult
-      displayResults(document.getElementById('tastingDaySelector').value)
+      displayResults(document.getElementById('eventSelector').value)
     };
   </script>
 

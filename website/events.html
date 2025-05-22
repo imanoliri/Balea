@@ -213,9 +213,20 @@
       }
 
       // Create html with general text
-      let html = FIELDS_TO_SHOW.map(f =>
-          row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
-        ).join('');
+      let html = FIELDS_TO_SHOW.map(f => {
+        if (!row[f]) return '';
+
+        let fieldContent = row[f]
+        // Convert list of Batch IDs to links to their batch info
+        if (f === "Bottles Batch IDs") {
+          fieldContent = fieldContent.split(',')
+            .map(b => b.trim())
+            .filter(b => b)
+            .map(batch_id => `<a href="batches.html?search=${batch_id}" target="_blank">${batch_id}</a>`)
+            .join(', ');
+        }
+        return `<div><span class="field-name">${f}:</span> ${fieldContent}</div>`;
+      }).join('');
 
 
       // Add goal bar

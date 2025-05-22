@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Balea Events</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
+      font-size: 1.2rem;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 2px solid #999;
+      margin-bottom: 2rem;
+    }
+
+    .no-results {
+      width: 100%;
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .results {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      font-size: 1rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .results div {
+      margin-bottom: 1rem;
+    }
+
+    .field-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .bar-container {
+      background-color: #ddd;
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 24px;
+      margin-top: 1rem;
+    }
+
+    .bar {
+      height: 100%;
+      background-color: #007B7F;
+      text-align: center;
+      color: white;
+      line-height: 24px;
+      white-space: nowrap;
+    }
+
+    .bar-ingredients {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #007B7F
+    }
+    .bar-bottles {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #00A3AD
+    }
+    .bar-labor {
+      height: 100%;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #40C1C8
+    }
+
+    #donation-buttons{
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .donation-button {
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #e0e0e0;
+      border-radius: 0.5rem;
+      color: #333;
+      width: 90%;
+      max-width: 400px;
+      display: block;
+      margin: 1rem auto;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+
+    .donation-button:hover {
+      background-color: #d0d0d0;
+    }
+
+    #action-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #action-buttons a {
+      color: #007B7F;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.3rem;
+      transition: background-color 0.2s ease;
+    }
+
+    #action-buttons a:hover {
+      background-color: #e8f5f4;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Balea Events</h1>
+
+  <select id="eventSelector" onchange="displayResults(this.value)">
+    <option value="" selected>Select an Event</option>
+  </select>
+
+  <div id="results" class="results"></div>
+
+  <div id="action-buttons">
+    <a href="donate.html" target="_blank">🍾 Take a Bottle Home</a>
+    <a href="../index.html" target="_blank">🐋 Go to Main Page</a>
+  </div>
+  
+
+
+  <script>
+    const SHEET_URL = 'https://opensheet.vercel.app/1Zw1Ve0Hdj--ioLedHPUK6sQFLyl6IqMCnpulM0bN50I/responses';
+
+    const FIELDS_TO_SEARCH = [
+        "Timestamp", "Email address", "Your Alias", "Event ID", "Event Name", "Event Description", "Date", "Time", "Location", "Participants", "Bottles Batch IDs", "Bottle Ingredients Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
+    ];
+    const FIELDS_TO_SHOW = [
+        "Event Name", "Event Description", "Participants", "Bottles Batch IDs", "Bottle Ingredients Costs", "Donations", "Extracts Used", "General Comments", "Specific Bottle Comments"
+    ];
+
+    let eventData = [];
+
+    const htmlDefaultResult = '<div class="no-results">Select an event to show its data.</div>';
+    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load event data.</div>';
+    const htmlNoResult = '<div class="no-results">Error loading event data.</div>';
+
+    async function loadeventData() {
+      try {
+        const res = await fetch(SHEET_URL);
+        const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("Data is not an array");
+        eventData = json;
+        populateDropdown()
+      } catch (err) {
+        console.error('Error loading batch data:', err);
+        document.getElementById('results').innerHTML = htmlErrorResult;
+      }
+    }
+
+    function populateDropdown() {
+      const selector = document.getElementById('eventSelector');
+      eventData.forEach((row, i) => {
+        const option = document.createElement('option');
+        const id = row["Event ID"];
+        option.value = i;
+        option.textContent = `${id} – ${row["Date"]}`;
+        selector.appendChild(option);
+      });
+    }
+
+    function displayResults(eventSelectorValue) {
+
+      if (!eventSelectorValue) {
+        document.getElementById('results').innerHTML = htmlDefaultResult;
+        return;
+      }
+
+      const row = eventData[eventSelectorValue]
+
+      if (!eventData[eventSelectorValue]) {
+        document.getElementById('results').innerHTML = htmlNoResult;
+        return;
+      }
+
+      // Create html with general text
+      let html = FIELDS_TO_SHOW.map(f => {
+        if (!row[f]) return '';
+
+        let fieldContent = row[f]
+        // Convert list of Batch IDs to links to their batch info
+        if (f === "Bottles Batch IDs") {
+          fieldContent = fieldContent.split(',')
+            .map(b => b.trim())
+            .filter(b => b)
+            .map(batch_id => `<a href="batches.html?search=${batch_id}" target="_blank">${batch_id}</a>`)
+            .join(', ');
+        }
+        return `<div><span class="field-name">${f}:</span> ${fieldContent}</div>`;
+      }).join('');
+
+
+      // Add goal bar
+      // Calculate base values
+      const ingredientCost = sumCSV(row["Bottle Ingredients Costs"]);
+      const donations = sumCSV(row["Donations"]);
+
+      // Count bottles from CSV string
+      const bottleCount = (row["Bottles Batch IDs"] || '').split(',').filter(x => x.trim()).length;
+
+      // Add €2 per bottle for bottles and €2 for labor
+      const bottleCost = bottleCount * 2;
+      const laborCost = bottleCount * 2;
+      const totalGoal = ingredientCost + bottleCost + laborCost;
+
+      // Compute proportional widths
+      const ingPercent = (ingredientCost / totalGoal) * 100;
+      const botPercent = (bottleCost / totalGoal) * 100;
+      const labPercent = (laborCost / totalGoal) * 100;
+      const donationPercent = Math.min(100, (donations / totalGoal) * 100);
+
+      const ingText = (donationPercent > 0)? "Ingredients" : ""
+      const botText = (donationPercent > ingPercent)? "Bottles" : ""
+      const labText = (donationPercent > botPercent)? "Labor" : ""
+
+      // Build progress bar
+      html += `
+        <div class="label" style="text-align: center;">💸 Support This Event</div>
+        <div class="bar-container" style="display: flex;">
+          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">${ingText}</div>
+          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">${botText}</div>
+          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">${labText}</div>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+          €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
+          covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).
+        </div>
+      `;
+
+
+      // Add donations buttons
+      const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
+
+      const rounded = val => Math.round(val * 100) / 100;
+      const base = rounded(ingredientCost / participants);
+      const mid = rounded((ingredientCost + bottleCost)/ participants);
+      const high = rounded((ingredientCost + bottleCost + laborCost)/ participants);
+
+      html += `
+        <div id="donation-buttons"">
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Bottles – €${mid}</a>
+          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Bottles and Labor – €${high}</a>
+        </div>
+      `;
+      
+      document.getElementById('results').innerHTML = html || htmlNoResult;
+    }
+
+    function sumCSV(str) {
+      if (!str) return 0;
+      return str
+        .split(/[,;]/)
+        .map(s => parseFloat(s.trim().replace('€','') || '0'))
+        .reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
+    }
+
+    window.onload = async () => {
+      await loadeventData();
+      document.getElementById('results').innerHTML = htmlDefaultResult
+      displayResults(document.getElementById('eventSelector').value)
+    };
+  </script>
+
+</body>
+</html>

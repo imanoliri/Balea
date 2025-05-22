@@ -112,6 +112,14 @@
       }
     }
 
+    function searchFromURL(){
+      const params = new URLSearchParams(window.location.search);
+      const searchString = params.get('search');
+      if (searchString) {
+        document.getElementById('search').value = searchString;
+      }
+    }
+
     function displayResults(query) {
       const searchText = query.trim().toLowerCase();
 
@@ -127,9 +135,11 @@
       );
 
       const html = filtered.map(row => {
-        const fieldsHtml = FIELDS_TO_SHOW.map(f =>
+        let fieldsHtml = FIELDS_TO_SHOW.map(f =>
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
+        batch_id = row["id"]
+        fieldsHtml += `<a href=reviews.html?search=${batch_id} target="_blank">✍️ Reviews For Batch ${batch_id}</a>`
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 
@@ -138,10 +148,12 @@
 
     window.onload = async () => {
       await loadBatchData();
+      searchFromURL();
       document.getElementById('results').innerHTML = htmlDefaultResult
       document.getElementById('search').addEventListener('input', e => {
         displayResults(e.target.value);
       });
+      displayResults(document.getElementById('search').value);
     };
   </script>
 

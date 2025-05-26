@@ -13,26 +13,56 @@
       padding: 1.0rem;
       text-align: center;
     }
-    #donation-buttons{
-      margin-top: 2rem;
-    }
-    .donation-button {
-      text-decoration: none;
-      font-size: 1.1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #e0e0e0;
-      border-radius: 0.5rem;
-      color: #333;
-      width: 90%;
-      max-width: 400px;
-      display: block;
-      margin: 1rem auto;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease;
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 1rem 0;
     }
 
-    .donation-button:hover {
-      background-color: #d0d0d0;
+    .btn-toggle input {
+      display: none;
+    }
+
+    .btn-toggle label {
+      border: 1px solid #007;
+      border-radius: 6px;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      background: #f2f2f2;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-toggle input:checked + label {
+      background: #007;
+      color: white;
+    }
+
+    #custom-donation {
+      margin-top: 2rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    input[type="number"] {
+      font-size: 1rem;
+      width: 5rem;
+    }
+
+    #total {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
     }
 
     img.logo {
@@ -56,11 +86,64 @@
   <p>If we sold each bottle for €7 — making a €2 margin — we would need to sell around <strong>30,000 liters per year</strong> just to support a single worker earning €2,500 net per month.</p>
   <p>If you believe in fairness and open brewing, consider donating to cover the cost of this one.</p>
 
-  <div id="donation-buttons">
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/5" target="_blank" class="donation-button">🐟 Just Cover the Cost – €5</a>
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/7" target="_blank" class="donation-button">🐬 Help a Bit More – €7</a>
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/9" target="_blank" class="donation-button">🐳 Support Open Brewing – €9</a>
+  <div id="custom-donation">
+    <h2>Select Your Drink</h2>
+    <div class="btn-group btn-toggle">
+      <input type="radio" id="drink-cider" name="drink" value="2">
+      <label for="drink-cider">Cider (€2)</label>
+
+      <input type="radio" id="drink-mead" name="drink" value="4">
+      <label for="drink-mead">Mead (€4)</label>
+
+      <input type="radio" id="drink-champagne" name="drink" value="5">
+      <label for="drink-champagne">Champagne (€5)</label>
+    </div>
+
+    <h2>Extras</h2>
+    <div class="btn-group btn-toggle">
+      <input type="checkbox" id="extra-bottle" value="2" class="extra">
+      <label for="extra-bottle">Bottle (€2)</label>
+
+      <input type="checkbox" id="extra-labor" value="2" class="extra">
+      <label for="extra-labor">Labor (€2)</label>
+    </div>
+
+    <div>
+      <label for="tip">Tip (€):</label>
+      <input type="number" id="tip" step="0.5" min="0" value="0">
+    </div>
+
+    <p id="total">Total: €0.00</p>
+    <a id="paypalLink" href="https://www.paypal.com/paypalme/ImanolIrizar/0" target="_blank">
+      <button type="button">Donate via PayPal</button>
+    </a>
   </div>
+
+  <script>
+    const drinkRadios = document.querySelectorAll('input[name="drink"]');
+    const extras = document.querySelectorAll('.extra');
+    const tipInput = document.getElementById('tip');
+    const totalDisplay = document.getElementById('total');
+    const paypalLink = document.getElementById('paypalLink');
+
+    function updateTotal() {
+      let total = 0;
+      const selectedDrink = [...drinkRadios].find(r => r.checked);
+      if (selectedDrink) total += parseFloat(selectedDrink.value);
+
+      extras.forEach(cb => { if (cb.checked) total += parseFloat(cb.value); });
+
+      const tip = parseFloat(tipInput.value) || 0;
+      total += tip;
+
+      totalDisplay.textContent = `Total: €${total.toFixed(2)}`;
+      paypalLink.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
+    }
+
+    drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
+    extras.forEach(cb => cb.addEventListener('change', updateTotal));
+    tipInput.addEventListener('input', updateTotal);
+  </script>
 
   
 

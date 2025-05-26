@@ -101,11 +101,17 @@
 
     <h2>Extras</h2>
     <div class="btn-group btn-toggle">
-      <input type="checkbox" id="extra-bottle" value="2" class="extra">
+      <input type="checkbox" id="extra-bottle" class="extra" value="2">
       <label for="extra-bottle">Bottle (€2)</label>
 
-      <input type="checkbox" id="extra-labor" value="2" class="extra">
+      <input type="checkbox" id="extra-labor" class="extra" value="2">
       <label for="extra-labor">Labor (€2)</label>
+    </div>
+
+    <h2>Finish</h2>
+    <div class="btn-group btn-toggle">
+      <input type="checkbox" id="roundUp"> 
+      <label>Round up to next euro</label>
     </div>
 
     <div>
@@ -122,6 +128,7 @@
   <script>
     const drinkRadios = document.querySelectorAll('input[name="drink"]');
     const extras = document.querySelectorAll('.extra');
+    const roundUp = document.getElementById('roundUp');
     const tipInput = document.getElementById('tip');
     const totalDisplay = document.getElementById('total');
     const paypalLink = document.getElementById('paypalLink');
@@ -133,6 +140,10 @@
 
       extras.forEach(cb => { if (cb.checked) total += parseFloat(cb.value); });
 
+      if (roundUp.checked) {
+        total = Math.ceil(total);
+      }
+
       const tip = parseFloat(tipInput.value) || 0;
       total += tip;
 
@@ -142,6 +153,7 @@
 
     drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
     extras.forEach(cb => cb.addEventListener('change', updateTotal));
+    roundUp.addEventListener('change', updateTotal);
     tipInput.addEventListener('input', updateTotal);
   </script>
 

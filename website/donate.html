@@ -120,9 +120,7 @@
     </div>
 
     <p id="total">Total: €0.00</p>
-    <a id="paypalLink" href="https://www.paypal.com/paypalme/ImanolIrizar/0" target="_blank">
-      <button type="button">Donate via PayPal</button>
-    </a>
+    <button type="button" onclick="handleDonate()">Donate via PayPal</button>
   </div>
 
   <script>
@@ -133,8 +131,10 @@
     const totalDisplay = document.getElementById('total');
     const paypalLink = document.getElementById('paypalLink');
 
+    let total = 0;
+
     function updateTotal() {
-      let total = 0;
+      total = 0;
       const selectedDrink = [...drinkRadios].find(r => r.checked);
       if (selectedDrink) total += parseFloat(selectedDrink.value);
 
@@ -148,13 +148,25 @@
       total += tip;
 
       totalDisplay.textContent = `Total: €${total.toFixed(2)}`;
-      paypalLink.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
     }
 
     drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
     extras.forEach(cb => cb.addEventListener('change', updateTotal));
     roundUp.addEventListener('change', updateTotal);
     tipInput.addEventListener('input', updateTotal);
+
+
+    function handleDonate() {
+      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
+      if (!selectedDrink) {
+        alert("Please select a drink before donating.");
+        return;
+      }
+      updateTotal();
+      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+    }
+
+    updateTotal()
   </script>
 
   

@@ -120,7 +120,7 @@
     </div>
 
     <p id="total">Total: €0.00</p>
-    <button type="button" onclick="handleDonate()">Donate via PayPal</button>
+    <button type="button" onclick="handleDonate()">💙 Donate via PayPal</button>
   </div>
 
   <script>
@@ -129,7 +129,6 @@
     const roundUp = document.getElementById('roundUp');
     const tipInput = document.getElementById('tip');
     const totalDisplay = document.getElementById('total');
-    const paypalLink = document.getElementById('paypalLink');
 
     let total = 0;
 
@@ -159,7 +158,7 @@
     function handleDonate() {
       const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
       if (!selectedDrink) {
-        alert("Please select a drink before donating.");
+        alert("🐳 Please select a drink before donating.");
         return;
       }
       updateTotal();

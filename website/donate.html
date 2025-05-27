@@ -68,11 +68,6 @@
     }
 
 
-    #total {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
-
     button {
       font-size: 1rem;
       padding: 0.5rem 1.5rem;
@@ -118,15 +113,14 @@
     </div>
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; width: 100%;">
-    <p id="total">Total: €0.00</p>
-    <button type="button" onclick="handleDonate()">💙 Donate via PayPal</button>
+    <button type="button" id = "donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
   </div>
 
   <script>
     const drinkRadios = document.querySelectorAll('input[name="drink"]');
     const extras = document.querySelectorAll('.extra');
     const tipInput = document.getElementById('tip');
-    const totalDisplay = document.getElementById('total');
+    const donateButton = document.getElementById('donate-button')
 
     let total = 0;
 
@@ -140,7 +134,7 @@
       const tip = parseFloat(tipInput.value) || 0;
       total += tip;
 
-      totalDisplay.textContent = `Total: €${total.toFixed(2)}`;
+      donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
     }
 
     drinkRadios.forEach(r => r.addEventListener('change', updateTotal));

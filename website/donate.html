@@ -40,6 +40,19 @@
       outline-offset: -0.1rem;
     }
 
+    .highlight-error {
+      border: 2px solid red !important;
+      animation: shake 0.3s ease-in-out 1;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+
     #custom-donation {
       background: white;
       padding: 1.5rem;
@@ -178,15 +191,29 @@
 
     function handleDonate() {
       const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
+
       if (!selectedDrink) {
-        alert("🐳 Please select a drink before donating.");
+        document.querySelectorAll('input[name="drink"]').forEach(input => {
+          const label = document.querySelector(`label[for="${input.id}"]`);
+          if (label) label.classList.add('highlight-error');
+        });
+
+        // Remove highlight after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('input[name="drink"]').forEach(input => {
+            const label = document.querySelector(`label[for="${input.id}"]`);
+            if (label) label.classList.remove('highlight-error');
+          });
+        }, 3000);
+
         return;
       }
+
       updateTotal();
       window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
     }
 
-    updateTotal()
+    updateTotal();
   </script>
 
   

@@ -56,15 +56,31 @@
       margin-bottom: 0rem;
     }
 
-    .tip-input {
-      padding: 0.3rem 0.6rem;
-      margin: 0.5rem 0 0;
-      font-size: 1rem;
-      border: 1px solid #ccc;
+    .tip-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tip-control button {
+      padding: 0.5rem 0.8rem;
+      font-size: 1.2rem;
       border-radius: 0.5rem;
-      width: 6rem;
-      height: 1.75rem;
-      text-align: right;
+      border: 1px solid #007;
+      background: white;
+      color: #007;
+      cursor: pointer;
+    }
+
+    .tip-input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      width: 4.5rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
     }
 
 
@@ -112,9 +128,12 @@
 
     <h2>Tip</h2>
     <small style="color: #666;">Optional — support future brews</small>
-    <div>
-      <input type="number" id="tip" class="tip-input" step="0.5" min="0" value="0">
+    <div class="tip-control">
+      <button type="button" class="tip-minus">−</button>
+      <input type="number" id="tip" class="tip-input" step="0.5" min="0" value="0.00">
+      <button type="button" class="tip-plus">+</button>
     </div>
+
 
     <hr style="border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; width: 100%;">
     <button type="button" id = "donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
@@ -145,6 +164,18 @@
     extras.forEach(cb => cb.addEventListener('change', updateTotal));
     tipInput.addEventListener('input', updateTotal);
 
+    document.querySelector('.tip-plus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+      updateTotal();
+    };
+
+    document.querySelector('.tip-minus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+      updateTotal();
+    };
+    
 
     function handleDonate() {
       const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);

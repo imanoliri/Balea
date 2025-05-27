@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="../marketing/branding/balea_aquamarine.svg" type="image/svg+xml">
-  <title>Adopt This Bottle</title>
+  <title>Pay For a Bottle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -13,54 +13,216 @@
       padding: 1.0rem;
       text-align: center;
     }
-    #donation-buttons{
-      margin-top: 2rem;
+    
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 0.5rem 0;
     }
-    .donation-button {
-      text-decoration: none;
-      font-size: 1.1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #e0e0e0;
+
+    .btn-toggle input {
+      display: none;
+    }
+
+    .btn-toggle label {
+      border: 1px solid #007;
       border-radius: 0.5rem;
-      color: #333;
-      width: 90%;
-      max-width: 400px;
-      display: block;
-      margin: 1rem auto;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      background: #f2f2f2;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-toggle input:checked + label {
+      outline: 0.25rem solid #007;
+      outline-offset: -0.1rem;
+    }
+
+    .highlight-error {
+      border: 2px solid red !important;
+      animation: shake 0.3s ease-in-out 1;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+
+    #custom-donation {
+      background: white;
+      padding: 1.5rem;
+      padding-top: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
       box-sizing: border-box;
-      transition: background-color 0.2s ease;
     }
 
-    .donation-button:hover {
-      background-color: #d0d0d0;
+    #custom-donation h2:first-of-type {
+      margin-top: 0rem;
+    }
+    #custom-donation h2 {
+      margin-bottom: 0rem;
     }
 
-    img.logo {
-      display: block;
-      margin: 1rem auto;
-      width: auto;
-      max-width: 80vw;
-      max-height: 30vh;
-      height: auto;
+    .tip-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
     }
+
+    .tip-control button {
+      padding: 0.5rem 0.8rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #007;
+      background: white;
+      color: #007;
+      cursor: pointer;
+    }
+
+    .tip-input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      width: 4.5rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+
+    #donate-button {
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <div>
-    <img src="../marketing/branding/balea_aquamarine.svg" alt="balea_aquamarine" class="logo" />
+  <h1 style="margin-top: 0;">Pay For a Bottle</h1>
+
+  <p>Each bottle of Balea costs <strong>€6–9 to make</strong> — and holds a full liter, not 75cl like most wines.</p>
+  <p>If you believe in fairness and open brewing, consider donating to <strong>cover the cost</strong> of this one.</p>
+  <p>If you <strong>leave a tip</strong>, you will help expand the project.</p>
+  
+  <div id="custom-donation">
+    <h2>Select Your Drink</h2>
+    <small id="drink-warning" class="shake-warning" style="display: none; color:red;">Please select the type of drink</small>
+    <div class="btn-group btn-toggle">
+      <input type="radio" id="drink-cider" name="drink" value="2">
+      <label for="drink-cider">Cider (€2)</label>
+
+      <input type="radio" id="drink-mead" name="drink" value="4">
+      <label for="drink-mead">Mead (€4)</label>
+
+      <input type="radio" id="drink-champagne" name="drink" value="5">
+      <label for="drink-champagne">Champagne (€5)</label>
+    </div>
+
+    <h2>Other Costs</h2>
+    <div class="btn-group btn-toggle">
+      <input type="checkbox" id="extra-bottle" class="extra" value="2" checked>
+      <label for="extra-bottle">Bottle (€2)</label>
+
+      <input type="checkbox" id="extra-labor" class="extra" value="2" checked>
+      <label for="extra-labor">Labor (€2)</label>
+    </div>
+
+    <h2>Tip</h2>
+    <div class="tip-control">
+      <button type="button" class="tip-minus">−</button>
+      <input type="number" id="tip" class="tip-input" step="0.5" min="0" value="0.00">
+      <button type="button" class="tip-plus">+</button>
+    </div>
+
+
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; width: 100%;">
+    <button type="button" id = "donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
   </div>
 
-  <p>Each bottle of Balea costs about <strong>€5 to make</strong> — and hold a full liter, not 75cl like most wines.</p>
-  <p>If we sold each bottle for €7 — making a €2 margin — we would need to sell around <strong>30,000 liters per year</strong> just to support a single worker earning €2,500 net per month.</p>
-  <p>If you believe in fairness and open brewing, consider donating to cover the cost of this one.</p>
+  <script>
+    const drinkRadios = document.querySelectorAll('input[name="drink"]');
+    const drinkWarning = document.getElementById("drink-warning");
+    const extras = document.querySelectorAll('.extra');
+    const tipInput = document.getElementById('tip');
+    const donateButton = document.getElementById('donate-button')
 
-  <div id="donation-buttons">
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/5" target="_blank" class="donation-button">🐟 Just Cover the Cost – €5</a>
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/7" target="_blank" class="donation-button">🐬 Help a Bit More – €7</a>
-    <a href="https://www.paypal.com/paypalme/ImanolIrizar/9" target="_blank" class="donation-button">🐳 Support Open Brewing – €9</a>
-  </div>
+    let total = 0;
+
+    function updateTotal() {
+      total = 0;
+      const selectedDrink = [...drinkRadios].find(r => r.checked);
+      if (selectedDrink) total += parseFloat(selectedDrink.value);
+
+      extras.forEach(cb => { if (cb.checked) total += parseFloat(cb.value); });
+
+      const tip = parseFloat(tipInput.value) || 0;
+      total += tip;
+
+      donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
+    }
+
+    drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
+    extras.forEach(cb => cb.addEventListener('change', updateTotal));
+    tipInput.addEventListener('input', updateTotal);
+
+    document.querySelector('.tip-plus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+      updateTotal();
+    };
+
+    document.querySelector('.tip-minus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+      updateTotal();
+    };
+    
+
+    function handleDonate() {
+      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
+
+      if (!selectedDrink) {
+        // Show warning & highlight buttons
+        document.querySelectorAll('input[name="drink"]').forEach(input => {
+          const label = document.querySelector(`label[for="${input.id}"]`);
+          if (label) label.classList.add('highlight-error');
+        });
+        drinkWarning.style.display = "block";
+
+        // Remove highlight but not warning text after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('input[name="drink"]').forEach(input => {
+            const label = document.querySelector(`label[for="${input.id}"]`);
+            if (label) label.classList.remove('highlight-error');
+          });
+        }, 3000);
+
+        return;
+      }
+
+      updateTotal();
+      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+    }
+
+    updateTotal();
+  </script>
 
   
 

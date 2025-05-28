@@ -28,7 +28,7 @@
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
     .no-results {
@@ -81,6 +81,10 @@
       text-align: center;
       white-space: nowrap;
       cursor: help;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
     #bar-ingredients {
       background-color: #007B7F
@@ -91,6 +95,20 @@
     #bar-labor {
       background-color: #40C1C8
     }
+
+    .emoji-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 80%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background-color: #EDE8D0;
+      font-size: 1rem;
+      margin: auto;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    }
+
 
     #custom-donation {
       background: white;
@@ -236,9 +254,9 @@
 
     <div class="label" style="text-align: center;">💸 Support This Event</div>
     <div id="bar-container">
-      <div id="bar-ingredients" title="Ingredients" class="bar-cost"></div>
-      <div id="bar-bottles" title="Bottles" class="bar-cost"></div>
-      <div id="bar-labor"title="Labor" class="bar-cost"></div>
+      <div id="bar-ingredients" title="Ingredients" class="bar-cost"><span id="emoji-ingredients" class="emoji-icon hidden">🌾</span></div>
+      <div id="bar-bottles" title="Bottles" class="bar-cost"><span id="emoji-bottles" class="emoji-icon hidden">🍾</span></div>
+      <div id="bar-labor" title="Labor" class="bar-cost"><span id="emoji-labor" class="emoji-icon hidden">🛠️</span></div>
     </div>
     <div id="total-text" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
 
@@ -388,22 +406,36 @@
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
 
-      const ingText = (donationPercent > 0)? "🌾" : ""
-      const botText = (donationPercent > ingPercent)? "🍾" : ""
-      const labText = (donationPercent > botPercent)? "🛠️" : ""
-
+      console.log(document.getElementById('emoji-ingredients').classList)
       const widthIngredients = Math.max(0, Math.min(donationPercent, ingPercent));
       const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));
       const widthLabor = Math.max(0, donationPercent - ingPercent - botPercent);
 
       // Update progress bar
       document.getElementById('bar-ingredients').style.width = `${widthIngredients}%`;
-      document.getElementById('bar-ingredients').textContent = ingText;
       document.getElementById('bar-bottles').style.width = `${widthBottles}%`;
-      document.getElementById('bar-bottles').textContent = botText;
       document.getElementById('bar-labor').style.width = `${widthLabor}%`;
-      document.getElementById('bar-labor').textContent = labText;
       document.getElementById('total-text').textContent  = `€${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal – covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).`;
+
+      // Show/hide emojis based on width > 4% (adjust threshold if needed)
+      console.log(widthIngredients)
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const totalWidth = document.getElementById('bar-container').offsetWidth;
+
+          const barIngredients = document.getElementById('bar-ingredients');
+          const barBottles = document.getElementById('bar-bottles');
+          const barLabor = document.getElementById('bar-labor');
+
+          const ingWidth = barIngredients.offsetWidth;
+          const botWidth = barBottles.offsetWidth;
+          const labWidth = barLabor.offsetWidth;
+
+          document.getElementById('emoji-ingredients').classList.toggle("hidden", ingWidth < totalWidth * 0.04);
+          document.getElementById('emoji-bottles').classList.toggle("hidden", botWidth < totalWidth * 0.04);
+          document.getElementById('emoji-labor').classList.toggle("hidden", labWidth < totalWidth * 0.04);
+        }, 0);
+      });
 
 
       // Update donations buttons

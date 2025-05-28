@@ -76,22 +76,19 @@
     }
 
 
-    #bar-ingredients {
+    .bar-cost {
       height: 100%;
       text-align: center;
       white-space: nowrap;
+      cursor: help;
+    }
+    #bar-ingredients {
       background-color: #007B7F
     }
     #bar-bottles {
-      height: 100%;
-      text-align: center;
-      white-space: nowrap;
       background-color: #00A3AD
     }
     #bar-labor {
-      height: 100%;
-      text-align: center;
-      white-space: nowrap;
       background-color: #40C1C8
     }
 
@@ -239,9 +236,9 @@
 
     <div class="label" style="text-align: center;">💸 Support This Event</div>
     <div id="bar-container">
-      <div id="bar-ingredients" title="Ingredients"></div>
-      <div id="bar-bottles" title="Bottles"></div>
-      <div id="bar-labor"title="Labor"></div>
+      <div id="bar-ingredients" title="Ingredients" class="bar-cost"></div>
+      <div id="bar-bottles" title="Bottles" class="bar-cost"></div>
+      <div id="bar-labor"title="Labor" class="bar-cost"></div>
     </div>
     <div id="total-text" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
 

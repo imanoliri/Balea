@@ -27,6 +27,10 @@
       margin-bottom: 2rem;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .no-results {
       width: 100%;
       font-size: 1rem;
@@ -58,7 +62,8 @@
       color: #333;
     }
 
-    .bar-container {
+    #bar-container {
+      display: flex;
       background-color: #ddd;
       border-radius: 1rem;
       overflow: hidden;
@@ -66,39 +71,31 @@
       margin-top: 1rem;
     }
 
-    .bar {
-      height: 100%;
-      background-color: #007B7F;
-      text-align: center;
-      color: white;
-      line-height: 24px;
-      white-space: nowrap;
-    }
 
-    .bar-ingredients {
+    #bar-ingredients {
       height: 100%;
       text-align: center;
       white-space: nowrap;
       background-color: #007B7F
     }
-    .bar-bottles {
+    #bar-bottles {
       height: 100%;
       text-align: center;
       white-space: nowrap;
       background-color: #00A3AD
     }
-    .bar-labor {
+    #bar-labor {
       height: 100%;
       text-align: center;
       white-space: nowrap;
       background-color: #40C1C8
     }
 
-    #donation-buttons{
+    #cost-buttons{
       margin-top: 2rem;
       text-align: center;
     }
-    .donation-button {
+    .cost-button {
       text-decoration: none;
       font-size: 1rem;
       padding: 0.75rem 1.5rem;
@@ -112,8 +109,19 @@
       box-sizing: border-box;
       transition: background-color 0.2s ease;
     }
+    .cost-button:hover {
+      background-color: #d0d0d0;
+    }
 
-    .donation-button:hover {
+    #donate-button {
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      font-weight: bold;
+    }
+    #donate-button:hover {
       background-color: #d0d0d0;
     }
 
@@ -147,7 +155,28 @@
     <option value="" selected>Select an Event</option>
   </select>
 
-  <div id="results" class="results"></div>
+  <!-- We start with this by default. Javascript shows another as required, via adding or removing the "hidden" CSS class -->
+  <div id="result-default" class="no-results">Select an event to show its data.</div>
+  <div id="result-fail-to-fetch" class="no-results hidden">⚠️ Failed to fetch events data.</div>
+  <div id="result-event-not-found" class="no-results hidden">Event not found.</div>
+
+  <div id="results" class="results hidden">
+    <div id="event-infos"></div>
+
+    <div class="label" style="text-align: center;">💸 Support This Event</div>
+    <div id="bar-container">
+      <div id="bar-ingredients" title="Ingredients"></div>
+      <div id="bar-bottles" title="Bottles"></div>
+      <div id="bar-labor"title="Labor"></div>
+    </div>
+    <div id="total-text" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+
+    <div id="cost-buttons">
+      <a id="cost-button-ingredients" href="https://www.paypal.com/paypalme/ImanolIrizar/6" target="_blank" class="cost-button">🐟 Cover the Ingredients Cost – €2</a>
+      <a id="cost-button-bottles" href="https://www.paypal.com/paypalme/ImanolIrizar/8" target="_blank" class="cost-button">🐬 Pay for the Bottles – €2</a>
+      <a id="cost-button-labor" href="https://www.paypal.com/paypalme/ImanolIrizar/10" target="_blank" class="cost-button">🐳 Support the Labor – €2</a>    </div>
+    
+  </div>
 
   <div id="action-buttons">
     <a href="donate.html" target="_blank">🍾 Take a Bottle Home and Pay For it Here</a>
@@ -168,8 +197,6 @@
 
     let eventData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Select an event to show its data.</div>';
-    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load event data.</div>';
     const htmlNoResult = '<div class="no-results">Error loading event data.</div>';
 
     async function loadeventData() {
@@ -181,7 +208,10 @@
         populateDropdown()
       } catch (err) {
         console.error('Error loading batch data:', err);
-        document.getElementById('results').innerHTML = htmlErrorResult;
+        document.getElementById('result-default').classList.add("hidden");
+        document.getElementById('result-fail-to-fetch').classList.remove("hidden");
+        document.getElementById('result-event-not-found').classList.add("hidden");
+        document.getElementById('results').classList.add("hidden");
       }
     }
 
@@ -198,15 +228,23 @@
 
     function displayResults(eventSelectorValue) {
 
+      // Show fail to fetch
       if (!eventSelectorValue) {
-        document.getElementById('results').innerHTML = htmlDefaultResult;
+        document.getElementById('result-default').classList.remove("hidden");
+        document.getElementById('result-fail-to-fetch').classList.add("hidden");
+        document.getElementById('result-event-not-found').classList.add("hidden");
+        document.getElementById('results').classList.add("hidden");
         return;
       }
 
       const row = eventData[eventSelectorValue]
 
-      if (!eventData[eventSelectorValue]) {
-        document.getElementById('results').innerHTML = htmlNoResult;
+      // Show event not found
+      if (!row) {
+        document.getElementById('result-default').classList.add("hidden");
+        document.getElementById('result-fail-to-fetch').classList.add("hidden");
+        document.getElementById('result-event-not-found').classList.remove("hidden");
+        document.getElementById('results').classList.add("hidden");
         return;
       }
 
@@ -225,7 +263,7 @@
         }
         return `<div><span class="field-name">${f}:</span> ${fieldContent}</div>`;
       }).join('');
-
+      document.getElementById('event-infos').innerHTML = html || htmlNoResult;
 
       // Add goal bar
       // Calculate base values
@@ -250,38 +288,43 @@
       const botText = (donationPercent > ingPercent)? "Bottles" : ""
       const labText = (donationPercent > botPercent)? "Labor" : ""
 
-      // Build progress bar
-      html += `
-        <div class="label" style="text-align: center;">💸 Support This Event</div>
-        <div class="bar-container" style="display: flex;">
-          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">${ingText}</div>
-          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">${botText}</div>
-          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">${labText}</div>
-        </div>
-        <div style="margin-top: 0.5rem; font-size: 0.9rem;">
-          €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
-          covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).
-        </div>
-      `;
+      const widthIngredients = Math.max(0, Math.min(donationPercent, ingPercent));
+      const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));
+      const widthLabor = Math.max(0, donationPercent - ingPercent - botPercent);
+
+      console.log(donationPercent)
+      console.log(widthIngredients, widthBottles, widthLabor)
+      // Update progress bar
+      document.getElementById('bar-ingredients').style.width = `${widthIngredients}%`;
+      document.getElementById('bar-ingredients').textContent = ingText;
+      document.getElementById('bar-bottles').style.width = `${widthBottles}%`;
+      document.getElementById('bar-bottles').textContent = botText;
+      document.getElementById('bar-labor').style.width = `${widthLabor}%`;
+      document.getElementById('bar-labor').textContent = labText;
+      document.getElementById('total-text').textContent  = `€${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal – covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).`;
 
 
-      // Add donations buttons
+      // Update donations buttons
       const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
 
       const rounded = val => Math.round(val * 100) / 100;
-      const base = rounded(ingredientCost / participants);
-      const mid = rounded((ingredientCost + bottleCost)/ participants);
-      const high = rounded((ingredientCost + bottleCost + laborCost)/ participants);
+      const ingredientCostParticipant = rounded(ingredientCost / participants);
+      const bottleCostParticipant = rounded(bottleCost / participants);
+      const laborCostParticipant = rounded(laborCost / participants);
 
-      html += `
-        <div id="donation-buttons"">
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Bottles – €${mid}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Bottles and Labor – €${high}</a>
-        </div>
-      `;
-      
-      document.getElementById('results').innerHTML = html || htmlNoResult;
+      document.getElementById("cost-button-ingredients").href = `https://www.paypal.com/paypalme/ImanolIrizar/${ingredientCostParticipant.toFixed(2)}`;
+      document.getElementById("cost-button-ingredients").textContent = `🐟 Cover the Ingredients Cost – €${ingredientCostParticipant.toFixed(2)}`;
+      document.getElementById("cost-button-bottles").href = `https://www.paypal.com/paypalme/ImanolIrizar/${bottleCostParticipant.toFixed(2)}`;
+      document.getElementById("cost-button-bottles").textContent = `🐬 Pay for the Bottles – €${bottleCostParticipant.toFixed(2)}`;
+      document.getElementById("cost-button-labor").href = `https://www.paypal.com/paypalme/ImanolIrizar/${laborCostParticipant.toFixed(2)}`;
+      document.getElementById("cost-button-labor").textContent = `🐳 Support the Labor – €${laborCostParticipant.toFixed(2)}`;
+
+
+      // Show results
+      document.getElementById('result-default').classList.add("hidden");
+      document.getElementById('result-fail-to-fetch').classList.add("hidden");
+      document.getElementById('result-event-not-found').classList.add("hidden");
+      document.getElementById('results').classList.remove("hidden"); 
     }
 
     function sumCSV(str) {
@@ -294,7 +337,7 @@
 
     window.onload = async () => {
       await loadeventData();
-      document.getElementById('results').innerHTML = htmlDefaultResult
+      // document.getElementById('results').innerHTML = htmlDefaultResult
       displayResults(document.getElementById('eventSelector').value)
     };
   </script>

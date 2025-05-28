@@ -225,7 +225,7 @@
 
   <h1>Balea Events</h1>
 
-  <select id="eventSelector" onchange="displayResults(this.value)">
+  <select id="eventSelector" onchange="displayResults(this.value); resetDonation()">
     <option value="" selected>Select an Event</option>
   </select>
 
@@ -272,7 +272,7 @@
 
       <hr class="divisor-line">
 
-      <button type="button" id="donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
+      <button type="button" id="donate-button" href="https://www.paypal.com/paypalme/ImanolIrizar/0" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
 
       <div id="round-up-container">
         <label for="round-up">
@@ -457,8 +457,7 @@
     
 
     function handleDonate() {
-      updateDonation();
-      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+      window.open(document.getElementById('donate-button').href, '_blank');
     }
 
     const toggleOptions = document.querySelectorAll('#toggle-buttons input[type="checkbox"]');
@@ -494,6 +493,23 @@
       const donateButton = document.getElementById('donate-button');
       donateButton.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
       donateButton.innerHTML = `${donationEmoji} Donate via PayPal<br>€${total.toFixed(2)}`;
+    }
+
+    function resetDonation() {
+      // Deselect all toggle buttons
+      toggleOptions.forEach(input => {
+        input.checked = false;
+        input.closest('.toggle-option').classList.remove('selected');
+      });
+
+      // Reset tip
+      document.getElementById('tip').value = '0.00';
+
+      // Uncheck round-up
+      document.getElementById('round-up').checked = false;
+
+      // Update UI
+      updateDonation();
     }
 
 

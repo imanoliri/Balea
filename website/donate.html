@@ -13,13 +13,32 @@
       padding: 1.0rem;
       text-align: center;
     }
+
+    #custom-donation {
+      background: white;
+      padding: 1.5rem;
+      padding-top: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+    }
+
+    #custom-donation h2:first-of-type {
+      margin-top: 0rem;
+    }
+    #custom-donation h2 {
+      margin-bottom: 0.5rem;
+    }
+
     
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
       justify-content: center;
-      margin: 0.5rem 0;
+      gap: 10px;
     }
 
     .btn-toggle input {
@@ -53,25 +72,6 @@
       100% { transform: translateX(0); }
     }
 
-    #custom-donation {
-      background: white;
-      padding: 1.5rem;
-      padding-top: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 600px;
-      box-sizing: border-box;
-    }
-
-    #custom-donation h2:first-of-type {
-      margin-top: 0rem;
-    }
-    #custom-donation h2 {
-      margin-bottom: 0rem;
-    }
 
     .tip-control {
       display: flex;
@@ -100,6 +100,12 @@
       border: 1px solid #ccc;
     }
 
+    .divisor-line{
+      all: 'unset';
+      border: none;
+      margin: 1.5rem;
+      border-top: 1px solid #ccc;
+    }
 
     #donate-button {
       font-size: 1rem;
@@ -147,13 +153,13 @@
     <h2>Tip</h2>
     <div class="tip-control">
       <button type="button" class="tip-minus">−</button>
-      <input type="number" id="tip" class="tip-input" step="0.5" min="0" value="0.00">
+      <input type="number" id="tip" class="tip-input" step="0.50" min="0" value="0.00">
       <button type="button" class="tip-plus">+</button>
     </div>
 
 
-    <hr style="border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; width: 100%;">
-    <button type="button" id = "donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
+    <hr class="divisor-line">
+    <button type="button" id="donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
   </div>
 
   <script>

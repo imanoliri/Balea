@@ -27,6 +27,10 @@
       margin-bottom: 2rem;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     .no-results {
       width: 100%;
       font-size: 1rem;
@@ -58,7 +62,12 @@
       color: #333;
     }
 
-    .bar-container {
+    #event-infos{
+      margin-bottom: 2rem;
+    }
+
+    #bar-container {
+      display: flex;
       background-color: #ddd;
       border-radius: 1rem;
       overflow: hidden;
@@ -66,55 +75,143 @@
       margin-top: 1rem;
     }
 
-    .bar {
-      height: 100%;
-      background-color: #007B7F;
-      text-align: center;
-      color: white;
-      line-height: 24px;
-      white-space: nowrap;
-    }
 
-    .bar-ingredients {
+    .bar-cost {
       height: 100%;
       text-align: center;
       white-space: nowrap;
+      cursor: help;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    #bar-ingredients {
       background-color: #007B7F
     }
-    .bar-bottles {
-      height: 100%;
-      text-align: center;
-      white-space: nowrap;
+    #bar-bottles {
       background-color: #00A3AD
     }
-    .bar-labor {
-      height: 100%;
-      text-align: center;
-      white-space: nowrap;
+    #bar-labor {
       background-color: #40C1C8
     }
 
-    #donation-buttons{
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .donation-button {
-      text-decoration: none;
+    .emoji-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 80%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background-color: #EDE8D0;
       font-size: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #e0e0e0;
-      border-radius: 0.5rem;
-      color: #333;
-      width: 90%;
-      max-width: 400px;
-      display: block;
-      margin: 1rem auto;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease;
+      margin: auto;
+      border: 1.5px solid grey;
     }
 
-    .donation-button:hover {
+
+    #custom-donation {
+      background: white;
+      padding: 1.5rem;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    #toggle-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .toggle-option {
+      display: inline-block;
+      border: 1px solid #007;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #f2f2f2;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s, color 0.2s, outline 0.2s;
+      text-decoration: none;
+      color: black;
+    }
+    .toggle-option:hover {
       background-color: #d0d0d0;
+    }
+
+    .toggle-option input {
+      display: none;
+    }
+
+    .toggle-option.selected {
+      outline: 0.25rem solid #007;
+      outline-offset: -0.1rem;
+    }
+
+    .tip-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tip-control button {
+      padding: 0.5rem 0.8rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #007;
+      background: white;
+      color: #007;
+      cursor: pointer;
+    }
+
+    .tip-input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      width: 4.5rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    .divisor-line{
+      border: none;
+      margin: 1.5rem;
+      border-top: 1px solid #ccc;
+    }
+
+    #donate-button {
+      display: block;
+      margin: 0 auto;
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      font-weight: bold;
+    }
+    #donate-button:hover {
+      background-color: #d0d0d0;
+    }
+
+    #round-up-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    #rounded-total {
+      font-weight: bold;
+      display: none;
     }
 
     #action-buttons {
@@ -143,11 +240,65 @@
 
   <h1>Balea Events</h1>
 
-  <select id="eventSelector" onchange="displayResults(this.value)">
+  <select id="eventSelector" onchange="displayResults(this.value); resetDonation()">
     <option value="" selected>Select an Event</option>
   </select>
 
-  <div id="results" class="results"></div>
+  <!-- We start with this by default. Javascript shows another as required, via adding or removing the "hidden" CSS class -->
+  <div id="result-default" class="no-results">Select an event to show its data.</div>
+  <div id="result-fail-to-fetch" class="no-results hidden">⚠️ Failed to fetch events data.</div>
+  <div id="result-event-not-found" class="no-results hidden">Event not found.</div>
+
+  <div id="results" class="results hidden">
+    <div id="event-infos"></div>
+
+    <div class="label" style="text-align: center;">💸 Support This Event</div>
+    <div id="bar-container">
+      <div id="bar-ingredients" title="Ingredients" class="bar-cost"><span id="emoji-ingredients" class="emoji-icon hidden">🌾</span></div>
+      <div id="bar-bottles" title="Bottles" class="bar-cost"><span id="emoji-bottles" class="emoji-icon hidden">🍾</span></div>
+      <div id="bar-labor" title="Labor" class="bar-cost"><span id="emoji-labor" class="emoji-icon hidden">🛠️</span></div>
+    </div>
+    <div id="total-text" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+
+    <div id=custom-donation>
+      <div id="toggle-buttons">
+        <label id="cost-button-ingredients" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Ingredients">
+          <span>🐟 Ingredients (€2)</span>
+        </label>
+
+        <label id="cost-button-bottles" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Bottles">
+          <span>🐬 Bottles (€2)</span>
+        </label>
+
+        <label id="cost-button-labor" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Labor">
+          <span>🐳 Labor (€2)</span>
+        </label>
+      </div>
+
+      <div class="tip-control">
+        <button type="button" class="tip-minus">−</button>
+        <input type="number" id="tip" class="tip-input" step="0.50" min="0" value="0.00">
+        <button type="button" class="tip-plus">+</button>
+      </div>
+
+
+      <hr class="divisor-line">
+
+      <button type="button" id="donate-button" href="https://www.paypal.com/paypalme/ImanolIrizar/0" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
+
+      <div id="round-up-container">
+        <label for="round-up">
+          <input type="checkbox" id="round-up">
+          Round up to the next euro.
+        </label>
+      </div>
+
+    </div>
+    
+  </div>
 
   <div id="action-buttons">
     <a href="donate.html" target="_blank">🍾 Take a Bottle Home and Pay For it Here</a>
@@ -168,8 +319,6 @@
 
     let eventData = [];
 
-    const htmlDefaultResult = '<div class="no-results">Select an event to show its data.</div>';
-    const htmlErrorResult = '<div class="no-results">⚠️ Failed to load event data.</div>';
     const htmlNoResult = '<div class="no-results">Error loading event data.</div>';
 
     async function loadeventData() {
@@ -181,7 +330,10 @@
         populateDropdown()
       } catch (err) {
         console.error('Error loading batch data:', err);
-        document.getElementById('results').innerHTML = htmlErrorResult;
+        document.getElementById('result-default').classList.add("hidden");
+        document.getElementById('result-fail-to-fetch').classList.remove("hidden");
+        document.getElementById('result-event-not-found').classList.add("hidden");
+        document.getElementById('results').classList.add("hidden");
       }
     }
 
@@ -198,15 +350,23 @@
 
     function displayResults(eventSelectorValue) {
 
+      // Show fail to fetch
       if (!eventSelectorValue) {
-        document.getElementById('results').innerHTML = htmlDefaultResult;
+        document.getElementById('result-default').classList.remove("hidden");
+        document.getElementById('result-fail-to-fetch').classList.add("hidden");
+        document.getElementById('result-event-not-found').classList.add("hidden");
+        document.getElementById('results').classList.add("hidden");
         return;
       }
 
       const row = eventData[eventSelectorValue]
 
-      if (!eventData[eventSelectorValue]) {
-        document.getElementById('results').innerHTML = htmlNoResult;
+      // Show event not found
+      if (!row) {
+        document.getElementById('result-default').classList.add("hidden");
+        document.getElementById('result-fail-to-fetch').classList.add("hidden");
+        document.getElementById('result-event-not-found').classList.remove("hidden");
+        document.getElementById('results').classList.add("hidden");
         return;
       }
 
@@ -225,7 +385,7 @@
         }
         return `<div><span class="field-name">${f}:</span> ${fieldContent}</div>`;
       }).join('');
-
+      document.getElementById('event-infos').innerHTML = html || htmlNoResult;
 
       // Add goal bar
       // Calculate base values
@@ -246,42 +406,61 @@
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
 
-      const ingText = (donationPercent > 0)? "Ingredients" : ""
-      const botText = (donationPercent > ingPercent)? "Bottles" : ""
-      const labText = (donationPercent > botPercent)? "Labor" : ""
+      console.log(document.getElementById('emoji-ingredients').classList)
+      const widthIngredients = Math.max(0, Math.min(donationPercent, ingPercent));
+      const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));
+      const widthLabor = Math.max(0, donationPercent - ingPercent - botPercent);
 
-      // Build progress bar
-      html += `
-        <div class="label" style="text-align: center;">💸 Support This Event</div>
-        <div class="bar-container" style="display: flex;">
-          <div class="bar-ingredients" style="width: ${Math.min(donationPercent, ingPercent)}%" title="Ingredients">${ingText}</div>
-          <div class="bar-bottles" style="width: ${Math.min(donationPercent - ingPercent, botPercent)}%" title="Bottles">${botText}</div>
-          <div class="bar-labor" style="width: ${Math.max(donationPercent - ingPercent - botPercent, 0)}%" title="Labor">${labText}</div>
-        </div>
-        <div style="margin-top: 0.5rem; font-size: 0.9rem;">
-          €${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal –
-          covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).
-        </div>
-      `;
+      // Update progress bar
+      document.getElementById('bar-ingredients').style.width = `${widthIngredients}%`;
+      document.getElementById('bar-bottles').style.width = `${widthBottles}%`;
+      document.getElementById('bar-labor').style.width = `${widthLabor}%`;
+      document.getElementById('total-text').textContent  = `€${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal – covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).`;
+
+      // Show/hide emojis based on width > 4% (adjust threshold if needed)
+      console.log(widthIngredients)
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const totalWidth = document.getElementById('bar-container').offsetWidth;
+
+          const barIngredients = document.getElementById('bar-ingredients');
+          const barBottles = document.getElementById('bar-bottles');
+          const barLabor = document.getElementById('bar-labor');
+
+          const ingWidth = barIngredients.offsetWidth;
+          const botWidth = barBottles.offsetWidth;
+          const labWidth = barLabor.offsetWidth;
+
+          document.getElementById('emoji-ingredients').classList.toggle("hidden", ingWidth < totalWidth * 0.04);
+          document.getElementById('emoji-bottles').classList.toggle("hidden", botWidth < totalWidth * 0.04);
+          document.getElementById('emoji-labor').classList.toggle("hidden", labWidth < totalWidth * 0.04);
+        }, 0);
+      });
 
 
-      // Add donations buttons
+      // Update donations buttons
       const participants = parseInt(row["Participants"]) || 1; // prevent division by 0
 
       const rounded = val => Math.round(val * 100) / 100;
-      const base = rounded(ingredientCost / participants);
-      const mid = rounded((ingredientCost + bottleCost)/ participants);
-      const high = rounded((ingredientCost + bottleCost + laborCost)/ participants);
+      const ingredientCostParticipant = rounded(ingredientCost / participants);
+      const bottleCostParticipant = rounded(bottleCost / participants);
+      const laborCostParticipant = rounded(laborCost / participants);
 
-      html += `
-        <div id="donation-buttons"">
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${base}" target="_blank" class="donation-button">🐟 Just Cover the Materials Cost – €${base}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${mid}" target="_blank" class="donation-button">🐬 Pay for Materials and Bottles – €${mid}</a>
-          <a href="https://www.paypal.com/paypalme/ImanolIrizar/${high}" target="_blank" class="donation-button">🐳 Support Materials, Bottles and Labor – €${high}</a>
-        </div>
-      `;
-      
-      document.getElementById('results').innerHTML = html || htmlNoResult;
+      document.querySelector("#cost-button-ingredients input").value = ingredientCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-ingredients span").textContent = `🌾 Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
+
+      document.querySelector("#cost-button-bottles input").value = bottleCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-bottles span").textContent = `🍾 Bottles (€${bottleCostParticipant.toFixed(2)})`;
+
+      document.querySelector("#cost-button-labor input").value = laborCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-labor span").textContent = `🛠️ Labor (€${laborCostParticipant.toFixed(2)})`;
+
+
+      // Show results
+      document.getElementById('result-default').classList.add("hidden");
+      document.getElementById('result-fail-to-fetch').classList.add("hidden");
+      document.getElementById('result-event-not-found').classList.add("hidden");
+      document.getElementById('results').classList.remove("hidden"); 
     }
 
     function sumCSV(str) {
@@ -292,11 +471,91 @@
         .reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
     }
 
+
+    document.querySelector('.tip-plus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+      updateDonation();
+    };
+
+    document.querySelector('.tip-minus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+      updateDonation();
+    };
+    
+
+    function handleDonate() {
+      window.open(document.getElementById('donate-button').href, '_blank');
+    }
+
+    const toggleOptions = document.querySelectorAll('#toggle-buttons input[type="checkbox"]');
+
+    function updateDonation() {
+      let total = 0;
+      let labels = [];
+
+      toggleOptions.forEach(input => {
+        const label = input.closest('.toggle-option');
+        if (input.checked) {
+          total += parseFloat(input.value);
+          labels.push(input.dataset.label);
+          label.classList.add('selected');
+        } else {
+          label.classList.remove('selected');
+        }
+      });
+
+      const tip = parseFloat(document.getElementById('tip').value) || 0;
+      total += tip;
+
+      const roundUp = document.getElementById('round-up').checked;
+      let appliedRoundUp = false;
+      if (roundUp && total % 1 !== 0) {
+        total = Math.ceil(total);
+        appliedRoundUp = true;
+      }
+
+      const donationEmojis = ['💙', '🐟', '🐬', '🐳'];
+      const checkedCount = Array.from(toggleOptions).filter(cb => cb.checked).length;
+      let donationEmoji = donationEmojis[Math.min(checkedCount, donationEmojis.length - 1)];
+      const tipEmoji = tip  ? "💰" : "";
+      const roundUpEmoji = appliedRoundUp ? "🌟" : "";
+
+
+      const donateButton = document.getElementById('donate-button');
+      donateButton.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
+      donateButton.innerHTML = `${donationEmoji}${tipEmoji}${roundUpEmoji} Donate via PayPal<br>€${total.toFixed(2)}`;
+    }
+
+    function resetDonation() {
+      // Deselect all toggle buttons
+      toggleOptions.forEach(input => {
+        input.checked = false;
+        input.closest('.toggle-option').classList.remove('selected');
+      });
+
+      // Reset tip
+      document.getElementById('tip').value = '0.00';
+
+      // Uncheck round-up
+      document.getElementById('round-up').checked = false;
+
+      // Update UI
+      updateDonation();
+    }
+
+
+    toggleOptions.forEach(input => {
+      input.addEventListener('change', updateDonation);
+    });
+    document.getElementById('round-up').addEventListener('change', updateDonation);
+
     window.onload = async () => {
       await loadeventData();
-      document.getElementById('results').innerHTML = htmlDefaultResult
+      updateDonation();
       displayResults(document.getElementById('eventSelector').value)
-    };
+    };    
   </script>
 
 </body>

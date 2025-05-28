@@ -391,9 +391,9 @@
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
 
-      const ingText = (donationPercent > 0)? "Ingredients" : ""
-      const botText = (donationPercent > ingPercent)? "Bottles" : ""
-      const labText = (donationPercent > botPercent)? "Labor" : ""
+      const ingText = (donationPercent > 0)? "🌾" : ""
+      const botText = (donationPercent > ingPercent)? "🍾" : ""
+      const labText = (donationPercent > botPercent)? "🛠️" : ""
 
       const widthIngredients = Math.max(0, Math.min(donationPercent, ingPercent));
       const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));

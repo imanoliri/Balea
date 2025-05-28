@@ -488,11 +488,13 @@
       const donationEmojis = ['💙', '🐟', '🐬', '🐳'];
       const checkedCount = Array.from(toggleOptions).filter(cb => cb.checked).length;
       let donationEmoji = donationEmojis[Math.min(checkedCount, donationEmojis.length - 1)];
+      const roundUpEmoji = roundUp ? "🌟" : "";
+      const tipEmoji = tip  ? "💰" : "";
 
 
       const donateButton = document.getElementById('donate-button');
       donateButton.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
-      donateButton.innerHTML = `${donationEmoji} Donate via PayPal<br>€${total.toFixed(2)}`;
+      donateButton.innerHTML = `${donationEmoji}${roundUpEmoji}${tipEmoji} Donate via PayPal<br>€${total.toFixed(2)}`;
     }
 
     function resetDonation() {

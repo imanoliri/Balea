@@ -103,10 +103,10 @@
       height: 80%;
       aspect-ratio: 1 / 1;
       border-radius: 50%;
+      border: 1.5px solid grey;
       background-color: #EDE8D0;
       font-size: 1rem;
       margin: auto;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     }
 
 
@@ -264,17 +264,20 @@
       <div id="toggle-buttons">
         <label id="cost-button-ingredients" class="toggle-option">
           <input type="checkbox" value="2" data-label="Ingredients">
-          <span>🐟 Ingredients (€2)</span>
+          <span class="emoji-icon">🌾</span>
+          <span class="label-text">Ingredients (€2)</span>
         </label>
 
         <label id="cost-button-bottles" class="toggle-option">
           <input type="checkbox" value="2" data-label="Bottles">
-          <span>🐬 Bottles (€2)</span>
+          <span class="emoji-icon">🍾</span>
+          <span class="label-text">Bottles (€2)</span>
         </label>
 
         <label id="cost-button-labor" class="toggle-option">
           <input type="checkbox" value="2" data-label="Labor">
-          <span>🐳 Labor (€2)</span>
+          <span class="emoji-icon">🛠️</span>
+          <span class="label-text">Labor (€2)</span>
         </label>
       </div>
 
@@ -447,13 +450,13 @@
       const laborCostParticipant = rounded(laborCost / participants);
 
       document.querySelector("#cost-button-ingredients input").value = ingredientCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-ingredients span").textContent = `🌾 Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-ingredients .label-text").textContent = `Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
 
       document.querySelector("#cost-button-bottles input").value = bottleCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-bottles span").textContent = `🍾 Bottles (€${bottleCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-bottles .label-text").textContent = `Bottles (€${bottleCostParticipant.toFixed(2)})`;
 
       document.querySelector("#cost-button-labor input").value = laborCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-labor span").textContent = `🛠️ Labor (€${laborCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-labor .label-text").textContent = `Labor (€${laborCostParticipant.toFixed(2)})`;
 
 
       // Show results

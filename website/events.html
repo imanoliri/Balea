@@ -414,13 +414,13 @@
       const laborCostParticipant = rounded(laborCost / participants);
 
       document.querySelector("#cost-button-ingredients input").value = ingredientCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-ingredients span").textContent = `🐟 Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-ingredients span").textContent = `🌾 Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
 
       document.querySelector("#cost-button-bottles input").value = bottleCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-bottles span").textContent = `🐬 Bottles (€${bottleCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-bottles span").textContent = `🍾 Bottles (€${bottleCostParticipant.toFixed(2)})`;
 
       document.querySelector("#cost-button-labor input").value = laborCostParticipant.toFixed(2);
-      document.querySelector("#cost-button-labor span").textContent = `🐳 Labor (€${laborCostParticipant.toFixed(2)})`;
+      document.querySelector("#cost-button-labor span").textContent = `🛠️ Labor (€${laborCostParticipant.toFixed(2)})`;
 
 
       // Show results
@@ -501,18 +501,23 @@
       const roundUp = document.getElementById('round-up').checked;
       if (roundUp && total % 1 !== 0) {
         total = Math.ceil(total);
-      } 
+      }
+
+      const donationEmojis = ['💙', '🐟', '🐬', '🐳'];
+      const checkedCount = Array.from(toggleOptions).filter(cb => cb.checked).length;
+      let donationEmoji = donationEmojis[Math.min(checkedCount, donationEmojis.length - 1)];
 
 
       const donateButton = document.getElementById('donate-button');
       donateButton.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
-      donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
+      donateButton.innerHTML = `${donationEmoji} Donate via PayPal<br>€${total.toFixed(2)}`;
     }
 
 
     toggleOptions.forEach(input => {
       input.addEventListener('change', updateDonation);
     });
+    document.getElementById('round-up').addEventListener('change', updateDonation);
 
     window.onload = async () => {
       await loadeventData();

@@ -510,15 +510,17 @@
       total += tip;
 
       const roundUp = document.getElementById('round-up').checked;
+      let appliedRoundUp = false;
       if (roundUp && total % 1 !== 0) {
         total = Math.ceil(total);
+        appliedRoundUp = true;
       }
 
       const donationEmojis = ['💙', '🐟', '🐬', '🐳'];
       const checkedCount = Array.from(toggleOptions).filter(cb => cb.checked).length;
       let donationEmoji = donationEmojis[Math.min(checkedCount, donationEmojis.length - 1)];
       const tipEmoji = tip  ? "💰" : "";
-      const roundUpEmoji = roundUp ? "🌟" : "";
+      const roundUpEmoji = appliedRoundUp ? "🌟" : "";
 
 
       const donateButton = document.getElementById('donate-button');

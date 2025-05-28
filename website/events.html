@@ -91,29 +91,85 @@
       background-color: #40C1C8
     }
 
-    #cost-buttons{
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .cost-button {
-      text-decoration: none;
-      font-size: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #e0e0e0;
-      border-radius: 0.5rem;
-      color: #333;
-      width: 90%;
-      max-width: 400px;
-      display: block;
-      margin: 1rem auto;
+    #custom-donation {
+      background: white;
+      padding: 1.5rem;
+      padding-top: 1rem;
+      margin: 0 auto;
+      width: 100%;
       box-sizing: border-box;
-      transition: background-color 0.2s ease;
     }
-    .cost-button:hover {
+
+    #toggle-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 1.5rem;
+    }
+
+    .toggle-option {
+      display: inline-block;
+      border: 1px solid #007;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #f2f2f2;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s, color 0.2s, outline 0.2s;
+      text-decoration: none;
+      color: black;
+    }
+    .toggle-option:hover {
       background-color: #d0d0d0;
     }
 
+    .toggle-option input {
+      display: none;
+    }
+
+    .toggle-option.selected {
+      outline: 0.25rem solid #007;
+      outline-offset: -0.1rem;
+    }
+
+    .tip-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tip-control button {
+      padding: 0.5rem 0.8rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #007;
+      background: white;
+      color: #007;
+      cursor: pointer;
+    }
+
+    .tip-input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      width: 4.5rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    .divisor-line{
+      all: 'unset';
+      border: none;
+      margin: 1.5rem;
+      border-top: 1px solid #ccc;
+    }
+
     #donate-button {
+      display: block;
+      margin: 0 auto;
       font-size: 1rem;
       padding: 0.5rem 1.5rem;
       cursor: pointer;
@@ -171,10 +227,32 @@
     </div>
     <div id="total-text" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
 
-    <div id="cost-buttons">
-      <a id="cost-button-ingredients" href="https://www.paypal.com/paypalme/ImanolIrizar/6" target="_blank" class="cost-button">🐟 Cover the Ingredients Cost – €2</a>
-      <a id="cost-button-bottles" href="https://www.paypal.com/paypalme/ImanolIrizar/8" target="_blank" class="cost-button">🐬 Pay for the Bottles – €2</a>
-      <a id="cost-button-labor" href="https://www.paypal.com/paypalme/ImanolIrizar/10" target="_blank" class="cost-button">🐳 Support the Labor – €2</a>
+    <div id=custom-donation>
+      <div id="toggle-buttons">
+        <label id="cost-button-ingredients" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Ingredients" unchecked>
+          <span>🐟 Ingredients (€2)</span>
+        </label>
+
+        <label id="cost-button-bottles" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Bottles" unchecked>
+          <span>🐬 Bottles (€2)</span>
+        </label>
+
+        <label id="cost-button-labor" class="toggle-option">
+          <input type="checkbox" value="2" data-label="Labor" unchecked>
+          <span>🐳 Labor (€2)</span>
+        </label>
+      </div>
+
+      <div class="tip-control">
+        <button type="button" class="tip-minus">−</button>
+        <input type="number" id="tip" class="tip-input" step="0.50" min="0" value="0.00">
+        <button type="button" class="tip-plus">+</button>
+      </div>
+
+      <hr class="divisor-line">
+      <button type="button" id="donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
     </div>
     
   </div>
@@ -293,8 +371,6 @@
       const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));
       const widthLabor = Math.max(0, donationPercent - ingPercent - botPercent);
 
-      console.log(donationPercent)
-      console.log(widthIngredients, widthBottles, widthLabor)
       // Update progress bar
       document.getElementById('bar-ingredients').style.width = `${widthIngredients}%`;
       document.getElementById('bar-ingredients').textContent = ingText;
@@ -313,12 +389,14 @@
       const bottleCostParticipant = rounded(bottleCost / participants);
       const laborCostParticipant = rounded(laborCost / participants);
 
-      document.getElementById("cost-button-ingredients").href = `https://www.paypal.com/paypalme/ImanolIrizar/${ingredientCostParticipant.toFixed(2)}`;
-      document.getElementById("cost-button-ingredients").textContent = `🐟 Cover the Ingredients Cost – €${ingredientCostParticipant.toFixed(2)}`;
-      document.getElementById("cost-button-bottles").href = `https://www.paypal.com/paypalme/ImanolIrizar/${bottleCostParticipant.toFixed(2)}`;
-      document.getElementById("cost-button-bottles").textContent = `🐬 Pay for the Bottles – €${bottleCostParticipant.toFixed(2)}`;
-      document.getElementById("cost-button-labor").href = `https://www.paypal.com/paypalme/ImanolIrizar/${laborCostParticipant.toFixed(2)}`;
-      document.getElementById("cost-button-labor").textContent = `🐳 Support the Labor – €${laborCostParticipant.toFixed(2)}`;
+      document.querySelector("#cost-button-ingredients input").value = ingredientCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-ingredients span").textContent = `🐟 Ingredients (€${ingredientCostParticipant.toFixed(2)})`;
+
+      document.querySelector("#cost-button-bottles input").value = bottleCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-bottles span").textContent = `🐬 Bottles (€${bottleCostParticipant.toFixed(2)})`;
+
+      document.querySelector("#cost-button-labor input").value = laborCostParticipant.toFixed(2);
+      document.querySelector("#cost-button-labor span").textContent = `🐳 Labor (€${laborCostParticipant.toFixed(2)})`;
 
 
       // Show results
@@ -336,11 +414,82 @@
         .reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
     }
 
+
+    document.querySelector('.tip-plus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+      updateDonation();
+    };
+
+    document.querySelector('.tip-minus').onclick = () => {
+      const tip = document.getElementById('tip');
+      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+      updateDonation();
+    };
+    
+
+    function handleDonate() {
+      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
+
+      if (!selectedDrink) {
+        // Show warning & highlight buttons
+        document.querySelectorAll('input[name="drink"]').forEach(input => {
+          const label = document.querySelector(`label[for="${input.id}"]`);
+          if (label) label.classList.add('highlight-error');
+        });
+        drinkWarning.style.display = "block";
+
+        // Remove highlight but not warning text after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('input[name="drink"]').forEach(input => {
+            const label = document.querySelector(`label[for="${input.id}"]`);
+            if (label) label.classList.remove('highlight-error');
+          });
+        }, 3000);
+
+        return;
+      }
+
+      updateDonation();
+      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+    }
+
+    const toggleOptions = document.querySelectorAll('#toggle-buttons input[type="checkbox"]');
+
+    function updateDonation() {
+      let total = 0;
+      let labels = [];
+
+      toggleOptions.forEach(input => {
+        const label = input.closest('.toggle-option');
+        if (input.checked) {
+          total += parseFloat(input.value);
+          labels.push(input.dataset.label);
+          label.classList.add('selected');
+        } else {
+          label.classList.remove('selected');
+        }
+      });
+
+      const tip = parseFloat(document.getElementById('tip').value) || 0;
+      total += tip;
+
+
+      const donateButton = document.getElementById('donate-button');
+      donateButton.href = `https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`;
+      donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
+    }
+
+
+    toggleOptions.forEach(input => {
+      input.addEventListener('change', updateDonation);
+    });
+
     window.onload = async () => {
       await loadeventData();
-      // document.getElementById('results').innerHTML = htmlDefaultResult
+      updateDonation();
       displayResults(document.getElementById('eventSelector').value)
-    };
+    };    
   </script>
 
 </body>

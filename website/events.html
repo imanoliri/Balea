@@ -458,27 +458,6 @@
     
 
     function handleDonate() {
-      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
-
-      if (!selectedDrink) {
-        // Show warning & highlight buttons
-        document.querySelectorAll('input[name="drink"]').forEach(input => {
-          const label = document.querySelector(`label[for="${input.id}"]`);
-          if (label) label.classList.add('highlight-error');
-        });
-        drinkWarning.style.display = "block";
-
-        // Remove highlight but not warning text after 3 seconds
-        setTimeout(() => {
-          document.querySelectorAll('input[name="drink"]').forEach(input => {
-            const label = document.querySelector(`label[for="${input.id}"]`);
-            if (label) label.classList.remove('highlight-error');
-          });
-        }, 3000);
-
-        return;
-      }
-
       updateDonation();
       window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
     }

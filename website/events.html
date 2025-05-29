@@ -327,7 +327,6 @@
         const json = await res.json();
         if (!Array.isArray(json)) throw new Error("Data is not an array");
         eventData = json;
-        populateDropdown()
       } catch (err) {
         console.error('Error loading batch data:', err);
         document.getElementById('result-default').classList.add("hidden");
@@ -422,7 +421,6 @@
       const labPercent = (laborCost / totalGoal) * 100;
       const donationPercent = Math.min(100, (donations / totalGoal) * 100);
 
-      console.log(document.getElementById('emoji-ingredients').classList)
       const widthIngredients = Math.max(0, Math.min(donationPercent, ingPercent));
       const widthBottles = Math.max(0, Math.min(donationPercent - ingPercent, botPercent));
       const widthLabor = Math.max(0, donationPercent - ingPercent - botPercent);
@@ -434,7 +432,6 @@
       document.getElementById('total-text').textContent  = `€${donations.toFixed(2)} / €${totalGoal.toFixed(2)} total goal – covering ingredients (€${ingredientCost.toFixed(2)}), bottles (€${bottleCost.toFixed(2)}), and labor (€${laborCost.toFixed(2)}).`;
 
       // Show/hide emojis based on width > 4% (adjust threshold if needed)
-      console.log(widthIngredients)
       requestAnimationFrame(() => {
         setTimeout(() => {
           const totalWidth = document.getElementById('bar-container').offsetWidth;

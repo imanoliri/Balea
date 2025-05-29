@@ -569,7 +569,8 @@
 
     window.onload = async () => {
       await loadeventData();
-      preselectDropdownFromUrl()
+      populateDropdown();
+      preselectDropdownFromUrl();
       updateDonation();
       displayResults(document.getElementById('eventSelector').value)
     };    

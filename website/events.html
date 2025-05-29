@@ -348,6 +348,22 @@
       });
     }
 
+    function getURLParameter(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function preselectDropdownFromUrl() {
+      const eventParam = getURLParameter('event');
+      const selector = document.getElementById('eventSelector');
+
+      if (eventParam !== null) {
+        selector.value = eventParam;
+        selector.dispatchEvent(new Event('change'));
+      }
+    }
+
+
     function displayResults(eventSelectorValue) {
 
       // Show fail to fetch
@@ -553,6 +569,7 @@
 
     window.onload = async () => {
       await loadeventData();
+      preselectDropdownFromUrl()
       updateDonation();
       displayResults(document.getElementById('eventSelector').value)
     };    

@@ -139,7 +139,7 @@
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
         batch_id = row["id"]
-        fieldsHtml += `<a href=reviews.html?search=${batch_id} target="_blank">✍️ Reviews For Batch ${batch_id}</a>`
+        fieldsHtml += `<a href=reviews.html?search=${batch_id}>✍️ Reviews For Batch ${batch_id}</a>`
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 

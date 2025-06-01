@@ -98,7 +98,7 @@
   <h1>Reviews</h1>
 
   <div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB_jtYsDyITDzdyFjeig10Y9tfb1tcmvTonEDsjx9K-jdQ_Q/viewform?usp=header" target="_blank" class="review-button">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB_jtYsDyITDzdyFjeig10Y9tfb1tcmvTonEDsjx9K-jdQ_Q/viewform?usp=header" class="review-button">
       ✍️ Write a Review
     </a>
   </div>
@@ -163,7 +163,7 @@
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
         batch_id = row["Batch Number"]
-        fieldsHtml += `<a href=batches.html?search=${batch_id} target="_blank">🔍 Info For Batch ${batch_id}</a>`
+        fieldsHtml += `<a href=batches.html?search=${batch_id}>🔍 Info For Batch ${batch_id}</a>`
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 

@@ -6,7 +6,7 @@ body {
 	word-wrap: break-word;
 	overflow-x: hidden;
 	opacity: 0;
-  	animation: fadeIn 0s ease 500ms forwards;
+  	animation: fadeIn 0s ease 250ms forwards;
 }
 
 @keyframes fadeIn {

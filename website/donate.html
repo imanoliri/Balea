@@ -67,8 +67,15 @@
       outline-offset: -0.1rem;
     }
 
+    .note {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+    }
 
-    .tip-control {
+
+    .control {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -76,7 +83,7 @@
       margin-top: 0.5rem;
     }
 
-    .tip-control button {
+    .control button {
       padding: 0.5rem 0.8rem;
       font-size: 1.2rem;
       border-radius: 0.5rem;
@@ -86,7 +93,7 @@
       cursor: pointer;
     }
 
-    .tip-input {
+    .control-input {
       padding: 0.5rem;
       font-size: 1.2rem;
       width: 4.5rem;
@@ -152,11 +159,19 @@
       <label for="extra-cups">Paper Cups x5 (€2)</label>
     </div>
 
+    <h2>Bottle Refund</h2>
+    <p class="note">Only valid if you return bottles – €1 refunded per bottle.</p>
+    <div class="control">
+      <button type="button" id="pfand-minus" class="control-minus">−</button>
+      <input type="number" id="pfand" class="control-input" step="1" min="0" value="0">
+      <button type="button" id="pfand-plus" class="control-plus">+</button>
+    </div>
+
     <h2>Tip</h2>
-    <div class="tip-control">
-      <button type="button" class="tip-minus">−</button>
-      <input type="number" id="tip" class="tip-input" step="0.50" min="0" value="0.00">
-      <button type="button" class="tip-plus">+</button>
+    <div class="control">
+      <button type="button" id="tip-minus" class="control-minus">−</button>
+      <input type="number" id="tip" class="control-input" step="0.50" min="0" value="0.00">
+      <button type="button" id="tip-plus" class="control-plus">+</button>
     </div>
 
 
@@ -170,6 +185,7 @@
   </div>
 
   <script>
+    const pfandInput = document.getElementById('pfand');
     const tipInput = document.getElementById('tip');
     const orderSummary = document.getElementById('order-summary');
     const donateButton = document.getElementById('donate-button');
@@ -197,6 +213,9 @@
       cups: 2,
     };
 
+    // Pfand per bottle
+    const pfandValuePerBottle = 1
+
     function updateTotal() {
       let total = 0;
 
@@ -209,6 +228,9 @@
       for (const type in extraCount) {
         total += extraCount[type] * extraPrices[type];
       }
+
+      // Remove pfand
+      total -= parseFloat(pfandInput.value * pfandValuePerBottle) || 0;
 
       // Add tip
       total += parseFloat(tipInput.value) || 0;
@@ -230,14 +252,26 @@
     document.getElementById('extra-pourer').addEventListener('click', () => incrementCounter(extraCount, 'pourer'));
     document.getElementById('extra-cups').addEventListener('click', () => incrementCounter(extraCount, 'cups'));
 
+    // Pfand buttons
+    document.querySelector('#pfand-plus').onclick = () => {
+      pfandInput.value = (parseFloat(pfandInput.value) + 1).toFixed(0);
+      updateTotal();
+    };
+
+    document.querySelector('#pfand-minus').onclick = () => {
+      pfandInput.value = Math.max(0, parseFloat(pfandInput.value) - 1).toFixed(0);
+      updateTotal();
+    };
+    pfandInput.addEventListener('input', updateTotal);
+
 
     // Tip buttons
-    document.querySelector('.tip-plus').onclick = () => {
+    document.querySelector('#tip-plus').onclick = () => {
       tipInput.value = (parseFloat(tipInput.value) + 0.5).toFixed(1);
       updateTotal();
     };
 
-    document.querySelector('.tip-minus').onclick = () => {
+    document.querySelector('#tip-minus').onclick = () => {
       tipInput.value = Math.max(0, parseFloat(tipInput.value) - 0.5).toFixed(1);
       updateTotal();
     };
@@ -247,6 +281,7 @@
     function handleDonate() {
       updateTotal();
       const total = donateButton.innerText.match(/€([\d.]+)/)[1];
+      if (total <= 0) {return}
       window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total}`, '_blank');
     }
 
@@ -269,7 +304,7 @@
         }
       }
 
-      return summary.length > 0 ? `🧾 Order So Far\n${summary.join('\n')}` : '';
+      return summary.length > 0 ? summary.join('\n') : '';
     }
 
 
@@ -282,6 +317,10 @@
       for (const type in extraCount) {
         extraCount[type] = 0;
       }
+
+      pfandInput.value = 0
+
+      tipInput.value = 0
 
       updateTotal()
     }

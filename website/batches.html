@@ -112,7 +112,7 @@
   <div id="results" class="no-results">Any matching batch will be shown here — try "b34", "sidra", "sagar", "blue", "carbonated", or "/2025"</div>
 
   <div id="action-buttons">
-    <a href="donate.html">🍾 Get Bottles</a>
+    <a href="donate.html">💰 Donate for Your Bottles</a>
     <a href="../index.html">🐋 Go to Landing Page</a>
   </div>
 
@@ -174,7 +174,7 @@
         ).join('');
         batch_id = row["id"]
         fieldsHtml += `<div><a href=reviews.html?search=${batch_id}>✍️ Reviews For Batch ${batch_id}</a></div>`
-        fieldsHtml += `<div><a href="../website/donate.html">💰 Get Bottles</a></div>`
+        fieldsHtml += `<div><a href="../website/donate.html">💰 Donate for Your Bottles</a></div>`
         
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');

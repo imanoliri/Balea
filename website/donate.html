@@ -111,6 +111,14 @@
       font-weight: bold;
     }
 
+    #clear-button {
+      font-size: 0.75rem;
+      padding: 0.5rem 1.0rem;
+      cursor: pointer;
+      border: 0px solid black;
+      border-radius: 0.25rem;
+      
+    }
   </style>
 </head>
 
@@ -125,23 +133,23 @@
   <div id="custom-donation">
     <h2>Select Your Drink</h2>
     <div class="btn-group btn-toggle">
-      <input type="radio" id="drink-cider" name="drink" value="2">
-      <label for="drink-cider">Cider (€2)</label>
+      <input type="button" id="drink-cider" name="drink" value="8">
+      <label for="drink-cider">Cider (€8)</label>
 
-      <input type="radio" id="drink-mead" name="drink" value="4">
-      <label for="drink-mead">Mead (€4)</label>
+      <input type="button" id="drink-mead" name="drink" value="10">
+      <label for="drink-mead">Mead (€10)</label>
 
-      <input type="radio" id="drink-champagne" name="drink" value="5">
-      <label for="drink-champagne">Champagne (€5)</label>
+      <input type="button" id="drink-special" name="drink" value="12">
+      <label for="drink-special">Special (€12)</label>
     </div>
 
-    <h2>Other Costs</h2>
+    <h2>Extras</h2>
     <div class="btn-group btn-toggle">
-      <input type="checkbox" id="extra-bottle" class="extra" value="2" checked>
-      <label for="extra-bottle">Bottle (€2)</label>
+      <input type="button" id="extra-pourer" class="extra" value="2">
+      <label for="extra-pourer">Pouring Cap (€2)</label>
 
-      <input type="checkbox" id="extra-labor" class="extra" value="2" checked>
-      <label for="extra-labor">Labor (€2)</label>
+      <input type="button" id="extra-cups" class="extra" value="2">
+      <label for="extra-cups">Paper Cups x5 (€2)</label>
     </div>
 
     <h2>Tip</h2>
@@ -153,57 +161,134 @@
 
 
     <hr class="divisor-line">
+    <p id="order-summary" style="margin-top: 1rem; font-style: italic; white-space: pre-line"></p>
     <button type="button" id="donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
+    <div>
+      <button type="button" id="clear-button" onclick="resetSelection()" style="margin-top: 1rem;">🔄 Clear Selection</button>
+    </div>
+
   </div>
 
   <script>
-    const drinkRadios = document.querySelectorAll('input[name="drink"]');
-    const extras = document.querySelectorAll('.extra');
     const tipInput = document.getElementById('tip');
-    const donateButton = document.getElementById('donate-button')
+    const orderSummary = document.getElementById('order-summary');
+    const donateButton = document.getElementById('donate-button');
 
-    let total = 0;
+    // Drink pricing and counts
+    const drinkPrices = {
+      cider: 8,
+      mead: 10,
+      special: 12,
+    };
+
+    const drinkCount = {
+      cider: 0,
+      mead: 0,
+      special: 0,
+    };
+
+    // Extras toggle status
+    const extraCount = {
+      pourer: 0,
+      cups: 0,
+    };
+    const extraPrices = {
+      pourer: 0,
+      cups: 0,
+    };
 
     function updateTotal() {
-      total = 0;
-      const selectedDrink = [...drinkRadios].find(r => r.checked);
-      if (selectedDrink) total += parseFloat(selectedDrink.value);
+      let total = 0;
 
-      extras.forEach(cb => { if (cb.checked) total += parseFloat(cb.value); });
+      // Add all drinks (price * count)
+      for (const type in drinkCount) {
+        total += drinkCount[type] * drinkPrices[type];
+      }
 
-      const tip = parseFloat(tipInput.value) || 0;
-      total += tip;
+      // Add all extras (price * count)
+      for (const type in extraCount) {
+        total += extraCount[type] * extraPrices[type];
+      }
+
+      // Add tip
+      total += parseFloat(tipInput.value) || 0;
+
+      orderSummary.textContent = getOrderSummary();
 
       donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
     }
 
-    drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
-    extras.forEach(cb => cb.addEventListener('change', updateTotal));
-    tipInput.addEventListener('input', updateTotal);
+    function incrementCounter(counter, type) {
+      counter[type]++;
+      updateTotal();
+    }
 
+    document.getElementById('drink-cider').addEventListener('click', () => incrementCounter(drinkCount, 'cider'));
+    document.getElementById('drink-mead').addEventListener('click', () => incrementCounter(drinkCount, 'mead'));
+    document.getElementById('drink-special').addEventListener('click', () => incrementCounter(drinkCount, 'special'));
+
+    document.getElementById('extra-pourer').addEventListener('click', () => incrementCounter(extraCount, 'pourer'));
+    document.getElementById('extra-cups').addEventListener('click', () => incrementCounter(extraCount, 'cups'));
+
+
+    // Tip buttons
     document.querySelector('.tip-plus').onclick = () => {
-      const tip = document.getElementById('tip');
-      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+      tipInput.value = (parseFloat(tipInput.value) + 0.5).toFixed(1);
       updateTotal();
     };
 
     document.querySelector('.tip-minus').onclick = () => {
-      const tip = document.getElementById('tip');
-      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+      tipInput.value = Math.max(0, parseFloat(tipInput.value) - 0.5).toFixed(1);
       updateTotal();
     };
-    
+
+    tipInput.addEventListener('input', updateTotal);
 
     function handleDonate() {
-      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
-
-
       updateTotal();
-      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+      const total = donateButton.innerText.match(/€([\d.]+)/)[1];
+      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total}`, '_blank');
+    }
+
+    function getOrderSummary() {
+      const summary = [];
+
+      for (const type in drinkCount) {
+        const count = drinkCount[type];
+        if (count > 0) {
+          const label = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize
+          summary.push(`${count} x ${label}`);
+        }
+      }
+
+      for (const type in extraCount) {
+        const count = extraCount[type];
+        if (count > 0) {
+          const label = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize
+          summary.push(`${count} x ${label}`);
+        }
+      }
+
+      return summary.length > 0 ? `🧾 Order So Far\n${summary.join('\n')}` : '';
+    }
+
+
+    function resetSelection() {
+
+      for (const type in drinkCount) {
+        drinkCount[type] = 0;
+      }
+
+      for (const type in extraCount) {
+        extraCount[type] = 0;
+      }
+
+      updateTotal()
     }
 
     updateTotal();
-  </script>
+</script>
+
 
   
 

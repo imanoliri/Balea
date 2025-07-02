@@ -99,6 +99,27 @@
       background: #aaa;
       cursor: not-allowed;
     }
+
+  #action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  #action-buttons a {
+    color: #007B7F;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s ease;
+  }
+
+  #action-buttons a:hover {
+    background-color: #e8f5f4;
+  }
   </style>
 </head>
 <body>
@@ -178,6 +199,8 @@
     <div id="order-summary"></div>
     <button id="donate-button" onclick="handleDonate()">💙 Donate €0.00 with PayPal</button>
   </div>
+
+  <div id="action-buttons"><a href="../index.html">🐋 Go to Landing Page</a></div>
 
   <script>
     let counts = {};

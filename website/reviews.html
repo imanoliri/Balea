@@ -98,6 +98,27 @@
       font-size: 1rem;
       color: #777;
     }
+    
+  #action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  #action-buttons a {
+    color: #007B7F;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s ease;
+  }
+
+  #action-buttons a:hover {
+    background-color: #e8f5f4;
+  }
   </style>
 </head>
 
@@ -114,7 +135,9 @@
 
   <input type="text" id="search" placeholder="🔎 Search by batch ID, email, characteristics..." autofocus />
 
-  <div id="results" class="no-results">Any matching review will be shown here — try "b21", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>
+  <div id="results" class="no-results">Any matching review will be shown here — try "b34", "imanol", "sour", "sweet", "fruity", "carbonated", or "/2025"</div>
+
+  <div id="action-buttons"><a href="../index.html">🐋 Go to Main Page</a></div>
 
   <script>
     const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
@@ -171,7 +194,8 @@
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');
         batch_id = row["Batch Number"]
-        fieldsHtml += `<a href=batches.html?search=${batch_id}>🔍 Info For Batch ${batch_id}</a>`
+        fieldsHtml += `<div><a href=batches.html?search=${batch_id}>🔍 Info For Batch ${batch_id}</a></div>`
+        fieldsHtml += `<div><a href="website/donate.html">💰 Get Bottles</a></div>`
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 

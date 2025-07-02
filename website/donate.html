@@ -2,243 +2,245 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="../marketing/branding/balea_aquamarine.svg" type="image/svg+xml">
-  <title>Pay For a Bottle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate for Your Bottles</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Droid Sans", sans-serif;
-      font-size: 1.0rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, sans-serif;
       margin: 0;
-      padding: 1.0rem;
-      text-align: center;
-      opacity: 0;
-      animation: fadeIn 0s ease 250ms forwards;
+      padding: 1rem;
+      background: #f9f9f9;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    #custom-donation {
+    .card {
       background: white;
-      padding: 1.5rem;
-      padding-top: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      margin: 0 auto;
-      width: 100%;
       max-width: 600px;
-      box-sizing: border-box;
+      margin: auto;
+      padding: 1.5rem;
+      padding-top: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    #custom-donation h2:first-of-type {
-      margin-top: 0rem;
+    h1 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
     }
-    #custom-donation h2 {
+
+    .note {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section h2 {
+      font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
 
-    
-    .btn-group {
+    .item-row {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .btn-toggle input {
-      display: none;
-    }
-
-    .btn-toggle label {
-      border: 1px solid #007;
-      border-radius: 0.5rem;
-      padding: 0.5em 1em;
-      cursor: pointer;
-      background: #f2f2f2;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-toggle input:checked + label {
-      outline: 0.25rem solid #007;
-      outline-offset: -0.1rem;
-    }
-
-    .highlight-error {
-      border: 2px solid red !important;
-      animation: shake 0.3s ease-in-out 1;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      50% { transform: translateX(4px); }
-      75% { transform: translateX(-4px); }
-      100% { transform: translateX(0); }
-    }
-
-
-    .tip-control {
-      display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .stepper {
+      display: flex;
       gap: 0.5rem;
-      margin-top: 0.5rem;
     }
 
-    .tip-control button {
-      padding: 0.5rem 0.8rem;
+    .stepper button {
+      width: 2rem;
+      height: 2rem;
       font-size: 1.2rem;
-      border-radius: 0.5rem;
-      border: 1px solid #007;
-      background: white;
-      color: #007;
-      cursor: pointer;
-    }
-
-    .tip-input {
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      width: 4.5rem;
-      text-align: center;
-      border-radius: 0.5rem;
+      border-radius: 0.25rem;
       border: 1px solid #ccc;
-    }
-
-    .divisor-line{
-      all: 'unset';
-      border: none;
-      margin: 1.5rem;
-      border-top: 1px solid #ccc;
-    }
-
-    #donate-button {
-      font-size: 1rem;
-      padding: 0.5rem 1.5rem;
+      background: white;
       cursor: pointer;
-      border: 1px solid black;
-      border-radius: 0.5rem;
+    }
+
+    .stepper span {
+      min-width: 2rem;
+      text-align: center;
       font-weight: bold;
     }
 
+    #order-summary {
+      font-style: italic;
+      white-space: pre-line;
+      color: #333;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    #donate-button {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      padding: 0.75rem;
+      background: #007;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    #donate-button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
   </style>
 </head>
-
 <body>
+  <div class="card">
+    <h1>Donate for Your Bottles</h1>
+    <p class="note">Help cover the cost of what you enjoyed.</p>
 
-  <h1 style="margin-top: 0;">Pay For a Bottle</h1>
+    <div class="section" id="items">
+      <h2>Choose What You Had</h2>
 
-  <p>Each bottle of Balea costs <strong>€6–9 to make</strong> — and holds a full liter, not 75cl like most wines.</p>
-  <p>If you believe in fairness and open brewing, consider donating to <strong>cover the cost</strong> of this one.</p>
-  <p>If you <strong>leave a tip</strong>, you will help expand the project.</p>
-  
-  <div id="custom-donation">
-    <h2>Select Your Drink</h2>
-    <small id="drink-warning" class="shake-warning" style="display: none; color:red;">Please select the type of drink</small>
-    <div class="btn-group btn-toggle">
-      <input type="radio" id="drink-cider" name="drink" value="2">
-      <label for="drink-cider">Cider (€2)</label>
+      <div class="item-row" data-id="cider" data-price="8">
+        <span>Cider (€8)</span>
+        <div class="stepper">
+          <button onclick="changeItemCount('cider', -1)">−</button>
+          <span id="count-cider">0</span>
+          <button onclick="changeItemCount('cider', 1)">+</button>
+        </div>
+      </div>
 
-      <input type="radio" id="drink-mead" name="drink" value="4">
-      <label for="drink-mead">Mead (€4)</label>
+      <div class="item-row" data-id="mead" data-price="10">
+        <span>Mead (€10)</span>
+        <div class="stepper">
+          <button onclick="changeItemCount('mead', -1)">−</button>
+          <span id="count-mead">0</span>
+          <button onclick="changeItemCount('mead', 1)">+</button>
+        </div>
+      </div>
 
-      <input type="radio" id="drink-champagne" name="drink" value="5">
-      <label for="drink-champagne">Champagne (€5)</label>
+      <div class="item-row" data-id="special" data-price="12">
+        <span>Special (€12)</span>
+        <div class="stepper">
+          <button onclick="changeItemCount('special', -1)">−</button>
+          <span id="count-special">0</span>
+          <button onclick="changeItemCount('special', 1)">+</button>
+        </div>
+      </div>
+
+      <h2>Other</h2>
+
+      <div class="item-row" data-id="cups" data-price="2">
+        <span>Paper Cups (€2)</span>
+        <div class="stepper">
+          <button onclick="changeItemCount('cups', -1)">−</button>
+          <span id="count-cups">0</span>
+          <button onclick="changeItemCount('cups', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="item-row" data-id="pourer" data-price="2">
+        <span>Pouring Cap (€2)</span>
+        <div class="stepper">
+          <button onclick="changeItemCount('pourer', -1)">−</button>
+          <span id="count-pourer">0</span>
+          <button onclick="changeItemCount('pourer', 1)">+</button>
+        </div>
+      </div>
     </div>
 
-    <h2>Other Costs</h2>
-    <div class="btn-group btn-toggle">
-      <input type="checkbox" id="extra-bottle" class="extra" value="2" checked>
-      <label for="extra-bottle">Bottle (€2)</label>
-
-      <input type="checkbox" id="extra-labor" class="extra" value="2" checked>
-      <label for="extra-labor">Labor (€2)</label>
+    <div class="section">
+      <h2>Return Bottles for €1 Each</h2>
+      <div class="stepper">
+        <button onclick="changeReturnCount(-1)">−</button>
+        <span id="return-count">0</span>
+        <button onclick="changeReturnCount(1)">+</button>
+      </div>
     </div>
 
-    <h2>Tip</h2>
-    <div class="tip-control">
-      <button type="button" class="tip-minus">−</button>
-      <input type="number" id="tip" class="tip-input" step="0.50" min="0" value="0.00">
-      <button type="button" class="tip-plus">+</button>
+    <div class="section">
+      <h2>Leave a Tip (Optional)</h2>
+      <div class="stepper">
+        <button onclick="changeTip(-0.5)">−</button>
+        <span id="tip-amount">0.00</span>
+        <button onclick="changeTip(0.5)">+</button>
+      </div>
     </div>
 
-
-    <hr class="divisor-line">
-    <button type="button" id="donate-button" onclick="handleDonate()">💙 Donate via PayPal<br>€0.00</button>
+    <div id="order-summary"></div>
+    <button id="donate-button" onclick="handleDonate()">💙 Donate €0.00 with PayPal</button>
   </div>
 
   <script>
-    const drinkRadios = document.querySelectorAll('input[name="drink"]');
-    const drinkWarning = document.getElementById("drink-warning");
-    const extras = document.querySelectorAll('.extra');
-    const tipInput = document.getElementById('tip');
-    const donateButton = document.getElementById('donate-button')
+    let counts = {};
+    let returnCount = 0;
+    let tip = 0.0;
 
-    let total = 0;
-
-    function updateTotal() {
-      total = 0;
-      const selectedDrink = [...drinkRadios].find(r => r.checked);
-      if (selectedDrink) total += parseFloat(selectedDrink.value);
-
-      extras.forEach(cb => { if (cb.checked) total += parseFloat(cb.value); });
-
-      const tip = parseFloat(tipInput.value) || 0;
-      total += tip;
-
-      donateButton.innerHTML = `💙 Donate via PayPal<br>€${total.toFixed(2)}`;
+    function changeItemCount(id, delta) {
+      counts[id] = Math.max(0, (counts[id] || 0) + delta);
+      document.getElementById(`count-${id}`).textContent = counts[id];
+      updateTotal();
     }
 
-    drinkRadios.forEach(r => r.addEventListener('change', updateTotal));
-    extras.forEach(cb => cb.addEventListener('change', updateTotal));
-    tipInput.addEventListener('input', updateTotal);
-
-    document.querySelector('.tip-plus').onclick = () => {
-      const tip = document.getElementById('tip');
-      tip.value = (parseFloat(tip.value) + 0.5).toFixed(1);
+    function changeReturnCount(delta) {
+      returnCount = Math.max(0, returnCount + delta);
+      document.getElementById('return-count').textContent = returnCount;
       updateTotal();
-    };
+    }
 
-    document.querySelector('.tip-minus').onclick = () => {
-      const tip = document.getElementById('tip');
-      tip.value = Math.max(0, parseFloat(tip.value) - 0.5).toFixed(1);
+    function changeTip(delta) {
+      tip = Math.max(0, parseFloat((tip + delta).toFixed(2)));
+      document.getElementById('tip-amount').textContent = tip.toFixed(2);
       updateTotal();
-    };
-    
+    }
 
-    function handleDonate() {
-      const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
+    function updateTotal() {
+      let total = 0;
+      const summary = [];
 
-      if (!selectedDrink) {
-        // Show warning & highlight buttons
-        document.querySelectorAll('input[name="drink"]').forEach(input => {
-          const label = document.querySelector(`label[for="${input.id}"]`);
-          if (label) label.classList.add('highlight-error');
-        });
-        drinkWarning.style.display = "block";
+      document.querySelectorAll('.item-row').forEach(row => {
+        const id = row.getAttribute('data-id');
+        const price = parseFloat(row.getAttribute('data-price'));
+        const count = counts[id] || 0;
+        if (count > 0) {
+          total += count * price;
+          summary.push(`${count} × ${id.charAt(0).toUpperCase() + id.slice(1)} (€${(count * price).toFixed(2)})`);
+        }
+      });
 
-        // Remove highlight but not warning text after 3 seconds
-        setTimeout(() => {
-          document.querySelectorAll('input[name="drink"]').forEach(input => {
-            const label = document.querySelector(`label[for="${input.id}"]`);
-            if (label) label.classList.remove('highlight-error');
-          });
-        }, 3000);
-
-        return;
+      if (returnCount > 0) {
+        total -= returnCount;
+        summary.push(`${returnCount} Returned Bottle${returnCount > 1 ? 's' : ''} (−€${returnCount})`);
       }
 
+      if (tip > 0) {
+        total += tip;
+        summary.push(`Tip: €${tip.toFixed(2)}`);
+      }
+
+      document.getElementById('order-summary').textContent = summary.length > 0 ? `🧾 Your Order:\n${summary.join('\n')}` : '';
+
+      const btn = document.getElementById('donate-button');
+      btn.disabled = total <= 0;
+      btn.textContent = `💙 Donate €${total.toFixed(2)} with PayPal`;
+    }
+
+    function handleDonate() {
       updateTotal();
-      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');
+      const totalText = document.getElementById('donate-button').textContent;
+      const amount = totalText.match(/€([\d.]+)/)[1];
+      window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${amount}`, '_blank');
     }
 
     updateTotal();
   </script>
-
-  
-
 </body>
 </html>

@@ -12,6 +12,14 @@
       margin: 0;
       padding: 1.25rem;
       text-align: center;
+      opacity: 0;
+      animation: fadeIn 0s ease 250ms forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     h1 {
@@ -301,8 +309,8 @@
   </div>
 
   <div id="action-buttons">
-    <a href="donate.html" target="_blank">🍾 Take a Bottle Home and Pay For it Here</a>
-    <a href="../index.html" target="_blank">🐋 Go to Main Page</a>
+    <a href="donate.html">🍾 Take a Bottle Home and Pay For it Here</a>
+    <a href="../index.html">🐋 Go to Main Page</a>
   </div>
   
 
@@ -395,7 +403,7 @@
           fieldContent = fieldContent.split(',')
             .map(b => b.trim())
             .filter(b => b)
-            .map(batch_id => `<a href="batches.html?search=${batch_id}" target="_blank">${batch_id}</a>`)
+            .map(batch_id => `<a href="batches.html?search=${batch_id}">${batch_id}</a>`)
             .join(', ');
         }
         return `<div><span class="field-name">${f}:</span> ${fieldContent}</div>`;

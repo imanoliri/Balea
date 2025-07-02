@@ -195,7 +195,7 @@
         ).join('');
         batch_id = row["Batch Number"]
         fieldsHtml += `<div><a href=batches.html?search=${batch_id}>🔍 Info For Batch ${batch_id}</a></div>`
-        fieldsHtml += `<div><a href="website/donate.html">💰 Get Bottles</a></div>`
+        fieldsHtml += `<div><a href="../website/donate.html">💰 Get Bottles</a></div>`
         return `<div class="card">${fieldsHtml}</div>`;
       }).join('');
 

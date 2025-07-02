@@ -133,8 +133,8 @@
   <div id="custom-donation">
     <h2>Select Your Drink</h2>
     <div class="btn-group btn-toggle">
-      <input type="button" id="drink-cider" name="drink" value="8">
-      <label for="drink-cider">Cider (€8)</label>
+      <input type="button" id="drink-cider" name="drink" value="7.5">
+      <label for="drink-cider">Cider (€7.5)</label>
 
       <input type="button" id="drink-mead" name="drink" value="10">
       <label for="drink-mead">Mead (€10)</label>
@@ -176,7 +176,7 @@
 
     // Drink pricing and counts
     const drinkPrices = {
-      cider: 8,
+      cider: 7.5,
       mead: 10,
       special: 12,
     };
@@ -193,8 +193,8 @@
       cups: 0,
     };
     const extraPrices = {
-      pourer: 0,
-      cups: 0,
+      pourer: 2,
+      cups: 2,
     };
 
     function updateTotal() {

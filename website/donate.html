@@ -67,19 +67,6 @@
       outline-offset: -0.1rem;
     }
 
-    .highlight-error {
-      border: 2px solid red !important;
-      animation: shake 0.3s ease-in-out 1;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      50% { transform: translateX(4px); }
-      75% { transform: translateX(-4px); }
-      100% { transform: translateX(0); }
-    }
-
 
     .tip-control {
       display: flex;
@@ -137,7 +124,6 @@
   
   <div id="custom-donation">
     <h2>Select Your Drink</h2>
-    <small id="drink-warning" class="shake-warning" style="display: none; color:red;">Please select the type of drink</small>
     <div class="btn-group btn-toggle">
       <input type="radio" id="drink-cider" name="drink" value="2">
       <label for="drink-cider">Cider (€2)</label>
@@ -172,7 +158,6 @@
 
   <script>
     const drinkRadios = document.querySelectorAll('input[name="drink"]');
-    const drinkWarning = document.getElementById("drink-warning");
     const extras = document.querySelectorAll('.extra');
     const tipInput = document.getElementById('tip');
     const donateButton = document.getElementById('donate-button')
@@ -212,24 +197,6 @@
     function handleDonate() {
       const selectedDrink = [...document.querySelectorAll('input[name="drink"]')].find(r => r.checked);
 
-      if (!selectedDrink) {
-        // Show warning & highlight buttons
-        document.querySelectorAll('input[name="drink"]').forEach(input => {
-          const label = document.querySelector(`label[for="${input.id}"]`);
-          if (label) label.classList.add('highlight-error');
-        });
-        drinkWarning.style.display = "block";
-
-        // Remove highlight but not warning text after 3 seconds
-        setTimeout(() => {
-          document.querySelectorAll('input[name="drink"]').forEach(input => {
-            const label = document.querySelector(`label[for="${input.id}"]`);
-            if (label) label.classList.remove('highlight-error');
-          });
-        }, 3000);
-
-        return;
-      }
 
       updateTotal();
       window.open(`https://www.paypal.com/paypalme/ImanolIrizar/${total.toFixed(2)}`, '_blank');

@@ -167,3 +167,24 @@ table tbody tr + tr td {
 	margin: 0 auto 1rem;
 	}
 }
+
+#action-buttons {
+	margin-top: 2rem;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+#action-buttons a {
+	color: #007B7F;
+	font-weight: 500;
+	text-decoration: none;
+	padding: 0.3rem 0.6rem;
+	border-radius: 0.3rem;
+	transition: background-color 0.2s ease;
+}
+
+#action-buttons a:hover {
+	background-color: #e8f5f4;
+}

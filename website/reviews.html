@@ -146,10 +146,10 @@
     const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
 
     const FIELDS_TO_SEARCH = [
-      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
     ];
     const FIELDS_TO_SHOW = [
-      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Flavor notes",	"What ingredients do you taste the most?"
+      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
     ];
 
     let reviewData = [];
@@ -192,7 +192,7 @@
         )
       );
 
-      const html = filtered.map(row => {
+      const html = filtered.reverse().map(row => {
         let fieldsHtml = FIELDS_TO_SHOW.map(f =>
           row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
         ).join('');

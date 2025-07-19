@@ -146,11 +146,14 @@
     const SHEET_URL = 'https://opensheet.vercel.app/13YE8ozQbY-LOaA4UrEqWcpu2L04-D590b74D_kL3eyo/responses';
 
     const FIELDS_TO_SEARCH = [
-      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
+      "Timestamp",	"Your Alias", "Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
     ];
     const FIELDS_TO_SHOW = [
-      "Timestamp",	"Email Address",	"Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
+      "Timestamp",	"Your Alias", "Batch Number",	"Rating",	"Comment",	"Taste notes",	"What ingredients do you notice the most?"
     ];
+    const FIELDS_TO_RENAME = {
+      "Your Alias": "Reviewer"
+    }
 
     let reviewData = [];
 
@@ -194,7 +197,7 @@
 
       const html = filtered.reverse().map(row => {
         let fieldsHtml = FIELDS_TO_SHOW.map(f =>
-          row[f] ? `<div><span class="field-name">${f}:</span> ${row[f]}</div>` : ''
+          row[f] ? `<div><span class="field-name">${FIELDS_TO_RENAME[f] || f}:</span> ${row[f]}</div>` : ''
         ).join('');
         batch_id = row["Batch Number"]
         fieldsHtml += `<div><a href=batches.html?search=${batch_id}>🔍 Info For Batch ${batch_id}</a></div>`

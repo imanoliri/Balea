@@ -205,7 +205,7 @@
   <script>
     let counts = {};
     let returnCount = 0;
-    let returnPrice = parseFloat(document.getElementById('data-price'));
+    let returnPrice = parseFloat(document.getElementById('return-count').getAttribute('data-price'));
     let tip = 0.0;
 
     function changeItemCount(id, delta) {

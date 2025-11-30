@@ -179,10 +179,10 @@
     </div>
 
     <div class="section">
-      <h2>Return Bottles for €1 Each</h2>
+      <h2>Return Bottles for €2 Each</h2>
       <div class="stepper">
         <button onclick="changeReturnCount(-1)">−</button>
-        <span id="return-count">0</span>
+        <span id="return-count" data-price="2">0</span>
         <button onclick="changeReturnCount(1)">+</button>
       </div>
     </div>
@@ -205,6 +205,7 @@
   <script>
     let counts = {};
     let returnCount = 0;
+    let returnPrice = parseFloat(document.getElementById('data-price'));
     let tip = 0.0;
 
     function changeItemCount(id, delta) {
@@ -240,7 +241,7 @@
       });
 
       if (returnCount > 0) {
-        total -= returnCount;
+        total -= returnCount * returnPrice;
         summary.push(`${returnCount} Returned Bottle${returnCount > 1 ? 's' : ''} (−€${returnCount})`);
       }
 
